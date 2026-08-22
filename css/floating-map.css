@@ -1,0 +1,340 @@
+/* ============================================
+   FLOATING-MAP.CSS - Live Tracking Map v4
+   All Buttons Visible | Bottom-Anchored | 3 Sizes
+   ============================================ */
+
+/* ============================================
+   CONTAINER
+   ============================================ */
+.floating-map-container {
+    position: fixed;
+    bottom: 85px;
+    right: 10px;
+    z-index: 1500;
+    display: none;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    background: #fff;
+    border-radius: 20px;
+    user-select: none;
+    transition: width 0.3s ease, height 0.3s ease, border-radius 0.3s ease;
+}
+
+.floating-map-container.visible {
+    display: block;
+    animation: floatIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes floatIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.95); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ============================================
+   SIZE 1: COMPACT (S) — Goal shape, small
+   ============================================ */
+.floating-map-container.size-compact {
+    width: 155px !important;
+    border-radius: 22px !important;
+}
+.floating-map-container.size-compact .floating-map-body {
+    height: 75px !important;
+}
+.floating-map-container.size-compact .map-header-text {
+    display: none;
+}
+.floating-map-container.size-compact .floating-map-info-row {
+    font-size: 10px;
+}
+.floating-map-container.size-compact .map-timer {
+    font-size: 11px !important;
+}
+.floating-map-container.size-compact .map-distance {
+    font-size: 9px !important;
+}
+.floating-map-container.size-compact .floating-map-actions-row {
+    gap: 4px;
+}
+.floating-map-container.size-compact .floating-map-action-btn {
+    font-size: 9px;
+    padding: 5px 4px;
+}
+
+/* ============================================
+   SIZE 2: NORMAL (M) — Rounded rectangle
+   ============================================ */
+.floating-map-container.size-normal {
+    width: 290px !important;
+    border-radius: 24px !important;
+}
+.floating-map-container.size-normal .floating-map-body {
+    height: 155px !important;
+}
+
+/* ============================================
+   SIZE 3: FULL (L) — Large, still bottom-right
+   ============================================ */
+.floating-map-container.size-full {
+    width: 360px !important;
+    border-radius: 28px !important;
+    bottom: 80px !important;
+    right: 8px !important;
+}
+.floating-map-container.size-full .floating-map-body {
+    height: 250px !important;
+}
+
+/* ============================================
+   OFFLINE BANNER
+   ============================================ */
+.map-offline-banner {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 5px 10px;
+    background: #FFF3E0;
+    color: #E65100;
+    font-size: 10px;
+    font-weight: 700;
+    border-bottom: 2px solid #FF9800;
+    animation: offlinePulse 2s infinite;
+}
+@keyframes offlinePulse {
+    0%,100% { background:#FFF3E0; }
+    50%     { background:#FFE0B2; }
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.floating-map-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 10px;
+    background: linear-gradient(135deg, #1B5E20, #2E7D32);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: grab;
+    user-select: none;
+}
+.floating-map-header:active { cursor: grabbing; }
+
+.floating-map-header-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pulse-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #69F0AE;
+    animation: dotPulse 1.2s infinite;
+    box-shadow: 0 0 6px rgba(105,240,174,0.6);
+}
+@keyframes dotPulse {
+    0%,100% { opacity:1; transform:scale(1); }
+    50%     { opacity:0.3; transform:scale(1.6); }
+}
+
+.map-header-text {
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+/* ============================================
+   ALL HEADER BUTTONS
+   ============================================ */
+.floating-map-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.floating-map-btn {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    font-weight: 700;
+}
+.floating-map-btn:hover {
+    background: rgba(255,255,255,0.4);
+    transform: scale(1.1);
+}
+.floating-map-btn:active {
+    transform: scale(0.9);
+}
+
+/* Size buttons */
+.floating-map-btn.size-btn {
+    width: 22px; height: 22px;
+    font-size: 10px;
+    font-weight: 800;
+    border: 2px solid transparent;
+}
+.floating-map-btn.size-btn.active {
+    background: white;
+    color: #2E7D32;
+    border-color: white;
+    box-shadow: 0 0 8px rgba(255,255,255,0.5);
+    width: 24px; height: 24px;
+    font-size: 12px;
+}
+
+/* ============================================
+   MAP BODY
+   ============================================ */
+.floating-map-body {
+    position: relative;
+    width: 100%;
+    height: 155px;
+    background: #E8F5E9;
+    overflow: hidden;
+    transition: height 0.3s ease;
+}
+.floating-map-body .leaflet-container {
+    width: 100%; height: 100%; z-index: 1;
+}
+
+.rider-marker {
+    font-size: 30px;
+    animation: riderBounce 0.8s ease-in-out infinite;
+    filter: drop-shadow(0 3px 5px rgba(0,0,0,0.3));
+}
+@keyframes riderBounce {
+    0%,100% { transform:translateY(0); }
+    50%     { transform:translateY(-5px); }
+}
+
+/* ============================================
+   INFO BAR — Timer + Distance + Buttons
+   ============================================ */
+.floating-map-info {
+    padding: 8px 10px;
+    background: white;
+    border-top: 2px solid #2E7D32;
+}
+
+.floating-map-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: #555;
+    font-weight: 600;
+}
+
+.map-timer {
+    font-weight: 800;
+    color: #FF6D00;
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+}
+
+.map-distance {
+    font-weight: 700;
+    color: #2E7D32;
+    font-size: 11px;
+}
+
+/* Action buttons row */
+.floating-map-actions-row {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.floating-map-action-btn {
+    flex: 1;
+    padding: 8px 6px;
+    border-radius: 8px;
+    border: none;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.call-btn {
+    background: #E8F5E9;
+    color: #2E7D32;
+}
+.call-btn:hover { background: #C8E6C9; }
+
+.view-btn {
+    background: linear-gradient(135deg, #2E7D32, #43A047);
+    color: white;
+    box-shadow: 0 2px 8px rgba(46,125,50,0.25);
+}
+.view-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(46,125,50,0.35);
+}
+.floating-map-action-btn:active { transform: scale(0.95); }
+
+/* ============================================
+   COLLAPSED
+   ============================================ */
+.floating-map-container.collapsed .floating-map-body { height: 0 !important; }
+.floating-map-container.collapsed .floating-map-info { display: none; }
+.floating-map-container.collapsed .map-offline-banner { display: none; }
+
+/* ============================================
+   MOBILE
+   ============================================ */
+@media (max-width: 480px) {
+    .floating-map-container { bottom: 80px; right: 6px; }
+    
+    .floating-map-container.size-compact { width: 140px !important; }
+    .floating-map-container.size-compact .floating-map-body { height: 65px !important; }
+    
+    .floating-map-container.size-normal { width: 265px !important; }
+    .floating-map-container.size-normal .floating-map-body { height: 140px !important; }
+    
+    .floating-map-container.size-full { width: 320px !important; bottom: 78px !important; right: 4px !important; }
+    .floating-map-container.size-full .floating-map-body { height: 220px !important; }
+}
+
+@media (max-width: 380px) {
+    .floating-map-container.size-compact { width: 130px !important; }
+    .floating-map-container.size-compact .floating-map-body { height: 60px !important; }
+    
+    .floating-map-container.size-normal { width: 240px !important; }
+    .floating-map-container.size-normal .floating-map-body { height: 125px !important; }
+    
+    .floating-map-container.size-full { width: 290px !important; }
+    .floating-map-container.size-full .floating-map-body { height: 200px !important; }
+}
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+body.dark-mode .floating-map-container {
+    background: #1a1f2e;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+body.dark-mode .floating-map-header { background: linear-gradient(135deg,#0D3B0F,#1B5E20); }
+body.dark-mode .floating-map-body { background: #141824; }
+body.dark-mode .floating-map-info { background: #1a1f2e; border-top-color: #2E7D32; }
+body.dark-mode .floating-map-info-row { color: #BBB; }
+body.dark-mode .map-timer { color: #FFB74D; }
+body.dark-mode .map-distance { color: #81C784; }
+body.dark-mode .call-btn { background: rgba(76,175,80,0.12); color: #81C784; }
+body.dark-mode .call-btn:hover { background: rgba(76,175,80,0.2); }
+body.dark-mode .view-btn { background: linear-gradient(135deg,#2E7D32,#388E3C); }
+body.dark-mode .map-offline-banner { background: #2D1B00; color: #FFB74D; border-bottom-color: #FF9800; }

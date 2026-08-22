@@ -1,0 +1,339 @@
+/* ============================================
+   FLOATING-CART-BUBBLE.CSS
+   Dynamic Width Cart Preview - Transparent Blur
+   ============================================ */
+
+/* ============================================ */
+/* MAIN CONTAINER */
+/* ============================================ */
+.floating-cart-bubble {
+    position: fixed;
+    bottom: calc(var(--bottom-nav-height) + 55px);
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    z-index: 1002;
+    
+    /* Dynamic width - content ke hisaab se */
+    width: auto;
+    max-width: 85vw;
+    
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity 0.3s ease,
+                visibility 0.3s ease;
+}
+
+.floating-cart-bubble.navbar-hidden {
+    bottom: 75px;
+}
+
+.floating-cart-bubble.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+}
+
+.floating-cart-bubble.hidden {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateX(-50%) translateY(80px) !important;
+    pointer-events: none !important;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 1, 1),
+                opacity 0.2s ease,
+                visibility 0.3s ease;
+}
+
+.floating-cart-bubble.empty {
+    transform: translateX(-50%) translateY(80px) scale(0.5) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.6, 1) !important;
+}
+
+/* ============================================ */
+/* BUBBLE BUTTON - Dynamic Width + Black Tint */
+/* ============================================ */
+.cart-bubble-btn {
+    display: flex;
+    align-items: center;
+    gap: 23px;
+    /* Horizontal padding bada, vertical compact */
+    padding: 8px 15px 8px 10px;
+    width: 100%;
+    
+    /* Black tint blur */
+   background: rgba(0, 0, 0, 0.65);  backdrop-filter: blur(20px); 
+    -webkit-backdrop-filter: blur(24px);
+    
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    cursor: pointer;
+    
+    box-shadow: 
+        0 8px 30px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+    transition: all 0.25s ease;
+    outline: none;
+    overflow: visible;
+    white-space: nowrap;
+}
+
+.cart-bubble-btn:hover {
+    background: rgba(0, 0, 0, 0.22);
+    box-shadow: 
+        0 10px 35px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.cart-bubble-btn:active {
+    transform: scale(0.95);
+    background: rgba(0, 0, 0, 0.28);
+    transition: all 0.08s ease;
+}
+
+/* ============================================ */
+/* PULSE GLOW */
+/* ============================================ */
+.cart-bubble-btn::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50px;
+    border: 1.5px solid rgba(255, 215, 0, 0.2);
+    animation: soft-pulse 3s infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes soft-pulse {
+    0%, 100% { 
+        inset: -4px;
+        opacity: 0.45;
+    }
+    50% { 
+        inset: -8px;
+        opacity: 0.08;
+    }
+}
+
+/* ============================================ */
+/* PRODUCT STACK - Compact but visible */
+/* ============================================ */
+.cart-bubble-stack {
+    display: flex;
+    align-items: center;
+    position: relative;
+    min-width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+}
+
+.cart-bubble-thumb {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+    border: 2.5px solid rgba(255, 255, 255, 0.9);
+    object-fit: cover;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    position: absolute;
+    left: 0;
+    font-size: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cart-bubble-thumb:nth-child(1) {
+    z-index: 3;
+    left: 0;
+    border-color: #fff;
+}
+
+.cart-bubble-thumb:nth-child(2) {
+    z-index: 2;
+    left: 20px;
+    transform: scale(0.88);
+    opacity: 0.75;
+    border-color: #eee;
+}
+
+.cart-bubble-thumb:nth-child(3) {
+    z-index: 1;
+    left: 34px;
+    transform: scale(0.78);
+    opacity: 0.5;
+    border-color: #ddd;
+}
+
+/* Single item */
+.cart-bubble-stack.single .cart-bubble-thumb {
+    left: 2px !important;
+    transform: scale(1) !important;
+    opacity: 1 !important;
+}
+
+/* 2 items stack */
+.cart-bubble-stack.two .cart-bubble-thumb:nth-child(1) { left: 0; }
+.cart-bubble-stack.two .cart-bubble-thumb:nth-child(2) { left: 20px; }
+
+/* 3 items stack */
+.cart-bubble-stack.three .cart-bubble-thumb:nth-child(1) { left: 0; }
+.cart-bubble-stack.three .cart-bubble-thumb:nth-child(2) { left: 20px; }
+.cart-bubble-stack.three .cart-bubble-thumb:nth-child(3) { left: 34px; }
+
+/* ============================================ */
+/* COUNT BADGE */
+/* ============================================ */
+.cart-bubble-count {
+    position: absolute;
+    top: -5px;
+    left: 28px;
+    background: #FF1744;
+    color: white;
+    font-size: 10px;
+    font-weight: 800;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2.5px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 10px rgba(255, 23, 68, 0.4);
+    z-index: 10;
+}
+
+.cart-bubble-count.pop {
+    animation: count-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes count-pop {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.35); }
+    100% { transform: scale(1); }
+}
+
+/* ============================================ */
+/* INFO - Clean + bada text */
+/* ============================================ */
+.cart-bubble-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    /* Dynamic - jitna content utni width */
+    flex: 1;
+    min-width: 50px;
+}
+
+.cart-bubble-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cart-bubble-price {
+    font-size: 17px;
+    font-weight: 800;
+    color: #FFD700;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================ */
+/* ARROW */
+/* ============================================ */
+.cart-bubble-arrow {
+    font-size: 22px;
+    color: #FFD700;
+    font-weight: 700;
+    margin-left: 4px;
+    flex-shrink: 0;
+    animation: arrow-soft 2s infinite;
+}
+
+@keyframes arrow-soft {
+    0%, 100% { transform: translateX(0); opacity: 0.65; }
+    50% { transform: translateX(4px); opacity: 1; }
+}
+
+/* ============================================ */
+/* DARK MODE */
+/* ============================================ */
+body.dark-mode .cart-bubble-btn {
+    background: rgba(0, 0, 0, 0.28);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 
+        0 8px 30px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+body.dark-mode .cart-bubble-thumb {
+    background: linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 100%);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode .cart-bubble-count {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ============================================ */
+/* RESPONSIVE */
+/* ============================================ */
+@media (max-width: 360px) {
+    .floating-cart-bubble {
+        bottom: calc(var(--bottom-nav-height) + 45px);
+        max-width: 90vw;
+    }
+    
+    .floating-cart-bubble.navbar-hidden {
+        bottom: 60px;
+    }
+    
+    .cart-bubble-btn {
+        padding: 6px 14px 6px 8px;
+        gap: 8px;
+    }
+    
+    .cart-bubble-stack {
+        min-width: 36px;
+        height: 36px;
+    }
+    
+    .cart-bubble-thumb {
+        width: 32px;
+        height: 32px;
+        font-size: 17px;
+    }
+    
+    .cart-bubble-thumb:nth-child(2) { left: 15px; }
+    .cart-bubble-thumb:nth-child(3) { left: 26px; }
+    
+    .cart-bubble-price { font-size: 14px; }
+    .cart-bubble-label { font-size: 9px; }
+    .cart-bubble-count {
+        min-width: 18px;
+        height: 18px;
+        font-size: 9px;
+        left: 22px;
+    }
+}
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+    .floating-cart-bubble {
+        bottom: calc(var(--bottom-nav-height) + 55px + env(safe-area-inset-bottom));
+    }
+    .floating-cart-bubble.navbar-hidden {
+        bottom: calc(75px + env(safe-area-inset-bottom));
+    }
+}

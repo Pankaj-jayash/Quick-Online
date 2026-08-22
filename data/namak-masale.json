@@ -1,0 +1,125 @@
+{
+    "category": "namak-masale",
+    "products": [
+        {
+            "id": "salt-001",
+            "name": {
+                "hi": "टाटा नमक (आयोडीन युक्त)",
+                "en": "Tata Salt (Iodized)"
+            },
+            "price": 25,
+            "unit": {
+                "hi": "1 किलो",
+                "en": "1 kg"
+            },
+            "image": "",
+            "discount": 0,
+            "mostOrdered": true
+        },
+        {
+            "id": "salt-002",
+            "name": {
+                "hi": "टाटा नमक (छोटा)",
+                "en": "Tata Salt (Small)"
+            },
+            "price": 15,
+            "unit": {
+                "hi": "500 ग्राम",
+                "en": "500 gm"
+            },
+            "image": "",
+            "discount": 0,
+            "mostOrdered": false
+        },
+        {
+            "id": "salt-003",
+            "name": {
+                "hi": "सेंधा नमक (रॉक सॉल्ट)",
+                "en": "Rock Salt (Sendha Namak)"
+            },
+            "price": 40,
+            "unit": {
+                "hi": "1 किलो",
+                "en": "1 kg"
+            },
+            "image": "",
+            "discount": 0,
+            "mostOrdered": false
+        },
+        {
+            "id": "salt-004",
+            "name": {
+                "hi": "काला नमक",
+                "en": "Black Salt (Kala Namak)"
+            },
+            "price": 30,
+            "unit": {
+                "hi": "200 ग्राम",
+                "en": "200 gm"
+            },
+            "image": "",
+            "discount": 0,
+            "mostOrdered": false
+        },
+        {
+            "id": "salt-005",
+            "name": {
+                "hi": "साबुत काली मिर्च",
+                "en": "Whole Black Pepper"
+            },
+            "price": 80,
+            "unit": {
+                "hi": "100 ग्राम",
+                "en": "100 gm"
+            },
+            "image": "",
+            "discount": 0,
+            "mostOrdered": true
+        },
+        {
+            "id": "salt-006",
+            "name": {
+                "hi": "काली मिर्च पाउडर",
+                "en": "Black Pepper Powder"
+            },
+            "price": 90,
+            "unit": {
+                "hi": "100 ग्राम",
+                "en": "100 gm"
+            },
+            "image": "",
+            "discount": 0,
+            "mostOrdered": false
+        },
+        {
+            "id": "salt-007",
+            "name": {
+                "hi": "चाट मसाला",
+                "en": "Chaat Masala"
+            },
+            "price": 35,
+            "unit": {
+                "hi": "100 ग्राम",
+                "en": "100 gm"
+            },
+            "image": "",
+            "discount": 0,
+            "mostOrdered": true
+        },
+        {
+            "id": "salt-008",
+            "name": {
+                "hi": "अमचूर पाउडर",
+                "en": "Dry Mango Powder (Amchur)"
+            },
+            "price": 45,
+            "unit": {
+                "hi": "100 ग्राम",
+                "en": "100 gm"
+            },
+            "image": "",
+            "discount": 0,
+            "mostOrdered": false
+        }
+    ]
+}

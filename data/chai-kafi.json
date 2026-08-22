@@ -1,0 +1,59 @@
+{
+    "category": "chai-kafi",
+    "products": [
+        {
+            "id": "chai-001",
+            "name": { "hi": "टाटा टी प्रीमियम", "en": "Tata Tea Premium" },
+            "price": 140,
+            "unit": { "hi": "500 ग्राम", "en": "500 g" },
+            "image": "https://images.unsplash.com/photo-1597481499750-3e6b22637e12?w=300",
+            "discount": 5,
+            "mostOrdered": true
+        },
+        {
+            "id": "chai-002",
+            "name": { "hi": "रेड लेबल चाय", "en": "Red Label Tea" },
+            "price": 130,
+            "unit": { "hi": "500 ग्राम", "en": "500 g" },
+            "image": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=300",
+            "discount": 0,
+            "mostOrdered": true
+        },
+        {
+            "id": "chai-003",
+            "name": { "hi": "नेस्कैफे कॉफी", "en": "Nescafe Classic Coffee" },
+            "price": 260,
+            "unit": { "hi": "100 ग्राम जार", "en": "100 g jar" },
+            "image": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=300",
+            "discount": 8,
+            "mostOrdered": true
+        },
+        {
+            "id": "chai-004",
+            "name": { "hi": "बॉर्नविटा", "en": "Bournvita Health Drink" },
+            "price": 230,
+            "unit": { "hi": "500 ग्राम", "en": "500 g" },
+            "image": "https://images.unsplash.com/photo-1571066811602-716837d681de?w=300",
+            "discount": 0,
+            "mostOrdered": false
+        },
+        {
+            "id": "chai-005",
+            "name": { "hi": "ग्रीन टी बैग्स", "en": "Green Tea Bags" },
+            "price": 180,
+            "unit": { "hi": "25 बैग्स", "en": "25 bags" },
+            "image": "https://images.unsplash.com/photo-1627435601361-ec25f5b1d0e5?w=300",
+            "discount": 10,
+            "mostOrdered": false
+        },
+        {
+            "id": "chai-006",
+            "name": { "hi": "इलायची चाय", "en": "Elaichi (Cardamom) Tea" },
+            "price": 150,
+            "unit": { "hi": "250 ग्राम", "en": "250 g" },
+            "image": "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=300",
+            "discount": 0,
+            "mostOrdered": false
+        }
+    ]
+}

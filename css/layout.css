@@ -1,0 +1,309 @@
+/* ============================================
+   LAYOUT.CSS - Sizes, Spacing, Grid, Layout
+   ============================================ */
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+
+/* Fixed Sections */
+.top-header {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    height: var(--header-height);
+    z-index: 1000;
+    background-color: var(--primary);
+    color: var(--text-on-primary);
+}
+
+.search-section {
+    position: fixed;
+    top: var(--header-height);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    z-index: 999;
+    padding: var(--spacing-sm) 0;
+    background-color: var(--bg-primary);
+    transition: background-color var(--transition-normal);
+}
+
+.categories-section {
+    position: fixed;
+    top: calc(var(--header-height) + var(--search-height) + 16px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    height: var(--categories-height);
+    z-index: 998;
+    background-color: var(--bg-primary);
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    transition: background-color var(--transition-normal);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* 
+   MAIN CONTENT AREA
+*/
+.main-content {
+    position: fixed;
+    top: calc(var(--header-height) + var(--search-height) + var(--categories-height) + 24px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    bottom: var(--bottom-nav-height);
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding: var(--spacing-md);
+    padding-top: 8px;
+    background-color: var(--bg-primary);
+    transition: background-color var(--transition-normal), bottom 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+}
+
+.bottom-spacer {
+    height: 20px;
+}
+
+/* ============================================ */
+/* ⬆️ FLOATING BACK TO TOP BUTTON - FULLY FIXED */
+/* ============================================ */
+.floating-back-to-top {
+    /* POSITION LOCKED - hamesha bottom pe hi rahega */
+    position: fixed;
+    bottom: calc(var(--bottom-nav-height) + 16px);
+    left: 50%;
+    z-index: 1001;
+    
+    /* Transform only for centering and slide-up animation */
+    transform: translateX(-50%) translateY(40px);
+    
+    /* Glassmorphism */
+    background: rgba(46, 125, 50, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    
+    /* Layout */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    border-radius: 50px;
+    
+    /* Text */
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 14px;
+    font-family: var(--font-heading);
+    
+    /* Shadow */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    
+    /* Animation */
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                bottom 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                background 0.2s ease;
+    cursor: pointer;
+    
+    /* HIDDEN by default */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Visible state - slides up from bottom */
+.floating-back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+}
+
+/* Hidden state - slides down + fades out */
+.floating-back-to-top.hidden {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateX(-50%) translateY(40px) !important;
+    pointer-events: none !important;
+}
+
+/* When navbar is hidden, button sits at very bottom */
+.floating-back-to-top.navbar-hidden {
+    bottom: 20px;
+}
+
+/* Click/tap feedback */
+.floating-back-to-top:active {
+    background: rgba(46, 125, 50, 0.45);
+    transform: translateX(-50%) translateY(0) scale(0.94) !important;
+    transition: transform 0.1s ease, background 0.1s ease;
+}
+
+.back-to-top-arrow {
+    font-size: 16px;
+    animation: bounce-up 1.5s infinite;
+}
+
+.back-to-top-text {
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+@keyframes bounce-up {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+/* Dark mode */
+body.dark-mode .floating-back-to-top {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .floating-back-to-top:active {
+    background: rgba(255, 255, 255, 0.22);
+}
+
+/* Bottom Navbar */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    height: var(--bottom-nav-height);
+    z-index: 1000;
+    background-color: var(--primary);
+    color: var(--text-on-primary);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: visible;
+}
+
+/* Navbar hidden */
+.bottom-nav.nav-hidden {
+    transform: translateX(-50%) translateY(100%);
+    overflow: hidden;
+}
+
+/* Products Grid */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    padding: var(--spacing-sm) 0;
+}
+
+/* Horizontal Scroll */
+.horizontal-scroll {
+    display: flex;
+    gap: var(--spacing-md);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: var(--spacing-sm) 0;
+    scroll-behavior: smooth;
+}
+
+.horizontal-scroll > * {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+}
+
+/* Section Titles */
+.section-title {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-lg);
+    margin: var(--spacing-md) 0 var(--spacing-sm);
+    padding: 8px 4px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: inline-block;
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -14px;
+    right: -14px;
+    bottom: 0;
+    background: rgba(245, 245, 220, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: -1;
+    border-radius: 10px;
+}
+
+body.dark-mode .section-title::before {
+    background: rgba(26, 26, 46, 0.8);
+}
+
+.category-products-section .section-title {
+    margin-top: 0;
+    padding-top: 4px;
+    font-size: 19px;
+    font-weight: 800;
+}
+
+/* Responsive */
+@media (min-width: 481px) {
+    body {
+        border-left: 1px solid #e0e0e0;
+        border-right: 1px solid #e0e0e0;
+    }
+}
+
+@media (max-width: 360px) {
+    :root {
+        --card-width: 150px;
+        --header-height: 50px;
+        --search-height: 42px;
+        --categories-height: 48px;
+        --bottom-nav-height: 52px;
+    }
+    
+    .categories-section {
+        top: calc(var(--header-height) + var(--search-height) + 10px);
+        padding: 0 24px;
+    }
+    
+    .main-content {
+        top: calc(var(--header-height) + var(--search-height) + var(--categories-height) + 18px);
+    }
+
+    .floating-back-to-top {
+        padding: 8px 16px;
+        bottom: calc(var(--bottom-nav-height) + 10px);
+    }
+    .floating-back-to-top.navbar-hidden {
+        bottom: 14px;
+    }
+    .back-to-top-text {
+        font-size: 12px;
+    }
+}

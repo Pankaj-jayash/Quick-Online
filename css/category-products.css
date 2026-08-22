@@ -1,0 +1,327 @@
+/* ============================================
+   CATEGORY-PRODUCTS.CSS - Section 5 (DYNAMIC FAST)
+   Category Colors + Smooth Speed + Transparent BG
+   ============================================ */
+
+.category-products-section {
+    margin-bottom: var(--spacing-md);
+    padding-top: 2px;
+    scroll-margin-top: 8px;
+    background: transparent;
+}
+
+/* ============================================ */
+/* 🏷️ SECTION TITLE - Fast Ghost Scroll */
+/* ============================================ */
+.category-products-section .section-title {
+    margin: 0 14px 8px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    
+    opacity: 1;
+    transform: translateY(0);
+    /* ⚡ FAST transitions */
+    transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.category-products-section.scrolled .section-title {
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+}
+
+/* ============================================ */
+/* 🛡️ TRUST UNIT - Transparent Card */
+/* ============================================ */
+.cat-trust-unit {
+    display: inline-flex;
+    align-items: center;
+    
+    /* Transparent background */
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    
+    border-radius: 10px;
+    padding: 1px;
+    
+    /* Subtle shadow */
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.04),
+        0 4px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    
+    position: relative;
+    
+    /* ⚡ FAST animation */
+    animation: trustSlideUp 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.cat-trust-unit:hover {
+    box-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.06),
+        0 6px 16px rgba(0, 0, 0, 0.06);
+    transform: translateY(-1px);
+}
+
+@keyframes trustSlideUp {
+    from { 
+        opacity: 0; 
+        transform: translateY(12px);
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0);
+    }
+}
+
+/* ============================================ */
+/* 📦 NAME BOX - Dynamic Color via JS inline */
+/* ============================================ */
+.cat-name-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 16px;
+    border-radius: 9px;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 14px;
+    font-family: var(--font-heading);
+    letter-spacing: 0.2px;
+    line-height: 1.2;
+    white-space: nowrap;
+    
+    /* ⚡ FAST transitions */
+    transition: all 0.2s ease;
+    
+    /* Subtle depth */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cat-name-box .box-icon {
+    font-size: 16px;
+    line-height: 1;
+    /* ⚡ FAST icon animation */
+    animation: iconQuickPop 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes iconQuickPop {
+    from { transform: scale(0.6); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.cat-name-box .box-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* ============================================ */
+/* ✅ COUNT BADGE - Clean, Transparent */
+/* ============================================ */
+.cat-count-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 14px;
+    background: transparent;
+    color: #555;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: var(--font-heading);
+    line-height: 1.2;
+    white-space: nowrap;
+    border-left: 1px solid rgba(0, 0, 0, 0.06);
+    
+    /* ⚡ FAST animation */
+    animation: countQuickIn 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s both;
+}
+
+@keyframes countQuickIn {
+    from { opacity: 0; transform: translateX(-6px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.cat-count-badge .count-num {
+    font-weight: 700;
+    font-size: 14px;
+    min-width: 16px;
+    text-align: center;
+    /* Color set by JS inline */
+}
+
+.cat-count-badge .count-label {
+    font-size: 11px;
+    color: #888;
+    font-weight: 400;
+}
+
+/* Verified tick */
+.cat-count-badge .verified-tick {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    /* Background set by JS inline */
+}
+
+/* ============================================ */
+/* ✕ CLOSE BUTTON - Fast & Light */
+/* ============================================ */
+.cat-back-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.03);
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    color: #999;
+    font-weight: 400;
+    
+    /* ⚡ FAST transition */
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+    margin-left: 6px;
+}
+
+.cat-back-btn:hover {
+    background: rgba(0, 0, 0, 0.07);
+    color: #444;
+}
+
+.cat-back-btn:active {
+    transform: scale(0.88);
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================ */
+/* PRODUCTS GRID */
+/* ============================================ */
+.category-products-section .products-grid {
+    animation: fadeInUpFast 0.3s ease;
+    gap: 10px;
+    padding: 6px 8px;
+}
+
+@keyframes fadeInUpFast {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================ */
+/* EMPTY STATE */
+/* ============================================ */
+.category-products-empty {
+    text-align: center;
+    padding: 40px 20px;
+    grid-column: 1 / -1;
+}
+
+.category-products-empty .empty-icon {
+    font-size: 40px;
+    display: block;
+    margin-bottom: 8px;
+    opacity: 0.5;
+}
+
+.category-products-empty .empty-text {
+    color: #999;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+/* ============================================ */
+/* DARK MODE */
+/* ============================================ */
+body.dark-mode .cat-trust-unit {
+    background: rgba(30, 30, 45, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-color: rgba(255, 255, 255, 0.05);
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.2),
+        0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+body.dark-mode .cat-count-badge {
+    color: #bbb;
+    border-left-color: rgba(255, 255, 255, 0.06);
+}
+
+body.dark-mode .cat-count-badge .count-label {
+    color: #888;
+}
+
+body.dark-mode .cat-back-btn {
+    background: rgba(255, 255, 255, 0.03);
+    color: #777;
+}
+
+body.dark-mode .cat-back-btn:hover {
+    background: rgba(255, 255, 255, 0.07);
+    color: #bbb;
+}
+
+/* ============================================ */
+/* MOBILE */
+/* ============================================ */
+@media (max-width: 400px) {
+    .category-products-section .section-title {
+        margin: 0 8px 6px;
+    }
+    
+    .cat-trust-unit {
+        border-radius: 8px;
+    }
+    
+    .cat-name-box {
+        padding: 7px 11px;
+        border-radius: 7px;
+    }
+    .cat-name-box .box-icon {
+        font-size: 14px;
+    }
+    .cat-name-box .box-name {
+        font-size: 12px;
+    }
+    
+    .cat-count-badge {
+        padding: 7px 10px;
+        gap: 4px;
+    }
+    .cat-count-badge .count-num {
+        font-size: 12px;
+    }
+    .cat-count-badge .count-label {
+        font-size: 10px;
+    }
+    .cat-count-badge .verified-tick {
+        width: 15px;
+        height: 15px;
+        font-size: 9px;
+    }
+    
+    .cat-back-btn {
+        width: 24px;
+        height: 24px;
+        font-size: 13px;
+    }
+    
+    .category-products-section .products-grid {
+        gap: 8px;
+        padding: 4px 6px;
+    }
+}

@@ -1,0 +1,187 @@
+{
+  "_comment": "═══════════════════════════════════════",
+  "_comment2": "🛒 QUICK DUKAN - CART MESSAGES (HI/EN)",
+  "_comment3": "═══════════════════════════════════════",
+  
+  "header": {
+    "hi": {
+      "title": "आपका कार्ट",
+      "subtitle": "सब कुछ सही है? 😊",
+      "savedBadge": "{count} सेव"
+    },
+    "en": {
+      "title": "Your Cart",
+      "subtitle": "Everything good? 😊",
+      "savedBadge": "{count} saved"
+    }
+  },
+  
+  "progressBar": {
+    "hi": {
+      "freeDelivery": "🚚 फ्री डिलीवरी के लिए सिर्फ ₹{amount} और जोड़ें!",
+      "congrats": "🎉 बधाई! आपकी डिलीवरी फ्री है!"
+    },
+    "en": {
+      "freeDelivery": "🚚 Add just ₹{amount} more for FREE delivery!",
+      "congrats": "🎉 Congrats! You got FREE delivery!"
+    }
+  },
+  
+  "coupon": {
+    "hi": {
+      "placeholder": "कूपन कोड",
+      "apply": "लगाएं",
+      "applied": "✅ {code} -₹{amount}",
+      "invalid": "❌ अमान्य कूपन कोड",
+      "expired": "⏰ यह कूपन एक्सपायर हो गया",
+      "minOrder": "⚠️ न्यूनतम ₹{amount} का ऑर्डर ज़रूरी",
+      "autoApplied": "🎉 {code} ऑटो-लागू! -₹{amount}",
+      "alreadyApplied": "⚠️ पहले मौजूदा कूपन हटाएं"
+    },
+    "en": {
+      "placeholder": "Coupon code",
+      "apply": "Apply",
+      "applied": "✅ {code} -₹{amount}",
+      "invalid": "❌ Invalid coupon code",
+      "expired": "⏰ This coupon has expired",
+      "minOrder": "⚠️ Min order ₹{amount} required",
+      "autoApplied": "🎉 {code} auto-applied! -₹{amount}",
+      "alreadyApplied": "⚠️ Remove existing coupon first"
+    }
+  },
+  
+  "undoDelete": {
+    "hi": {
+      "removed": "🗑️ हटा दिया गया",
+      "undo": "पूर्ववत करें"
+    },
+    "en": {
+      "removed": "🗑️ Item removed",
+      "undo": "Undo"
+    }
+  },
+  
+  "cartItem": {
+    "hi": {
+      "stockWarning": "⚠️ सिर्फ {count} बचे!",
+      "saveForLater": "सेव करें",
+      "saved": "सेव हो गया",
+      "remove": "हटाएं",
+      "alreadySaved": "✓ पहले से सेव है!"
+    },
+    "en": {
+      "stockWarning": "⚠️ Only {count} left!",
+      "saveForLater": "Save for Later",
+      "saved": "Saved",
+      "remove": "Remove",
+      "alreadySaved": "✓ Already saved!"
+    }
+  },
+  
+  "savedItems": {
+    "hi": {
+      "title": "📦 सेव",
+      "count": "({count})",
+      "moveToCart": "→कार्ट",
+      "remove": "✕",
+      "emptyDesc": "♡ टैप करके आइटम सेव करें"
+    },
+    "en": {
+      "title": "📦 Saved",
+      "count": "({count})",
+      "moveToCart": "→Cart",
+      "remove": "✕",
+      "emptyDesc": "Tap ♡ to save items"
+    }
+  },
+  
+  "orderSummary": {
+    "hi": {
+      "title": "📋 समरी",
+      "itemCount": "({count} आइटम)",
+      "subtotal": "सबटोटल",
+      "couponDiscount": "कूपन",
+      "delivery": "डिलीवरी",
+      "free": "🎉 फ्री!",
+      "total": "कुल",
+      "savings": "🎉 बचाए: ₹{amount}!",
+      "estimatedDelivery": "⏱️ {time}"
+    },
+    "en": {
+      "title": "📋 Summary",
+      "itemCount": "({count} items)",
+      "subtotal": "Subtotal",
+      "couponDiscount": "Coupon",
+      "delivery": "Delivery",
+      "free": "🎉 FREE!",
+      "total": "Total",
+      "savings": "🎉 Saved: ₹{amount}!",
+      "estimatedDelivery": "⏱️ {time}"
+    }
+  },
+  
+  "footer": {
+    "hi": {
+      "whatsapp": "💬 WhatsApp पर भेजें",
+      "whatsappLoading": "भेज रहे हैं...",
+      "copyOrder": "📋 कॉपी करें",
+      "copySuccess": "✅ ऑर्डर कॉपी हो गया!",
+      "clearCart": "🗑️ खाली करें",
+      "clearConfirm": "पूरा कार्ट खाली करें?"
+    },
+    "en": {
+      "whatsapp": "💬 Send on WhatsApp",
+      "whatsappLoading": "Sending...",
+      "copyOrder": "📋 Copy Order",
+      "copySuccess": "✅ Order copied!",
+      "clearCart": "🗑️ Clear Cart",
+      "clearConfirm": "Clear entire cart?"
+    }
+  },
+  
+  "toast": {
+    "hi": {
+      "added": "🎉 कार्ट में जोड़ा!",
+      "quantityUp": "✅ मात्रा बढ़ाई!",
+      "quantityMax": "⚠️ अधिकतम मात्रा!",
+      "removed": "🗑️ हटा दिया",
+      "cartCleared": "🗑️ कार्ट खाली कर दिया",
+      "saved": "♡ सेव कर लिया",
+      "movedToCart": "→ कार्ट में डाल दिया",
+      "couponApplied": "🎫 कूपन लगा दिया!",
+      "couponRemoved": "🎫 कूपन हटा दिया",
+      "orderSent": "✅ ऑर्डर WhatsApp पर भेज दिया!",
+      "copied": "📋 कॉपी हो गया!",
+      "restored": "✅ वापस जोड़ दिया!"
+    },
+    "en": {
+      "added": "🎉 Added to cart!",
+      "quantityUp": "✅ Quantity increased!",
+      "quantityMax": "⚠️ Maximum quantity!",
+      "removed": "🗑️ Removed",
+      "cartCleared": "🗑️ Cart cleared",
+      "saved": "♡ Saved for later",
+      "movedToCart": "→ Moved to cart",
+      "couponApplied": "🎫 Coupon applied!",
+      "couponRemoved": "🎫 Coupon removed",
+      "orderSent": "✅ Order sent on WhatsApp!",
+      "copied": "📋 Copied!",
+      "restored": "✅ Restored!"
+    }
+  },
+  
+  "emptyCart": {
+    "hi": {
+      "title": "आपका कार्ट खाली है 🛒",
+      "subtitle": "कुछ सामान जोड़ो, फिर मज़ा आएगा! 🛍️",
+      "buttonText": "🏪 प्रोडक्ट देखें",
+      "suggestedTitle": "⭐ आपके लिए सुझाव"
+    },
+    "en": {
+      "title": "Your cart is empty 🛒",
+      "subtitle": "Add some items and enjoy shopping! 🛍️",
+      "buttonText": "🏪 Browse Products",
+      "suggestedTitle": "⭐ Suggested for You"
+    }
+  }
+}

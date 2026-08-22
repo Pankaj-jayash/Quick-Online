@@ -1,0 +1,503 @@
+/* ============================================
+   THEME.CSS - Colors, Fonts, Global Theme
+   Fixed Version - All Issues Resolved
+   ============================================ */
+
+:root {
+    /* Primary Colors - Fixed Consistency */
+    --primary: #2E7D32;
+    --primary-light: #4CAF50;
+    --primary-dark: #1B5E20;
+    
+    /* Background Colors - Better Contrast */
+    --bg-primary: #FAFAFA;
+    --bg-secondary: #FFFFFF;
+    --bg-card: #FFFFFF;
+    
+    /* Text Colors */
+    --text-primary: #1a1a1a;
+    --text-secondary: #555555;
+    --text-light: #888888;
+    --text-on-primary: #FFFFFF;
+    
+    /* Accent Colors - Fixed Gold Contrast */
+    --gold: #8B6914;
+    --gold-light: #D4A017;
+    --gold-glow: rgba(139, 105, 20, 0.4);
+    --success: #2E7D32;
+    --error: #C62828;
+    --warning: #E65100;
+    
+    /* Shadow */
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.12);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.16);
+    
+    /* Border Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-full: 50px;
+    
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    
+    /* Fonts */
+    --font-heading: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+    --font-body: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+    --font-size-xs: 12px;
+    --font-size-sm: 14px;
+    --font-size-md: 16px;
+    --font-size-lg: 20px;
+    --font-size-xl: 24px;
+    --font-size-xxl: 32px;
+    
+    /* Animation */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    
+    /* Layout */
+    --header-height: 50px;
+    --search-height: 50px;
+    --categories-height: 55px;
+    --bottom-nav-height: 60px;
+    --card-width: 170px;
+}
+
+/* ============================================
+   KEYFRAMES - Fixed Missing Animation
+   ============================================ */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+/* ============================================
+   RESET AND BASE
+   ============================================ */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Fixed: Global smooth transitions for dark mode */
+    transition: background-color 0.3s ease, 
+                color 0.3s ease, 
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+    text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button, 
+a, 
+input, 
+.nav-btn, 
+.category-btn {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation; /* Fixed: Prevent double-tap zoom */
+}
+
+img {
+    max-width: 100%;
+    display: block;
+    height: auto;
+}
+
+/* ============================================
+   FOCUS STYLES - Fixed: Accessibility
+   ============================================ */
+:focus-visible {
+    outline: 3px solid var(--primary-light);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible),
+input:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ============================================
+   SELECTION - Fixed: Better UX
+   ============================================ */
+::selection {
+    background: var(--primary);
+    color: var(--text-on-primary);
+}
+
+::-moz-selection {
+    background: var(--primary);
+    color: var(--text-on-primary);
+}
+
+/* ============================================
+   SCROLLBAR - Fixed: Better Contrast
+   ============================================ */
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.hidden {
+    display: none !important;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* ============================================
+   SECTION TITLES - Fixed: Safari Fallback
+   ============================================ */
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 700;
+    color: #8B6914;
+    margin: 12px 0 8px;
+    padding: 6px 12px;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: inline-block;
+    letter-spacing: 0.3px;
+    background: transparent;
+}
+
+/* Fixed: Safari backdrop-filter fallback */
+.section-title::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    background: var(--bg-primary);
+    opacity: 0.92;
+    z-index: -1;
+    border-radius: 8px;
+}
+
+/* Only apply blur on supported browsers */
+@supports (backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px)) {
+    .section-title::before {
+        background: transparent;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+}
+
+/* Category products section title */
+.category-products-section .section-title {
+    color: #8B6914;
+    font-size: 19px;
+    font-weight: 800;
+}
+
+/* Recently viewed section title */
+.recently-viewed-section .section-title {
+    color: #8B7355;
+}
+
+/* Most orders section title */
+.most-orders-section .section-title {
+    color: #CD853F;
+}
+
+/* All products section title */
+.all-products-section .section-title {
+    color: #6A1B9A;
+}
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+body.dark-mode {
+    --bg-primary: #121212;
+    --bg-secondary: #1E1E1E;
+    --bg-card: #2C2C2C;
+    --text-primary: #E0E0E0;
+    --text-secondary: #B0B0B0;
+    --text-light: #808080;
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.4);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.5);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.6);
+}
+
+body.dark-mode .section-title {
+    color: #FFD700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+body.dark-mode .category-products-section .section-title {
+    color: #FFD700;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+}
+
+body.dark-mode .recently-viewed-section .section-title {
+    color: #DEB887;
+}
+
+body.dark-mode .most-orders-section .section-title {
+    color: #F4A460;
+    text-shadow: 0 0 10px rgba(244, 164, 96, 0.3);
+}
+
+body.dark-mode .all-products-section .section-title {
+    color: #BB86FC;
+    text-shadow: 0 0 10px rgba(187, 134, 252, 0.3);
+}
+
+/* Fixed: Dark mode scrollbar */
+body.dark-mode .section-title::before {
+    background: var(--bg-primary);
+    opacity: 0.92;
+}
+
+@supports (backdrop-filter: blur(10px)) {
+    body.dark-mode .section-title::before {
+        background: transparent;
+    }
+}
+
+/* ============================================
+   REDUCED MOTION - Fixed: Accessibility
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ============================================
+   PRINT STYLES - Fixed: Better UX
+   ============================================ */
+@media print {
+    .bottom-nav,
+    .search-section,
+    .categories-section,
+    .top-header,
+    .cart-badge,
+    #backToTopBtn,
+    .voice-search-btn,
+    .site-footer {
+        display: none !important;
+    }
+    
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .main-content {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    .cart-modal,
+    .orders-modal,
+    .checkout-modal {
+        position: static !important;
+    }
+    
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+}
+
+/* ============================================
+   FOOTER - Inside Main Content
+   ============================================ */
+.site-footer {
+    background: var(--bg-secondary);
+    padding: 16px;
+    text-align: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: var(--radius-md);
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+body.dark-mode .site-footer {
+    background: var(--bg-card);
+    border-top-color: rgba(255, 255, 255, 0.06);
+}
+
+.footer-content {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.footer-text {
+    color: var(--text-secondary);
+    font-size: 11px;
+    margin-bottom: 6px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.footer-link {
+    color: var(--primary);
+    font-size: 11px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.footer-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+.footer-link:active {
+    transform: scale(0.95);
+}
+
+.footer-divider {
+    color: var(--text-light);
+    font-size: 10px;
+}
+
+/* ============================================
+   PRODUCT IMAGE FIX - Prevent CLS
+   ============================================ */
+.product-image-wrapper {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #f0f0f0;
+    position: relative;
+}
+
+.product-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+body.dark-mode .product-image-wrapper {
+    background: #2C2C2C;
+}
+
+/* ============================================
+   LOADING STATE FOR BUTTONS
+   ============================================ */
+button[data-loading-text].loading {
+    pointer-events: none;
+    opacity: 0.7;
+    position: relative;
+}
+
+button[data-loading-text].loading::after {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    display: inline-block;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+/* ============================================
+   DISABLED ARROWS
+   ============================================ */
+.scroll-arrow:disabled,
+.scroll-arrow.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+    cursor: not-allowed;
+} 

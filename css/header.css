@@ -1,0 +1,501 @@
+/* ============================================
+   HEADER.CSS - Quick Dukan
+   Free Delivery (9s) ↔ Trust Shield (3s)
+   With Shining & Glow Effects
+   ============================================ */
+
+/* ===== MAIN HEADER ===== */
+.top-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-height);
+    min-height: var(--header-height);
+    padding: 0 10px;
+    gap: 4px;
+    background: var(--primary);
+    color: var(--text-on-primary);
+    box-sizing: border-box;
+}
+
+/* ============================================
+   LEFT SECTION - Brand
+   ============================================ */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex-shrink: 0;
+}
+
+.header-icon {
+    font-size: 20px;
+    display: inline-block;
+    cursor: default;
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
+    animation: cartBounce 3s ease-in-out infinite;
+}
+
+@keyframes cartBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+.brand-name {
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+}
+
+.quick-text {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.3px;
+}
+
+.dukan-text {
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 500;
+    color: #FFEA00;
+    position: relative;
+}
+
+/* Golden underline */
+.dukan-text::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, #FFEA00, transparent);
+    border-radius: 1px;
+    animation: underlineGlow 2s ease-in-out infinite;
+}
+
+@keyframes underlineGlow {
+    0%, 100% { opacity: 0.3; transform: scaleX(0.7); }
+    50% { opacity: 1; transform: scaleX(1); }
+}
+
+/* ============================================
+   CENTER SECTION - Alternating Badge
+   ============================================ */
+.header-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 1;
+    min-width: 0;
+    overflow: visible;
+}
+
+/* Main Badge Container */
+.center-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.12);
+    padding: 5px 10px;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    min-width: 85px;
+    height: 30px;
+}
+
+/* ===== SHINING EFFECT ===== */
+.center-badge::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.08) 40%,
+        rgba(255, 255, 255, 0.2) 45%,
+        rgba(255, 255, 255, 0.4) 50%,
+        rgba(255, 255, 255, 0.2) 55%,
+        rgba(255, 255, 255, 0.08) 60%,
+        transparent 70%
+    );
+    background-size: 200% 200%;
+    animation: diamondShine 4s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes diamondShine {
+    0% { 
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    100% { 
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+}
+
+/* Second shine layer - opposite direction */
+.center-badge::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        -45deg,
+        transparent 40%,
+        rgba(255, 255, 255, 0.05) 47%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.05) 53%,
+        transparent 60%
+    );
+    background-size: 200% 200%;
+    animation: diamondShineReverse 5s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes diamondShineReverse {
+    0% { 
+        transform: translateX(100%) translateY(-100%) rotate(-45deg);
+    }
+    100% { 
+        transform: translateX(-100%) translateY(100%) rotate(-45deg);
+    }
+}
+
+/* Badge Content Wrapper */
+.badge-content {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    position: relative;
+    z-index: 2;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* ========== FREE DELIVERY STYLE ========== */
+.badge-content.delivery-content .badge-icon {
+    font-size: 15px;
+    display: inline-block;
+    animation: truckBounce 1.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));
+}
+
+@keyframes truckBounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    30% { transform: translateY(-4px) scale(1.1); }
+    50% { transform: translateY(0) scale(1); }
+    70% { transform: translateY(-2px) scale(1.05); }
+}
+
+.badge-content.delivery-content .badge-text {
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 0.3px;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+}
+
+/* ========== TRUST SHIELD STYLE ========== */
+.badge-content.trust-content {
+    gap: 6px;
+}
+
+/* Shield Icon */
+.badge-content.trust-content .trust-shield-icon {
+    font-size: 17px;
+    display: inline-block;
+    animation: shieldPulse 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.6));
+}
+
+@keyframes shieldPulse {
+    0%, 100% { 
+        transform: scale(1);
+        filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.4));
+    }
+    50% { 
+        transform: scale(1.2);
+        filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+    }
+}
+
+/* Checkmark Badge */
+.badge-content.trust-content .trust-check-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 17px;
+    height: 17px;
+    background: #4CAF50;
+    color: #FFFFFF;
+    font-size: 10px;
+    font-weight: 900;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 
+        0 0 8px rgba(76, 175, 80, 0.6),
+        0 0 16px rgba(76, 175, 80, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    animation: checkGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes checkGlow {
+    0%, 100% {
+        box-shadow: 0 0 6px rgba(76, 175, 80, 0.5), 0 0 12px rgba(76, 175, 80, 0.2);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 14px rgba(76, 175, 80, 0.8), 0 0 24px rgba(76, 175, 80, 0.4);
+        transform: scale(1.15);
+    }
+}
+
+.badge-content.trust-content .badge-text {
+    color: #E8F5E9;
+    font-weight: 600;
+    font-size: 9px;
+    letter-spacing: 0.3px;
+    text-shadow: 0 0 6px rgba(76, 175, 80, 0.4);
+}
+
+/* ========== TRANSITION STATES ========== */
+.badge-content.hidden {
+    position: absolute;
+    opacity: 0;
+    transform: translateY(12px) scale(0.9);
+    pointer-events: none;
+}
+
+.badge-content.visible {
+    position: relative;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* 🌊 Wave Separator */
+.header-center::after {
+    content: '';
+    width: 16px;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.6) 50%,
+        transparent
+    );
+    background-size: 200% 100%;
+    margin: 0 5px;
+    flex-shrink: 0;
+    border-radius: 2px;
+    animation: waveFlow 2s ease-in-out infinite;
+}
+
+@keyframes waveFlow {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* ============================================
+   RIGHT SECTION - Toggle Buttons
+   ============================================ */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.toggle-btn {
+    width: 32px;
+    height: 28px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.15);
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.toggle-btn::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at center,
+        rgba(255, 255, 255, 0.2) 0%,
+        transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: var(--radius-full);
+}
+
+.toggle-btn:hover::before {
+    opacity: 1;
+}
+
+.toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+}
+
+.toggle-btn:active {
+    transform: scale(0.92);
+}
+
+.lang-toggle {
+    width: 38px;
+}
+
+.lang-text {
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.theme-toggle {
+    width: 30px;
+}
+
+.theme-icon {
+    font-size: 15px;
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.theme-toggle:hover .theme-icon {
+    transform: rotate(30deg);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 380px) {
+    .top-header {
+        padding: 0 6px;
+        gap: 2px;
+    }
+    
+    .quick-text {
+        font-size: 17px;
+    }
+    .dukan-text {
+        font-size: 12px;
+    }
+    .header-icon {
+        font-size: 18px;
+    }
+    
+    .center-badge {
+        padding: 3px 6px;
+        min-width: 65px;
+        height: 26px;
+    }
+    
+    .badge-content.delivery-content .badge-icon {
+        font-size: 13px;
+    }
+    .badge-content.delivery-content .badge-text {
+        font-size: 8px;
+    }
+    
+    .badge-content.trust-content .trust-shield-icon {
+        font-size: 14px;
+    }
+    .badge-content.trust-content .trust-check-badge {
+        width: 14px;
+        height: 14px;
+        font-size: 8px;
+    }
+    .badge-content.trust-content .badge-text {
+        font-size: 7px;
+    }
+    
+    .toggle-btn {
+        width: 28px;
+        height: 26px;
+    }
+    .lang-toggle {
+        width: 32px;
+    }
+    .lang-text {
+        font-size: 10px;
+    }
+    
+    .header-center::after {
+        width: 10px;
+        margin: 0 3px;
+    }
+}
+
+@media (max-width: 340px) {
+    .header-left {
+        gap: 1px;
+    }
+    .quick-text {
+        font-size: 15px;
+    }
+    .dukan-text {
+        font-size: 11px;
+    }
+    
+    .center-badge {
+        padding: 3px 5px;
+        min-width: unset;
+    }
+    .badge-content.delivery-content .badge-text,
+    .badge-content.trust-content .badge-text {
+        display: none;
+    }
+    
+    .header-center::after {
+        display: none;
+    }
+}
+
+/* Login & Orders Buttons */
+.login-toggle, .orders-toggle {
+    position: relative;
+}
+
+.login-icon, .orders-icon {
+    font-size: 14px;
+}
+
+/* Badge for Orders Count */
+.orders-badge {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    background: #f44336;
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 5px;
+    border-radius: 10px;
+    min-width: 16px;
+    text-align: center;
+    display: none;
+}
+
+.orders-badge.show {
+    display: block;
+}

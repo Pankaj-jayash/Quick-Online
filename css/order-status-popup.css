@@ -1,0 +1,179 @@
+/* ============================================
+   ORDER STATUS POPUP - Real-time Tracking
+   ============================================ */
+
+.order-status-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.order-status-popup.hidden {
+    display: none;
+}
+
+.order-status-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    animation: statusOverlayIn 0.3s ease;
+}
+
+@keyframes statusOverlayIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.order-status-content {
+    position: relative;
+    background: #FFFFFF;
+    border-radius: 24px;
+    padding: 30px 24px 24px;
+    max-width: 380px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: statusPopupIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1;
+}
+
+@keyframes statusPopupIn {
+    0% { transform: scale(0.6) translateY(40px); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.order-status-icon {
+    font-size: 64px;
+    margin-bottom: 12px;
+    animation: statusIconBounce 2s ease-in-out infinite;
+}
+
+@keyframes statusIconBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.order-status-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #333;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.order-status-message {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.order-status-loader {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.status-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(46, 125, 50, 0.1);
+    border-top-color: #2E7D32;
+    border-radius: 50%;
+    animation: statusSpin 0.8s linear infinite;
+}
+
+@keyframes statusSpin {
+    to { transform: rotate(360deg); }
+}
+
+.order-status-close-btn {
+    display: inline-block;
+    padding: 10px 24px;
+    background: linear-gradient(135deg, #2E7D32, #1B5E20);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+}
+
+.order-status-close-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
+}
+
+/* Status Colors */
+.order-status-popup.status-pending .order-status-title {
+    color: #E65100;
+}
+
+.order-status-popup.status-confirmed .order-status-title {
+    color: #2E7D32;
+}
+
+.order-status-popup.status-confirmed .order-status-close-btn {
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+}
+
+.order-status-popup.status-cancelled .order-status-title {
+    color: #C62828;
+}
+
+.order-status-popup.status-cancelled .order-status-close-btn {
+    background: linear-gradient(135deg, #f44336, #C62828);
+}
+
+.order-status-popup.status-delivered .order-status-title {
+    color: #1565C0;
+}
+
+.order-status-popup.status-delivered .order-status-close-btn {
+    background: linear-gradient(135deg, #2196F3, #1565C0);
+}
+
+/* Dark Mode */
+body.dark-mode .order-status-content {
+    background: #1E1E1E;
+}
+
+body.dark-mode .order-status-title {
+    color: #E0E0E0;
+}
+
+body.dark-mode .order-status-message {
+    color: #B0B0B0;
+}
+
+body.dark-mode .status-spinner {
+    border-color: rgba(76, 175, 80, 0.1);
+    border-top-color: #4CAF50;
+}
+
+/* Mobile */
+@media (max-width: 380px) {
+    .order-status-popup { padding: 12px; }
+    .order-status-content { padding: 24px 16px 20px; border-radius: 20px; }
+    .order-status-icon { font-size: 52px; }
+    .order-status-title { font-size: 18px; }
+    .order-status-message { font-size: 13px; }
+    .status-spinner { width: 32px; height: 32px; }
+    .order-status-close-btn { padding: 8px 20px; font-size: 13px; }
+}

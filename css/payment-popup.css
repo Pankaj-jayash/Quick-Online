@@ -1,0 +1,317 @@
+/* ============================================
+   PAYMENT POPUP CSS — No Scroll, Compact, Clean
+   ============================================ */
+.payment-popup-container {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 15px 8px 25px 8px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.payment-popup-container.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.payment-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.65);
+}
+
+.payment-card {
+    position: relative;
+    background: white;
+    border-radius: 22px;
+    padding: 18px 16px 14px 16px;
+    max-width: 360px;
+    width: 100%;
+    z-index: 1;
+    animation: slideUpPay 0.35s ease;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+}
+@keyframes slideUpPay {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Header */
+.payment-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    gap: 10px;
+}
+.payment-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.payment-icon { font-size: 30px; line-height: 1; }
+.payment-header h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #222;
+    margin: 0;
+    line-height: 1.2;
+}
+.payment-amount {
+    font-size: 12px;
+    color: #2E7D32;
+    font-weight: 700;
+    margin: 2px 0 0 0;
+}
+
+/* QR Section */
+.payment-qr-section {
+    text-align: center;
+    padding: 12px;
+    background: #f9fafb;
+    border-radius: 16px;
+    margin-bottom: 10px;
+}
+.qr-main-hint {
+    font-size: 11px;
+    color: #888;
+    margin: 0 0 8px 0;
+    font-weight: 500;
+}
+.qr-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#qrImage {
+    width: 130px !important;
+    height: 130px !important;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.qr-amount-badge {
+    font-size: 17px;
+    font-weight: 800;
+    color: #1B5E20;
+    margin: 6px 0 2px 0;
+}
+.qr-upi-id {
+    font-size: 11px;
+    color: #666;
+    font-weight: 500;
+    margin: 2px 0;
+    word-break: break-all;
+}
+.copy-upi-btn {
+    margin-top: 6px;
+    padding: 7px 16px;
+    border: 1.5px dashed #2E7D32;
+    background: transparent;
+    color: #2E7D32;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.copy-upi-btn:active {
+    background: #E8F5E9;
+    transform: scale(0.95);
+}
+
+/* Divider */
+.payment-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0;
+}
+.payment-divider::before,
+.payment-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e0e0e0;
+}
+.payment-divider span {
+    font-size: 11px;
+    color: #999;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* UPI Apps Section */
+.payment-apps-section {
+    margin-bottom: 2px;
+}
+.apps-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+    margin: 0 0 8px 0;
+    text-align: center;
+}
+.upi-apps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin-bottom: 8px;
+}
+.upi-app-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 4px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: 600;
+    color: #444;
+    transition: all 0.2s;
+    -webkit-tap-highlight-color: transparent;
+}
+.upi-app-btn:active {
+    border-color: #2E7D32;
+    background: #f0fdf4;
+    transform: scale(0.95);
+}
+
+/* App Icons */
+.app-icon-g, .app-icon-p, .app-icon-pt, .app-icon-b {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 15px;
+    color: white;
+    flex-shrink: 0;
+}
+.app-icon-g { background: #4285F4; }
+.app-icon-p { background: #5F259F; }
+.app-icon-pt { background: #00BAF2; }
+.app-icon-b { background: #FF9933; }
+
+.upi-any-app-btn {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #2E7D32;
+    background: #f0fdf4;
+    color: #2E7D32;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.upi-any-app-btn:active {
+    background: #C8E6C9;
+    transform: scale(0.97);
+}
+
+/* COD Section */
+.payment-cod-section {
+    margin-bottom: 2px;
+}
+.cod-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border: 2px solid #FF9800;
+    background: #FFF8E1;
+    border-radius: 14px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+}
+.cod-btn:active {
+    background: #FFE0B2;
+    transform: scale(0.97);
+}
+.cod-icon { font-size: 26px; line-height: 1; flex-shrink: 0; }
+.cod-text strong {
+    display: block;
+    font-size: 13px;
+    color: #333;
+    margin-bottom: 2px;
+}
+.cod-text small {
+    font-size: 10px;
+    color: #888;
+}
+
+/* Auto Forward Checkbox */
+.payment-auto-forward {
+    margin-top: 10px;
+    padding: 9px 12px;
+    background: #f0fdf4;
+    border-radius: 10px;
+}
+.auto-forward-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: #555;
+    cursor: pointer;
+    font-weight: 500;
+}
+.auto-forward-label input[type="checkbox"] {
+    width: 16px; height: 16px;
+    accent-color: #2E7D32;
+    flex-shrink: 0;
+}
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+body.dark-mode .payment-card {
+    background: #1a1f2e;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+}
+body.dark-mode .payment-header h3 { color: #EEE; }
+body.dark-mode .payment-amount { color: #81C784; }
+body.dark-mode .payment-qr-section { background: #242b3d; }
+body.dark-mode .qr-main-hint { color: #999; }
+body.dark-mode .qr-amount-badge { color: #A5D6A7; }
+body.dark-mode .qr-upi-id { color: #BBB; }
+body.dark-mode .copy-upi-btn { color: #81C784; border-color: #4CAF50; }
+body.dark-mode .apps-title { color: #BBB; }
+body.dark-mode .upi-app-btn {
+    background: #242b3d;
+    border-color: #333;
+    color: #CCC;
+}
+body.dark-mode .upi-any-app-btn {
+    background: rgba(76,175,80,0.1);
+    border-color: #4CAF50;
+    color: #81C784;
+}
+body.dark-mode .payment-divider::before,
+body.dark-mode .payment-divider::after {
+    background: #333;
+}
+body.dark-mode .payment-divider span { color: #888; }
+body.dark-mode .cod-btn {
+    background: #2D1B00;
+    border-color: #FF9800;
+}
+body.dark-mode .cod-text strong { color: #EEE; }
+body.dark-mode .cod-text small { color: #999; }
+body.dark-mode .payment-auto-forward {
+    background: rgba(76,175,80,0.1);
+    color: #BBB;
+}
+body.dark-mode .auto-forward-label { color: #BBB; }

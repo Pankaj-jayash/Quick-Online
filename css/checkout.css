@@ -1,0 +1,1297 @@
+/* ============================================
+   CHECKOUT.CSS - Premium Checkout Modal (Final)
+   Quick Dukan - Cart Theme | Multilingual
+   ============================================ */
+
+/* ============================================
+   1. OVERLAY & CONTAINER
+   ============================================ */
+.checkout-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+    z-index: 2100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+
+.checkout-modal.hidden {
+    display: none;
+}
+
+.checkout-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    animation: fadeInOverlay 0.3s ease;
+}
+
+@keyframes fadeInOverlay {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ============================================
+   2. CHECKOUT CONTENT
+   ============================================ */
+.checkout-content {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    max-height: 90vh;
+    max-height: 90dvh;
+    background: var(--bg-card, #FFFFFF);
+    border-radius: 20px;
+    overflow: hidden;
+    animation: scaleIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.92) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ============================================
+   3. HEADER - Green Theme
+   ============================================ */
+.checkout-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px 12px;
+    background: var(--primary, #2E7D32);
+    flex-shrink: 0;
+}
+
+.checkout-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.checkout-header-icon {
+    font-size: 26px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.checkout-header-text h2 {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0;
+    color: #FFFFFF;
+    line-height: 1.2;
+}
+
+.checkout-subtitle {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 1px 0 0;
+    font-weight: 400;
+}
+
+.close-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    color: #FFFFFF;
+    flex-shrink: 0;
+}
+
+.close-btn:hover {
+    background: #FF4444;
+    color: white;
+    transform: rotate(90deg);
+}
+
+/* ============================================
+   4. CART TOTAL - Compact
+   ============================================ */
+.checkout-cart-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 18px;
+    background: rgba(46, 125, 50, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    flex-shrink: 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+}
+
+.checkout-cart-total .total-items {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.checkout-cart-total .total-price {
+    font-size: 15px;
+    font-weight: 800;
+    color: #2E7D32;
+}
+
+/* ============================================
+   5. FORM - Scrollable
+   ============================================ */
+.checkout-form {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 12px 18px 8px;
+}
+
+/* ============================================
+   6. FORM INPUTS - Placeholder as Label
+   ============================================ */
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--text-primary, #333);
+    background: var(--bg-card, #FFF);
+    transition: all 0.3s ease;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.form-input:focus {
+    border-color: var(--primary, #2E7D32);
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.08);
+}
+
+.form-input.error {
+    border-color: #FF4444 !important;
+    box-shadow: 0 0 0 3px rgba(255, 68, 68, 0.08) !important;
+}
+
+.form-input.valid {
+    border-color: #4CAF50 !important;
+}
+
+.form-input::placeholder {
+    color: #999;
+    font-size: 13px;
+}
+
+/* Phone Input */
+.phone-input-group {
+    display: flex;
+    align-items: center;
+    border: 2px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.phone-input-group:focus-within {
+    border-color: var(--primary, #2E7D32);
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.08);
+}
+
+.phone-input-group.error {
+    border-color: #FF4444 !important;
+}
+
+.phone-prefix {
+    padding: 12px 8px 12px 14px;
+    font-weight: 700;
+    font-size: 14px;
+    background: rgba(0, 0, 0, 0.02);
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
+    color: #555;
+}
+
+.phone-input {
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    flex: 1;
+    padding: 12px 14px;
+}
+
+.phone-input:focus {
+    box-shadow: none !important;
+}
+
+/* Location Status */
+.location-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+
+.location-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.location-indicator.searching {
+    background: #FFF3E0;
+    color: #E65100;
+}
+
+.location-indicator.found {
+    background: #E8F5E9;
+    color: #2E7D32;
+}
+
+.location-indicator.off {
+    background: #FFEBEE;
+    color: #C62828;
+}
+
+.location-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.location-dot.searching {
+    background: #FF9800;
+    animation: pulse 1.5s infinite;
+}
+
+.location-dot.found {
+    background: #4CAF50;
+}
+
+.location-dot.off {
+    background: #F44336;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* ============================================
+   7. DELIVERY TIME - Compact 1-Row
+   ============================================ */
+.delivery-time-section {
+    margin-bottom: 10px;
+}
+
+.delivery-time-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.delivery-time-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+}
+
+.time-radio-label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 7px 12px;
+    border: 1.5px solid rgba(0, 0, 0, 0.12);
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    user-select: none;
+    color: #666;
+    background: #FAFAFA;
+}
+
+.time-radio-label:hover {
+    border-color: var(--primary, #2E7D32);
+    background: rgba(46, 125, 50, 0.04);
+}
+
+.time-radio-label input[type="radio"] {
+    display: none;
+}
+
+.time-radio-label.selected {
+    background: var(--primary, #2E7D32);
+    color: #FFFFFF;
+    border-color: var(--primary, #2E7D32);
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(46, 125, 50, 0.25);
+}
+
+/* Manual Time Input */
+.time-manual-input {
+    padding: 7px 12px;
+    border: 1.5px dashed rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    font-size: 11px;
+    width: 120px;
+    outline: none;
+    transition: all 0.3s ease;
+    background: #FAFAFA;
+    color: #555;
+}
+
+.time-manual-input:focus {
+    border-color: var(--primary, #2E7D32);
+    background: #FFF;
+    box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.06);
+}
+
+.time-manual-input::placeholder {
+    color: #BBB;
+    font-size: 10px;
+}
+
+/* ============================================
+   8. SAVE CHECKBOX
+   ============================================ */
+.save-info-group {
+    margin-bottom: 6px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    color: #777;
+    user-select: none;
+}
+
+.checkbox-label input {
+    display: none;
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.checkbox-label input:checked + .checkmark {
+    background: var(--primary, #2E7D32);
+    border-color: var(--primary, #2E7D32);
+}
+
+.checkbox-label input:checked + .checkmark::after {
+    content: '✓';
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* ============================================
+   9. FOOTER + ORDER BUTTON
+   ============================================ */
+.checkout-footer {
+    padding: 10px 16px;
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    background: var(--bg-card, #FFF);
+    flex-shrink: 0;
+}
+
+/* Order Button - 4 States */
+.confirm-order-btn {
+    width: 100%;
+    padding: 15px 24px;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+/* STATE 1: Waiting */
+.confirm-order-btn.state-waiting {
+    background: linear-gradient(135deg, #FF9800, #F57C00);
+    color: #FFF;
+    cursor: not-allowed;
+    opacity: 0.8;
+    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.25);
+}
+
+.confirm-order-btn.state-waiting .btn-spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #FFF;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* STATE 2: GPS Off */
+.confirm-order-btn.state-gpsoff {
+    background: #BDBDBD;
+    color: #FFF;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.confirm-order-btn.state-gpsoff:hover {
+    background: #9E9E9E;
+}
+
+/* STATE 3: Ready (Active) */
+.confirm-order-btn.state-ready {
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: #FFF;
+    box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+    animation: whatsappPulse 2.5s infinite;
+}
+
+@keyframes whatsappPulse {
+    0%, 100% { box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4); }
+    50% { box-shadow: 0 8px 35px rgba(37, 211, 102, 0.6); }
+}
+
+.confirm-order-btn.state-ready:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 35px rgba(37, 211, 102, 0.55);
+}
+
+.confirm-order-btn.state-ready::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.15) 50%, transparent 60%);
+    animation: btnShine 3s infinite;
+}
+
+@keyframes btnShine {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+}
+
+/* STATE 4: Sending */
+.confirm-order-btn.state-sending {
+    background: linear-gradient(135deg, #2196F3, #1976D2);
+    color: #FFF;
+    cursor: not-allowed;
+    opacity: 0.9;
+}
+
+.confirm-order-btn.state-sending .btn-spinner {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #FFF;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.confirm-order-btn:active {
+    transform: scale(0.97);
+}
+
+/* ============================================
+   10. GPS POPUP
+   ============================================ */
+.gps-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+    pointer-events: none;
+}
+
+.gps-popup-overlay.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.gps-popup-card {
+    background: #FFFFFF;
+    border-radius: 22px;
+    padding: 28px 22px 22px;
+    text-align: center;
+    max-width: 360px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+    animation: gpsCardIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes gpsCardIn {
+    0% { transform: scale(0.7) translateY(30px); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.gps-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.06);
+    border: none;
+    font-size: 14px;
+    color: #999;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.gps-close-btn:hover {
+    background: rgba(0, 0, 0, 0.12);
+    color: #333;
+}
+
+.gps-popup-icon {
+    font-size: 56px;
+    margin-bottom: 10px;
+    animation: gpsIconFloat 2.5s ease-in-out infinite;
+}
+
+@keyframes gpsIconFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.gps-popup-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+.gps-popup-message {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    padding: 0 4px;
+}
+
+.gps-instruction-box {
+    background: #FFF8E1;
+    border: 2px dashed #FFB74D;
+    border-radius: 12px;
+    padding: 10px 12px;
+    margin: 8px 0 12px;
+}
+
+.gps-instruction-box p {
+    color: #E65100;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.gps-waves {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin: 8px 0 14px;
+}
+
+.gps-waves span {
+    font-size: 22px;
+    animation: gpsWave 1.8s ease-in-out infinite;
+}
+
+.gps-waves span:nth-child(2) { animation-delay: 0.3s; }
+.gps-waves span:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes gpsWave {
+    0%, 100% { opacity: 0.2; transform: translateY(0) scale(0.9); }
+    50% { opacity: 1; transform: translateY(-10px) scale(1.1); }
+}
+
+.gps-primary-btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #FF9800, #F57C00);
+    color: #FFF;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(255, 152, 0, 0.3);
+}
+
+.gps-primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(255, 152, 0, 0.45);
+}
+
+.gps-retry-btn {
+    display: block;
+    width: 100%;
+    padding: 11px;
+    background: transparent;
+    color: #FF9800;
+    border: 2px solid #FF9800;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: all 0.2s ease;
+}
+
+.gps-retry-btn:hover {
+    background: #FFF3E0;
+}
+
+/* ============================================
+   11. CONFETTI
+   ============================================ */
+.checkout-confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+    overflow: hidden;
+}
+
+.confetti-piece {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    animation: confettiFall 1.5s ease-out forwards;
+}
+
+@keyframes confettiFall {
+    0% { transform: translateY(-100%) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+/* ============================================
+   12. DARK MODE
+   ============================================ */
+body.dark-mode .checkout-content {
+    background: #1a1f2e;
+}
+
+body.dark-mode .checkout-header {
+    background: #1B5E20;
+}
+
+body.dark-mode .checkout-cart-total {
+    background: rgba(27, 94, 32, 0.1);
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+    color: #BBB;
+}
+
+body.dark-mode .form-input {
+    background: #252b3b;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #DDD;
+}
+
+body.dark-mode .form-input:focus {
+    border-color: #4CAF50;
+    background: #2a3040;
+}
+
+body.dark-mode .form-input::placeholder {
+    color: #777;
+}
+
+body.dark-mode .phone-input-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .phone-prefix {
+    background: rgba(255, 255, 255, 0.03);
+    border-right-color: rgba(255, 255, 255, 0.06);
+    color: #AAA;
+}
+
+body.dark-mode .time-radio-label {
+    background: #252b3b;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #AAA;
+}
+
+body.dark-mode .time-radio-label.selected {
+    background: #2E7D32;
+    color: #FFF;
+    border-color: #2E7D32;
+}
+
+body.dark-mode .time-manual-input {
+    background: #252b3b;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #DDD;
+}
+
+body.dark-mode .location-indicator.searching {
+    background: rgba(255, 152, 0, 0.15);
+    color: #FFB74D;
+}
+
+body.dark-mode .location-indicator.found {
+    background: rgba(76, 175, 80, 0.15);
+    color: #81C784;
+}
+
+body.dark-mode .location-indicator.off {
+    background: rgba(244, 67, 54, 0.15);
+    color: #EF9A9A;
+}
+
+body.dark-mode .gps-popup-card {
+    background: #1E1E1E;
+}
+
+body.dark-mode .gps-popup-title {
+    color: #E0E0E0;
+}
+
+body.dark-mode .gps-popup-message {
+    color: #B0B0B0;
+}
+
+body.dark-mode .gps-instruction-box {
+    background: #2D1B00;
+    border-color: #FF8F00;
+}
+
+body.dark-mode .gps-instruction-box p {
+    color: #FFB74D;
+}
+
+body.dark-mode .checkout-footer {
+    background: #1a1f2e;
+    border-top-color: rgba(255, 255, 255, 0.06);
+}
+
+/* ============================================
+   13. MOBILE
+   ============================================ */
+@media (max-width: 380px) {
+    .checkout-modal {
+        padding: 8px;
+    }
+    
+    .checkout-content {
+        max-height: 95vh;
+        max-height: 95dvh;
+        border-radius: 18px;
+    }
+    
+    .checkout-header {
+        padding: 10px 14px 10px;
+    }
+    
+    .checkout-header-icon {
+        font-size: 22px;
+    }
+    
+    .checkout-header-text h2 {
+        font-size: 15px;
+    }
+    
+    .checkout-form {
+        padding: 10px 14px 6px;
+    }
+    
+    .form-input {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+    
+    .phone-prefix {
+        padding: 10px 6px 10px 12px;
+        font-size: 13px;
+    }
+    
+    .phone-input {
+        padding: 10px 12px;
+    }
+    
+    .time-radio-label {
+        padding: 5px 10px;
+        font-size: 10px;
+    }
+    
+    .time-manual-input {
+        width: 100px;
+        padding: 5px 10px;
+        font-size: 10px;
+    }
+    
+    .confirm-order-btn {
+        padding: 13px 18px;
+        font-size: 14px;
+    }
+    
+    .checkout-footer {
+        padding: 8px 12px;
+    }
+}
+
+@media (max-height: 600px) {
+    .checkout-content {
+        max-height: 98vh;
+        max-height: 98dvh;
+    }
+    
+    .checkout-header {
+        padding: 8px 14px 8px;
+    }
+    
+    .form-group {
+        margin-bottom: 6px;
+    }
+    
+    .form-input {
+        padding: 8px 10px;
+    }
+}
+
+/* ============================================
+   14. ORDER METHOD BUTTONS - WhatsApp vs Direct
+   ============================================ */
+.order-method-section {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    padding: 12px;
+    background: rgba(46, 125, 50, 0.03);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.order-method-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #555;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: 0.3px;
+}
+
+.order-method-label .method-icon {
+    font-size: 14px;
+}
+
+.order-method-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.order-method-btn {
+    flex: 1;
+    padding: 12px 10px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    background: #FAFAFA;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-family: inherit;
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.order-method-btn:active {
+    transform: scale(0.96);
+}
+
+.order-method-btn .method-btn-icon {
+    font-size: 22px;
+    transition: all 0.3s ease;
+}
+
+.order-method-btn .method-btn-text {
+    font-size: 11px;
+    font-weight: 600;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+.order-method-btn .method-btn-subtext {
+    font-size: 9px;
+    color: #999;
+    transition: all 0.3s ease;
+}
+
+/* WhatsApp Button Selected */
+.order-method-btn.whatsapp-method.selected {
+    background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+    border-color: #25D366;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+}
+
+.order-method-btn.whatsapp-method.selected .method-btn-text {
+    color: #128C7E;
+    font-weight: 700;
+}
+
+.order-method-btn.whatsapp-method.selected .method-btn-subtext {
+    color: #25D366;
+}
+
+/* Direct Order Button Selected */
+.order-method-btn.direct-method.selected {
+    background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+    border-color: #2196F3;
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.2);
+}
+
+.order-method-btn.direct-method.selected .method-btn-text {
+    color: #1565C0;
+    font-weight: 700;
+}
+
+.order-method-btn.direct-method.selected .method-btn-subtext {
+    color: #2196F3;
+}
+
+/* Checkmark badge */
+.order-method-btn .method-check {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #4CAF50;
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    animation: checkPop 0.3s ease;
+}
+
+.order-method-btn.selected .method-check {
+    display: flex;
+}
+
+@keyframes checkPop {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+/* Dark Mode */
+body.dark-mode .order-method-section {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+body.dark-mode .order-method-label {
+    color: #AAA;
+}
+
+body.dark-mode .order-method-btn {
+    background: #252b3b;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .order-method-btn .method-btn-text {
+    color: #AAA;
+}
+
+body.dark-mode .order-method-btn .method-btn-subtext {
+    color: #777;
+}
+
+body.dark-mode .order-method-btn.whatsapp-method.selected {
+    background: rgba(37, 211, 102, 0.15);
+    border-color: #25D366;
+}
+
+body.dark-mode .order-method-btn.whatsapp-method.selected .method-btn-text {
+    color: #25D366;
+}
+
+body.dark-mode .order-method-btn.direct-method.selected {
+    background: rgba(33, 150, 243, 0.15);
+    border-color: #2196F3;
+}
+
+body.dark-mode .order-method-btn.direct-method.selected .method-btn-text {
+    color: #42A5F5;
+}
+
+/* Mobile Responsive */
+@media (max-width: 380px) {
+    .order-method-buttons {
+        gap: 6px;
+    }
+    
+    .order-method-btn {
+        padding: 10px 8px;
+    }
+    
+    .order-method-btn .method-btn-icon {
+        font-size: 20px;
+    }
+    
+    .order-method-btn .method-btn-text {
+        font-size: 10px;
+    }
+    
+    .order-method-btn .method-btn-subtext {
+        font-size: 8px;
+    }
+}
+
+/* ============================================
+   PAYMENT METHOD SECTION - Checkout
+   ============================================ */
+.payment-method-section {
+    margin-bottom: 12px;
+    padding: 12px;
+    background: #FAFAFA;
+    border-radius: 12px;
+    border: 2px solid #E0E0E0;
+    animation: paymentMethodIn 0.3s ease;
+}
+
+@keyframes paymentMethodIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.payment-method-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #555;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.payment-method-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.payment-method-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    background: white;
+    border: 2px solid #E0E0E0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    text-align: left;
+    width: 100%;
+}
+
+.payment-method-btn:hover {
+    border-color: #2E7D32;
+    background: #F1F8E9;
+}
+
+.payment-method-btn.selected {
+    border-color: #2E7D32;
+    background: #E8F5E9;
+    box-shadow: 0 2px 10px rgba(46, 125, 50, 0.15);
+}
+
+.payment-method-btn .pm-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.payment-method-btn .pm-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+    flex: 1;
+}
+
+.payment-method-btn .pm-check {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #BDBDBD;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: transparent;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.payment-method-btn.selected .pm-check {
+    background: #2E7D32;
+    border-color: #2E7D32;
+    color: white;
+}
+
+/* Card disabled style */
+.payment-method-btn[data-payment="Card"] {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.payment-method-btn[data-payment="Card"]:hover {
+    border-color: #E0E0E0;
+    background: white;
+}
+
+.payment-method-btn[data-payment="Card"] .pm-coming-soon {
+    font-size: 9px;
+    color: #FF9800;
+    font-weight: 700;
+    background: #FFF3E0;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+/* Dark Mode */
+body.dark-mode .payment-method-section {
+    background: #252525;
+    border-color: #333;
+}
+
+body.dark-mode .payment-method-title {
+    color: #AAA;
+}
+
+body.dark-mode .payment-method-btn {
+    background: #2A2A2A;
+    border-color: #444;
+}
+
+body.dark-mode .payment-method-btn:hover {
+    border-color: #4CAF50;
+    background: #1B2E1B;
+}
+
+body.dark-mode .payment-method-btn.selected {
+    border-color: #4CAF50;
+    background: #1B2E1B;
+}
+
+body.dark-mode .payment-method-btn .pm-text {
+    color: #CCC;
+}
+
+body.dark-mode .payment-method-btn .pm-check {
+    border-color: #555;
+}
+
+body.dark-mode .payment-method-btn.selected .pm-check {
+    background: #4CAF50;
+    border-color: #4CAF50;
+}
+
+/* Mobile Responsive */
+@media (max-width: 400px) {
+    .payment-method-section {
+        padding: 10px;
+    }
+    
+    .payment-method-btn {
+        padding: 10px 12px;
+    }
+    
+    .payment-method-btn .pm-icon {
+        font-size: 18px;
+    }
+    
+    .payment-method-btn .pm-text {
+        font-size: 12px;
+    }
+}

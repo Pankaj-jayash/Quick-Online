@@ -1,0 +1,59 @@
+{
+    "category": "dairy",
+    "products": [
+        {
+            "id": "dairy-001",
+            "name": { "hi": "अमूल गोल्ड दूध", "en": "Amul Gold Milk" },
+            "price": 68,
+            "unit": { "hi": "1 लीटर", "en": "1 litre" },
+            "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=300",
+            "discount": 0,
+            "mostOrdered": true
+        },
+        {
+            "id": "dairy-002",
+            "name": { "hi": "अमूल दही", "en": "Amul Curd" },
+            "price": 40,
+            "unit": { "hi": "400 ग्राम", "en": "400 g" },
+            "image": "https://images.unsplash.com/photo-1584278858536-52532423b9ea?w=300",
+            "discount": 0,
+            "mostOrdered": true
+        },
+        {
+            "id": "dairy-003",
+            "name": { "hi": "अमूल मक्खन", "en": "Amul Butter" },
+            "price": 56,
+            "unit": { "hi": "100 ग्राम", "en": "100 g" },
+            "image": "https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?w=300",
+            "discount": 5,
+            "mostOrdered": true
+        },
+        {
+            "id": "dairy-004",
+            "name": { "hi": "पनीर", "en": "Fresh Paneer" },
+            "price": 90,
+            "unit": { "hi": "200 ग्राम", "en": "200 g" },
+            "image": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=300",
+            "discount": 0,
+            "mostOrdered": true
+        },
+        {
+            "id": "dairy-005",
+            "name": { "hi": "घी (शुद्ध देसी)", "en": "Pure Desi Ghee" },
+            "price": 320,
+            "unit": { "hi": "500 मिली", "en": "500 ml" },
+            "image": "https://images.unsplash.com/photo-1621996659490-3f27f648c5c3?w=300",
+            "discount": 10,
+            "mostOrdered": false
+        },
+        {
+            "id": "dairy-006",
+            "name": { "hi": "चीज़ स्लाइस", "en": "Cheese Slices" },
+            "price": 130,
+            "unit": { "hi": "10 स्लाइस", "en": "10 slices" },
+            "image": "https://images.unsplash.com/photo-1618164436241-4473940d1f5c?w=300",
+            "discount": 0,
+            "mostOrdered": false
+        }
+    ]
+}

@@ -1,0 +1,215 @@
+{
+  "_comment": "═══════════════════════════════════════",
+  "_comment2": "🛒 QUICK DUKAN - CART CONFIGURATION",
+  "_comment3": "═══════════════════════════════════════",
+
+  "shopLocation": {
+    "lat": 27.6667496,
+    "lng": 77.7124673,
+    "name": "Quick Dukan",
+    "address": "MP86+MXW, Kanhaiya Lal, Bijoli Banger, Mant, Mathura, Uttar Pradesh – 281202, India",
+    "phone": "919719312956"
+  },
+
+  "progressBar": {
+    "freeDeliveryThreshold": 500,
+    "milestones": [
+      {
+        "amount": 150,
+        "icon": "🥉",
+        "label": "Bronze",
+        "reward": "5% छूट अनलॉक!",
+        "autoApplyCoupon": "QUICK5",
+        "color": "#CD7F32"
+      },
+      {
+        "amount": 300,
+        "icon": "🥈",
+        "label": "Silver",
+        "reward": "₹50 की छूट!",
+        "autoApplyCoupon": "QUICK50",
+        "color": "#C0C0C0"
+      },
+      {
+        "amount": 500,
+        "icon": "🥇",
+        "label": "Gold",
+        "reward": "फ्री डिलीवरी + ₹100 छूट!",
+        "autoApplyCoupon": "QUICK100",
+        "color": "#FFD700"
+      }
+    ],
+    "animations": {
+      "shimmer": true,
+      "milestonePop": true,
+      "badgePulse": true
+    }
+  },
+
+  "coupons": {
+    "enabled": true,
+    "autoApplyOnMilestone": true,
+    "maxOneCoupon": true,
+    "codes": [
+      {
+        "code": "QUICK5",
+        "type": "percentage",
+        "value": 5,
+        "minOrder": 100,
+        "description": "5% छूट",
+        "expiry": "2026-12-31",
+        "color": "#FF9933"
+      },
+      {
+        "code": "QUICK50",
+        "type": "fixed",
+        "value": 50,
+        "minOrder": 300,
+        "description": "₹50 छूट",
+        "expiry": "2026-12-31",
+        "color": "#FF9933"
+      },
+      {
+        "code": "QUICK100",
+        "type": "fixed",
+        "value": 100,
+        "minOrder": 500,
+        "description": "₹100 छूट",
+        "expiry": "2026-12-31",
+        "color": "#FF9933"
+      },
+      {
+        "code": "FIRST100",
+        "type": "fixed",
+        "value": 100,
+        "minOrder": 200,
+        "description": "पहला ऑर्डर ₹100 छूट",
+        "expiry": "2026-12-31",
+        "color": "#138808"
+      },
+      {
+        "code": "FREEDEL",
+        "type": "freeDelivery",
+        "value": 0,
+        "minOrder": 0,
+        "description": "फ्री डिलीवरी",
+        "expiry": "2026-12-31",
+        "color": "#138808"
+      }
+    ]
+  },
+
+  "delivery": {
+    "charge": 40,
+    "freeAbove": 500,
+    "estimatedTime": "30-45 मिनट",
+    "timeSlots": [
+      "अभी (30-45 मिनट)",
+      "शाम 5-7 बजे",
+      "शाम 7-9 बजे"
+    ]
+  },
+
+  "features": {
+    "saveForLater": true,
+    "undoDelete": true,
+    "stockWarning": true,
+    "copyOrder": true,
+    "orderNotes": true,
+    "confetti": true,
+    "haptic": true,
+    "dragToClose": true,
+    "liveTracking": true
+  },
+
+  "tracking": {
+    "riderSpeed": 30,
+    "updateInterval": 30000,
+    "etaPerKm": 5
+  },
+
+  "undoDelete": {
+    "enabled": true,
+    "timeoutSeconds": 5,
+    "message": {
+      "hi": "🗑️ हटा दिया गया",
+      "en": "🗑️ Item removed"
+    },
+    "undoText": {
+      "hi": "पूर्ववत करें",
+      "en": "Undo"
+    }
+  },
+
+  "emptyCart": {
+    "suggestedProducts": ["atta", "chawal", "chai-patti", "doodh", "bread"],
+    "messages": {
+      "hi": {
+        "title": "आपका कार्ट खाली है 🛒",
+        "subtitle": "कुछ सामान जोड़ो, फिर मज़ा आएगा! 🛍️",
+        "buttonText": "🏪 प्रोडक्ट देखें"
+      },
+      "en": {
+        "title": "Your cart is empty 🛒",
+        "subtitle": "Add some items and enjoy shopping! 🛍️",
+        "buttonText": "🏪 Browse Products"
+      }
+    }
+  },
+
+  "ui": {
+    "theme": "tricolor",
+    "animations": {
+      "cartIconBounce": true,
+      "itemSlideIn": true,
+      "buttonPulse": true,
+      "confettiOnMilestone": true
+    },
+    "colors": {
+      "kesari": "#FF9933",
+      "hara": "#138808",
+      "white": "#FFFFFF",
+      "gold": "#FFD700",
+      "silver": "#C0C0C0",
+      "bronze": "#CD7F32",
+      "discountBadge": "#FF4444",
+      "whatsappGreen": "#25D366",
+      "whatsappDark": "#128C7E",
+      "stockWarning": "#FF6D00",
+      "savingsGreen": "#138808",
+      "removeRed": "#FF4444",
+      "couponBg": "rgba(19, 136, 8, 0.1)"
+    }
+  },
+
+  "stockWarning": {
+    "enabled": true,
+    "threshold": 5,
+    "messages": {
+      "hi": "⚠️ सिर्फ {count} बचे!",
+      "en": "⚠️ Only {count} left!"
+    }
+  },
+
+  "quantityLimits": {
+    "min": 1,
+    "max": 10
+  },
+
+  "orderNotes": {
+    "enabled": true,
+    "maxLength": 200,
+    "placeholder": {
+      "hi": "कोई खास निर्देश? (जैसे: शाम 5 बजे के बाद डिलीवर करें)",
+      "en": "Any special instructions? (e.g.: Deliver after 5 PM)"
+    }
+  },
+
+  "whatsapp": {
+    "number": "919719312956",
+    "messageTemplate": {
+      "hi": "🛒 *Quick Dukan - नया ऑर्डर*\n\n{items}\n\n━━━━━━━━━━━━━━━━\n📦 कुल आइटम: {itemCount}\n💰 कुल राशि: ₹{total}\n🎫 कूपन: {coupon}\n📝 नोट्स: {notes}\n\n🙏 कृपया ऑर्डर कन्फर्म करें।",
+      "en": "🛒 *Quick Dukan - New Order*\n\n{items}\n\n━━━━━━━━━━━━━━━━\n📦 Total Items: {itemCount}\n💰 Total: ₹{total}\n🎫 Coupon: {coupon}\n📝 Notes: {notes}\n\n🙏 Please confirm the order."
+    }
+  }
+}

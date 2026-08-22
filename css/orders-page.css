@@ -1,0 +1,771 @@
+/* ============================================
+   ORDERS PAGE CSS - Compact Premium Design
+   Quick Dukan - My Orders (No Login)
+   Light Effects + Compact Layout
+   ============================================ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+    background: #f8f9fa;
+    min-height: 100vh;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.hidden { display: none !important; }
+
+/* ============================================
+   HEADER - COMPACT
+   ============================================ */
+.orders-header {
+    background: linear-gradient(135deg, #1B5E20, #2E7D32);
+    color: white;
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 15px rgba(27, 94, 32, 0.3);
+}
+
+.back-btn, .home-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.back-btn:active, .home-btn:active {
+    transform: scale(0.9);
+}
+
+.header-center {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.header-logo {
+    font-size: 18px;
+}
+
+.header-title {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+/* ============================================
+   USER INFO BAR - COMPACT
+   ============================================ */
+.user-info-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    background: white;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #E8F5E9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.user-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #333;
+}
+
+.user-phone {
+    font-size: 10px;
+    color: #999;
+}
+
+/* ============================================
+   ORDERS CONTAINER - COMPACT
+   ============================================ */
+.orders-container {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 480px;
+    margin: 0 auto;
+    padding-bottom: 70px;
+}
+
+/* ============================================
+   LOADING
+   ============================================ */
+.loading-state {
+    text-align: center;
+    padding: 50px 20px;
+    color: #999;
+}
+
+.loading-spinner {
+    width: 35px;
+    height: 35px;
+    border: 3px solid #E8F5E9;
+    border-top-color: #2E7D32;
+    border-radius: 50%;
+    margin: 0 auto 12px;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   ORDER CARD - COMPACT + LIGHT EFFECT
+   ============================================ */
+.order-card {
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+    animation: cardIn 0.4s ease;
+}
+
+.order-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: lightSweep 3s ease-in-out infinite;
+}
+
+@keyframes lightSweep {
+    0% { left: -100%; }
+    50% { left: 150%; }
+    100% { left: 150%; }
+}
+
+@keyframes cardIn {
+    from { transform: translateY(15px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.order-card:active {
+    transform: scale(0.98);
+}
+
+/* Order Header - Compact */
+.order-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    border-bottom: 1px solid #f0f0f0;
+    gap: 8px;
+}
+
+.order-id {
+    font-size: 11px;
+    font-weight: 700;
+    color: #333;
+    word-break: break-all;
+}
+
+.order-date {
+    font-size: 9px;
+    color: #999;
+    margin-top: 2px;
+}
+
+.order-status-badge {
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 9px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.order-status-badge.pending { background: #FFF3E0; color: #E65100; }
+.order-status-badge.confirmed { background: #E8F5E9; color: #2E7D32; }
+.order-status-badge.in_transit { 
+    background: #E3F2FD; 
+    color: #1565C0; 
+    animation: badgeGlow 2s infinite;
+}
+.order-status-badge.delivered { background: #E8F5E9; color: #2E7D32; }
+.order-status-badge.cancelled { background: #FFEBEE; color: #C62828; }
+
+@keyframes badgeGlow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(21, 101, 192, 0.3); }
+    50% { box-shadow: 0 0 8px 2px rgba(21, 101, 192, 0.2); }
+}
+
+/* ============================================
+   🆕 PAYMENT STATUS BAR - COMPACT
+   ============================================ */
+.payment-status-bar {
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.payment-status-bar.payment-pending { background: #FFFDE7; }
+.payment-status-bar.payment-verified { background: #F1F8E9; }
+.payment-status-bar.payment-cancelled { background: #FFEBEE; }
+
+.payment-status-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.payment-status-icon {
+    font-size: 16px;
+}
+
+.payment-status-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.payment-status-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: #555;
+}
+
+.payment-status-value {
+    font-size: 9px;
+    color: #666;
+}
+
+/* ============================================
+   BIKE ANIMATION - COMPACT + LIGHT EFFECT
+   ============================================ */
+.bike-animation-container {
+    padding: 10px 12px;
+    background: linear-gradient(135deg, #FFFDE7, #FFF8E1);
+    margin: 8px 12px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.bike-animation-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,200,0,0.1) 10%, transparent 60%);
+    animation: lightPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes lightPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* Check Marks Row - Compact */
+.checkmark-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 1;
+}
+
+.checkmark-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    flex: 1;
+}
+
+.checkmark-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #E0E0E0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    color: #999;
+    font-weight: 700;
+    transition: all 0.4s ease;
+}
+
+.checkmark-item.done .checkmark-dot {
+    background: #4CAF50;
+    color: white;
+    animation: checkPop 0.3s ease;
+}
+
+.checkmark-item.active .checkmark-dot {
+    background: #FF9800;
+    color: white;
+    animation: checkGlow 1.5s infinite;
+}
+
+@keyframes checkPop {
+    0% { transform: scale(0); }
+    60% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+@keyframes checkGlow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 152, 0, 0.4); }
+    50% { box-shadow: 0 0 6px 2px rgba(255, 152, 0, 0.3); }
+}
+
+.checkmark-label {
+    font-size: 6px;
+    color: #999;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.checkmark-item.done .checkmark-label { color: #4CAF50; }
+.checkmark-item.active .checkmark-label { color: #FF9800; }
+
+/* Bike Track - Compact */
+.bike-track {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+    z-index: 1;
+}
+
+.bike-shop, .bike-customer {
+    font-size: 14px;
+}
+
+.bike-road {
+    flex: 1;
+    height: 3px;
+    background: #E0E0E0;
+    border-radius: 2px;
+    position: relative;
+}
+
+.bike-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #FFB300, #FF9800);
+    border-radius: 2px;
+    transition: width 1.2s ease;
+}
+
+.bike-rider {
+    position: absolute;
+    top: -12px;
+    font-size: 16px;
+    transform: translateX(-50%);
+    animation: bikeMove 0.6s ease-in-out infinite;
+    z-index: 2;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.2));
+}
+
+@keyframes bikeMove {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-3px); }
+}
+
+.bike-status-text {
+    text-align: center;
+    font-size: 9px;
+    font-weight: 700;
+    color: #E65100;
+    margin-top: 6px;
+    position: relative;
+    z-index: 1;
+}
+
+.bike-eta {
+    text-align: center;
+    font-size: 8px;
+    color: #999;
+    margin-top: 2px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================
+   ORDER ITEMS - COMPACT
+   ============================================ */
+.order-items {
+    padding: 8px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.order-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+}
+
+.order-item-image {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background: #E8F5E9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.order-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-emoji {
+    font-size: 20px;
+}
+
+.order-item-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.order-item-name {
+    font-size: 11px;
+    font-weight: 600;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.order-item-detail {
+    font-size: 9px;
+    color: #999;
+}
+
+.order-item-price {
+    font-size: 11px;
+    font-weight: 700;
+    color: #2E7D32;
+    white-space: nowrap;
+}
+
+/* ============================================
+   ORDER SUMMARY - COMPACT
+   ============================================ */
+.order-summary {
+    padding: 8px 12px;
+    background: #FAFAFA;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-total {
+    font-size: 14px;
+    font-weight: 800;
+    color: #2E7D32;
+}
+
+.order-item-count {
+    font-size: 10px;
+    color: #666;
+}
+
+/* ============================================
+   DELIVERY INFO - COMPACT
+   ============================================ */
+.delivery-info {
+    padding: 6px 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 9px;
+    color: #666;
+    border-top: 1px solid #f5f5f5;
+}
+
+/* ============================================
+   LOCATION BUTTONS - COMPACT
+   ============================================ */
+.location-buttons {
+    display: flex;
+    gap: 5px;
+    padding: 8px 12px;
+    flex-wrap: wrap;
+}
+
+.location-btn {
+    flex: 1;
+    min-width: 70px;
+    padding: 7px 4px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 9px;
+    font-weight: 700;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.location-btn:active {
+    transform: scale(0.95);
+}
+
+.shop-btn { background: #2E7D32; color: white; }
+.user-btn { background: #2196F3; color: white; }
+.rider-btn { background: #FF9800; color: white; }
+
+/* ============================================
+   TIMELINE - COMPACT
+   ============================================ */
+.order-timeline {
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #f5f5f5;
+}
+
+.timeline-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    z-index: 1;
+}
+
+.timeline-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #E0E0E0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: #999;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.timeline-step.completed .timeline-dot {
+    background: #4CAF50;
+    color: white;
+}
+
+.timeline-step.active .timeline-dot {
+    background: #FF9800;
+    color: white;
+    animation: pulse 1.5s infinite;
+}
+
+.timeline-step.cancelled .timeline-dot {
+    background: #f44336;
+    color: white;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255,152,0,0.4); }
+    50% { box-shadow: 0 0 0 5px rgba(255,152,0,0); }
+}
+
+.timeline-step span {
+    font-size: 7px;
+    color: #666;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.timeline-line {
+    flex: 1;
+    height: 2px;
+    background: #E0E0E0;
+    margin: 0 -2px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+}
+
+.timeline-line.completed {
+    background: #4CAF50;
+}
+
+/* ============================================
+   ORDER ACTIONS - COMPACT
+   ============================================ */
+.order-actions {
+    padding: 8px 12px;
+    display: flex;
+    gap: 5px;
+    border-top: 1px solid #eee;
+    flex-wrap: wrap;
+}
+
+.order-btn {
+    flex: 1;
+    min-width: 60px;
+    padding: 8px 4px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 9px;
+    font-weight: 700;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    white-space: nowrap;
+}
+
+.order-btn:active {
+    transform: scale(0.95);
+}
+
+.reorder-btn { background: #FF9800; color: white; }
+.share-btn { background: #25D366; color: white; }
+.rate-btn { background: #FFD700; color: #333; }
+.rate-btn.rated { background: #FFF3E0; color: #E65100; cursor: default; }
+
+/* ============================================
+   CANCELLED BANNER - COMPACT
+   ============================================ */
+.cancelled-banner {
+    padding: 12px;
+    text-align: center;
+    background: #FFEBEE;
+    border-radius: 8px;
+    margin: 8px 12px;
+    animation: sadShake 0.8s ease;
+}
+
+.cancelled-icon {
+    font-size: 24px;
+    animation: sadBounce 2s ease-in-out infinite;
+}
+
+.cancelled-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #C62828;
+    margin-top: 3px;
+}
+
+.cancelled-reason {
+    font-size: 9px;
+    color: #666;
+    margin-top: 2px;
+}
+
+@keyframes sadShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-3px); }
+    75% { transform: translateX(3px); }
+}
+
+@keyframes sadBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+/* ============================================
+   DELIVERED BANNER - COMPACT
+   ============================================ */
+.delivered-banner {
+    padding: 12px;
+    text-align: center;
+    background: #E8F5E9;
+    border-radius: 8px;
+    margin: 8px 12px;
+    animation: happyBounce 0.8s ease;
+}
+
+.delivered-icon {
+    font-size: 24px;
+    animation: happyJump 1s ease-in-out infinite;
+}
+
+.delivered-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #2E7D32;
+    margin-top: 3px;
+}
+
+@keyframes happyBounce {
+    0% { transform: scale(0.8); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes happyJump {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+@media (max-width: 400px) {
+    .orders-container { padding: 8px; }
+    .order-card { border-radius: 12px; }
+    .order-id { font-size: 10px; }
+    .order-status-badge { font-size: 8px; padding: 2px 6px; }
+    .order-item-image { width: 34px; height: 34px; }
+    .item-emoji { font-size: 18px; }
+    .order-item-name { font-size: 10px; }
+    .order-item-price { font-size: 10px; }
+    .order-total { font-size: 13px; }
+    .location-btn { font-size: 8px; padding: 6px 3px; }
+    .order-btn { font-size: 8px; padding: 7px 3px; }
+    .timeline-dot { width: 18px; height: 18px; font-size: 8px; }
+    .timeline-step span { font-size: 6px; }
+    .bike-shop, .bike-customer { font-size: 12px; }
+    .bike-rider { font-size: 14px; }
+    .checkmark-dot { width: 16px; height: 16px; font-size: 7px; }
+    .checkmark-label { font-size: 5px; }
+}
+
+@media (min-width: 500px) {
+    .orders-container {
+        max-width: 450px;
+        margin: 0 auto;
+    }
+}

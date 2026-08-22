@@ -1,0 +1,80 @@
+{
+    "category": "masale",
+    "products": [
+        {
+            "id": "masala-001",
+            "name": {
+                "hi": "हल्दी पाउडर",
+                "en": "Turmeric Powder"
+            },
+            "price": 40,
+            "unit": {
+                "hi": "200 ग्राम",
+                "en": "200 gm"
+            },
+            "image": "https://images.unsplash.com/photo-1615485500704-8e990f9900f6?w=300",
+            "discount": 0,
+            "mostOrdered": true
+        },
+        {
+            "id": "masala-002",
+            "name": {
+                "hi": "लाल मिर्च पाउडर",
+                "en": "Red Chilli Powder"
+            },
+            "price": 60,
+            "unit": {
+                "hi": "200 ग्राम",
+                "en": "200 gm"
+            },
+            "image": "https://images.unsplash.com/photo-1589881133595-a0d914cf16f0?w=300",
+            "discount": 0,
+            "mostOrdered": true
+        },
+        {
+            "id": "masala-003",
+            "name": {
+                "hi": "धनिया पाउडर",
+                "en": "Coriander Powder"
+            },
+            "price": 50,
+            "unit": {
+                "hi": "200 ग्राम",
+                "en": "200 gm"
+            },
+            "image": "https://images.unsplash.com/photo-1599909812181-0d88a5c3a6f7?w=300",
+            "discount": 10,
+            "mostOrdered": false
+        },
+        {
+            "id": "masala-004",
+            "name": {
+                "hi": "गरम मसाला",
+                "en": "Garam Masala"
+            },
+            "price": 80,
+            "unit": {
+                "hi": "100 ग्राम",
+                "en": "100 gm"
+            },
+            "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=300",
+            "discount": 0,
+            "mostOrdered": true
+        },
+        {
+            "id": "masala-005",
+            "name": {
+                "hi": "जीरा",
+                "en": "Cumin Seeds"
+            },
+            "price": 45,
+            "unit": {
+                "hi": "200 ग्राम",
+                "en": "200 gm"
+            },
+            "image": "https://images.unsplash.com/photo-1599909812181-0d88a5c3a6f7?w=300",
+            "discount": 0,
+            "mostOrdered": false
+        }
+    ]
+}

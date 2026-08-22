@@ -1,0 +1,50 @@
+{
+    "category": "tel-ghee",
+    "products": [
+        {
+            "id": "tel-001",
+            "name": {
+                "hi": "सरसों का तेल",
+                "en": "Mustard Oil"
+            },
+            "price": 180,
+            "unit": {
+                "hi": "1 लीटर",
+                "en": "1 Litre"
+            },
+            "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=300",
+            "discount": 0,
+            "mostOrdered": true
+        },
+        {
+            "id": "tel-002",
+            "name": {
+                "hi": "रिफाइंड तेल",
+                "en": "Refined Sunflower Oil"
+            },
+            "price": 160,
+            "unit": {
+                "hi": "1 लीटर",
+                "en": "1 Litre"
+            },
+            "image": "https://images.unsplash.com/photo-1620706857370-e1b9770e8bb2?w=300",
+            "discount": 8,
+            "mostOrdered": true
+        },
+        {
+            "id": "tel-003",
+            "name": {
+                "hi": "देशी घी",
+                "en": "Pure Desi Ghee"
+            },
+            "price": 550,
+            "unit": {
+                "hi": "1 लीटर",
+                "en": "1 Litre"
+            },
+            "image": "https://images.unsplash.com/photo-1631281956018-3e2b2b3c7e2f?w=300",
+            "discount": 0,
+            "mostOrdered": true
+        }
+    ]
+}

@@ -1,0 +1,113 @@
+{
+  "category": "cold-drinks",
+  "products": [
+    
+    {
+  "id": "cold-013",
+  "name": { "hi": "लिम्का (2 लीटर)", 
+    "en": "Limca (2 Litre)" 
+  },
+      "price": 85,
+      "unit": { "hi": "2 लीटर", "en": "2 Litre" 
+  },
+  "image":"https://i.ibb.co/sdT8xzmb/IMG-20260729-113828.jpg",
+  "discount": 15,
+  "mostOrdered": true
+},
+
+{
+      "id": "cold-014",
+      "name": { "hi": "थम्स-अप (1 लीटर)",
+      "en": "Thums Up (1 Ltr)" },
+      "price": 50,
+      "unit": { "hi": "1 लीटर", "en": "1 Ltr" },
+      "image": "https://i.ibb.co/hx2rPMfp/IMG-20260729-105755.jpg",
+      "discount": 0,
+      "mostOrdered": true
+    },
+   {
+      "id": "cold-009",
+      "name": { "hi": "स्प्राइट (2 Ltr)", "en": "Sprite (2 Ltr)" },
+      "price": 85,
+      "unit": { "hi": "2 Ltr", "en": "2 Ltr" },
+      "image": "https://i.ibb.co/RT80XGRD/IMG-20260729-132617.png",
+      "discount": 15,
+      "mostOrdered": true
+    },
+
+{
+      "id": "cold-001",
+      "name": { "hi": "पेप्सी (1 लीटर)",
+      "en": "Pepsi (1 Ltr)" },
+      "price": 50,
+      "unit": { "hi": "1 लीटर", "en": "1 Ltr" },
+      "image": "https://i.ibb.co/Vc1BXV63/IMG-20260729-124736.png",
+      "discount": 0,
+      "mostOrdered": true
+    },
+    {
+      "id": "cold-002",
+      "name": { "hi": "पेप्सी (2 लीटर)", "en": "Pepsi (2 Litre)" },
+      "price": 100,
+      "unit": { "hi": "2 लीटर", "en": "2 Litre" },
+      "image": "https://i.ibb.co/PvxLvrM2/IMG-20260728-164045.jpg",
+      "discount": 5,
+      "mostOrdered": true
+    },
+    {
+      "id": "cold-004",
+      "name": { "hi": "मिरिंडा (750ml)", "en": "Mirinda (750ml)" },
+      "price": 45,
+      "unit": { "hi": "750 ml", "en": "750 ml" },
+      "image": "https://m.media-amazon.com/images/I/61v8L0h1mDL._SL1500_.jpg",
+      "discount": 0,
+      "mostOrdered": true
+    },
+    {
+      "id": "cold-005",
+      "name": { "hi": "माउंटेन ड्यू (750ml)", "en": "Mountain Dew (750ml)" },
+      "price": 45,
+      "unit": { "hi": "750 ml", "en": "750 ml" },
+      "image": "https://m.media-amazon.com/images/I/61ZmWqFGy3L._SL1500_.jpg",
+      "discount": 0,
+      "mostOrdered": false
+    },
+    {
+      "id": "cold-006",
+      "name": { "hi": "7अप (750ml)", "en": "7Up (750ml)" },
+      "price": 45,
+      "unit": { "hi": "750 ml", "en": "750 ml" },
+      "image": "https://m.media-amazon.com/images/I/61ZmWqFGy3L._SL1500_.jpg",
+      "discount": 0,
+      "mostOrdered": false
+    },
+    
+    {
+      "id": "cold-010",
+      "name": { "hi": "फैंटा (750ml)", "en": "Fanta (750ml)" },
+      "price": 45,
+      "unit": { "hi": "750 ml", "en": "750 ml" },
+      "image": "https://m.media-amazon.com/images/I/71yFanta750ml.jpg",
+      "discount": 0,
+      "mostOrdered": false
+    },
+    {
+      "id": "cold-011",
+      "name": { "hi": "कैंपा कोला (750ml)", "en": "Campa Cola (750ml)" },
+      "price": 40,
+      "unit": { "hi": "750 ml", "en": "750 ml" },
+      "image": "https://m.media-amazon.com/images/I/71CampaCola.jpg",
+      "discount": 0,
+      "mostOrdered": true
+    },
+    {
+      "id": "cold-012",
+      "name": { "hi": "कोक ज़ीरो (330ml कैन)", "en": "Coke Zero (330ml Can)" },
+      "price": 199,
+      "unit": { "hi": "330 ml", "en": "330 ml" },
+      "image": "https://m.media-amazon.com/images/I/71CokeZero.jpg",
+      "discount": 0,
+      "mostOrdered": false
+    }
+  ]
+}

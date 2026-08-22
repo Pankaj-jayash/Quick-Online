@@ -1,0 +1,86 @@
+/* ============================================
+   INDEPENDENCE-THEME.CSS - Water Flag
+   Real Waves, 2-Minute Flag Formation
+   ============================================ */
+
+/* ===== WATER FLAG CANVAS ===== */
+#flagWaterCanvas {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ===== RAIN CONTAINER ===== */
+.rain-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* ===== RAIN DROPS - Realistic ===== */
+.tricolor-raindrop {
+    position: absolute;
+    border-radius: 50% 50% 50% 50% / 30% 30% 70% 70%;
+    z-index: 1;
+    animation: realRainFall linear forwards;
+    will-change: transform;
+}
+
+.tricolor-raindrop.saffron-drop {
+    background: linear-gradient(180deg, 
+        rgba(255,153,51,0.8) 0%, 
+        rgba(255,120,20,0.55) 100%);
+    box-shadow: 0 0 2px rgba(255,153,51,0.35);
+}
+
+.tricolor-raindrop.white-drop {
+    background: linear-gradient(180deg, 
+        rgba(255,255,255,0.8) 0%, 
+        rgba(220,220,220,0.55) 100%);
+    box-shadow: 0 0 2px rgba(255,255,255,0.45);
+}
+
+.tricolor-raindrop.green-drop {
+    background: linear-gradient(180deg, 
+        rgba(19,136,8,0.8) 0%, 
+        rgba(10,100,5,0.55) 100%);
+    box-shadow: 0 0 2px rgba(19,136,8,0.35);
+}
+
+@keyframes realRainFall {
+    0% {
+        transform: translateY(-20px) scaleY(1.3);
+        opacity: 0;
+    }
+    8% {
+        opacity: 0.75;
+    }
+    85% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(calc(var(--header-height) + 25px)) scaleY(0.7);
+        opacity: 0;
+    }
+}
+
+/* ===== HEADER CONTENT ABOVE ALL ===== */
+.top-header > *:not(#flagWaterCanvas):not(.rain-container) {
+    position: relative;
+    z-index: 5;
+}
+
+/* ===== WAVE SPARKLE ON CREST ===== */
+@keyframes crestSparkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+}

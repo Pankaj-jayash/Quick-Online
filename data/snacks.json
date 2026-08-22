@@ -1,0 +1,125 @@
+{
+    "category": "snacks",
+    "products": [
+        {
+            "id": "snack-001",
+            "name": {
+                "hi": "पार्ले-जी बिस्किट (बड़ा पैक)",
+                "en": "Parle-G Biscuit (Large Pack)"
+            },
+            "price": 60,
+            "unit": {
+                "hi": "800 ग्राम",
+                "en": "800 gm"
+            },
+            "image": "",
+            "discount": 5,
+            "mostOrdered": true
+        },
+        {
+            "id": "snack-002",
+            "name": {
+                "hi": "पार्ले-जी बिस्किट (छोटा पैक)",
+                "en": "Parle-G Biscuit (Small Pack)"
+            },
+            "price": 10,
+            "unit": {
+                "hi": "55 ग्राम",
+                "en": "55 gm"
+            },
+            "image": "",
+            "discount": 0,
+            "mostOrdered": true
+        },
+        {
+            "id": "snack-003",
+            "name": {
+                "hi": "हल्दीराम नमकीन मिक्सचर",
+                "en": "Haldiram Namkeen Mix"
+            },
+            "price": 55,
+            "unit": {
+                "hi": "200 ग्राम",
+                "en": "200 gm"
+            },
+            "image": "",
+            "discount": 0,
+            "mostOrdered": true
+        },
+        {
+            "id": "snack-004",
+            "name": {
+                "hi": "हल्दीराम आलू भुजिया",
+                "en": "Haldiram Aloo Bhujia"
+            },
+            "price": 50,
+            "unit": {
+                "hi": "200 ग्राम",
+                "en": "200 gm"
+            },
+            "image": "",
+            "discount": 0,
+            "mostOrdered": false
+        },
+        {
+            "id": "snack-005",
+            "name": {
+                "hi": "हल्दीराम मूंग दाल",
+                "en": "Haldiram Moong Dal"
+            },
+            "price": 45,
+            "unit": {
+                "hi": "150 ग्राम",
+                "en": "150 gm"
+            },
+            "image": "",
+            "discount": 0,
+            "mostOrdered": false
+        },
+        {
+            "id": "snack-006",
+            "name": {
+                "hi": "गुड डे बटर कुकीज़",
+                "en": "Good Day Butter Cookies"
+            },
+            "price": 30,
+            "unit": {
+                "hi": "100 ग्राम",
+                "en": "100 gm"
+            },
+            "image": "",
+            "discount": 0,
+            "mostOrdered": true
+        },
+        {
+            "id": "snack-007",
+            "name": {
+                "hi": "ओरियो बिस्किट",
+                "en": "Oreo Biscuit"
+            },
+            "price": 30,
+            "unit": {
+                "hi": "120 ग्राम",
+                "en": "120 gm"
+            },
+            "image": "",
+            "discount": 10,
+            "mostOrdered": false
+        },
+        {
+            "id": "snack-008",
+            "name": {
+                "hi": "मोनाको बिस्किट",
+                "en": "Monaco Biscuit"
+            },
+            "price": 25,
+            "unit": {
+                "hi": "100 ग्राम",
+                "en": "100 gm"
+            },
+            "image": "",
+            "discount": 0,
+            "mostOrdered": false
+        }
+    ]
+}

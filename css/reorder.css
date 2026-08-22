@@ -1,0 +1,120 @@
+/* ============================================
+   REORDER.CSS - Reorder System
+   Quick Dukan - Premium Styling
+   ============================================ */
+
+/* Reorder Button in Orders */
+.reorder-btn {
+    padding: 8px 12px;
+    background: linear-gradient(135deg, #FF9800, #F57C00);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 8px rgba(255, 152, 0, 0.3);
+}
+
+.reorder-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.4);
+}
+
+.reorder-btn:active {
+    transform: scale(0.95);
+}
+
+.reorder-btn .reorder-icon {
+    font-size: 14px;
+}
+
+/* Reorder Animation */
+.reorder-btn.reordering {
+    animation: reorderSpin 0.6s ease;
+}
+
+@keyframes reorderSpin {
+    0% { transform: rotate(0); }
+    50% { transform: rotate(180deg) scale(1.2); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+/* Reorder Success Toast */
+.reorder-toast {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2E7D32;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: 600;
+    z-index: 99999;
+    animation: reorderToastIn 0.3s ease;
+    box-shadow: 0 4px 20px rgba(46, 125, 50, 0.4);
+    white-space: nowrap;
+}
+
+.reorder-toast.hidden {
+    display: none;
+}
+
+@keyframes reorderToastIn {
+    from { transform: translateX(-50%) translateY(20px); opacity: 0; }
+    to { transform: translateX(-50%) translateY(0); opacity: 1; }
+}
+
+/* Reorder Items Preview */
+.reorder-items-preview {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+.reorder-item-chip {
+    padding: 4px 8px;
+    background: #f5f5f5;
+    border-radius: 12px;
+    font-size: 10px;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.reorder-item-chip .chip-icon {
+    font-size: 12px;
+}
+
+/* Dark Mode */
+body.dark-mode .reorder-item-chip {
+    background: #333;
+    color: #CCC;
+}
+
+body.dark-mode .reorder-toast {
+    background: #1B5E20;
+}
+
+/* Mobile Responsive */
+@media (max-width: 380px) {
+    .reorder-btn {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+    
+    .reorder-toast {
+        font-size: 11px;
+        padding: 10px 16px;
+        bottom: 90px;
+    }
+}

@@ -1,0 +1,95 @@
+{
+    "category": "dal",
+    "products": [
+        {
+            "id": "dal-001",
+            "name": {
+                "hi": "अरहर दाल (तूअर)",
+                "en": "Toor Dal (Pigeon Pea)"
+            },
+            "price": 160,
+            "unit": {
+                "hi": "1 किलो",
+                "en": "1 kg"
+            },
+            "image": "https://images.unsplash.com/photo-1585996741836-8e5e7a5e6b9b?w=300",
+            "discount": 5,
+            "mostOrdered": true
+        },
+        {
+            "id": "dal-002",
+            "name": {
+                "hi": "मसूर दाल (लाल)",
+                "en": "Red Masoor Dal"
+            },
+            "price": 110,
+            "unit": {
+                "hi": "1 किलो",
+                "en": "1 kg"
+            },
+            "image": "https://images.pexels.com/photos/34940646/pexels-photo-34940646.jpeg",
+            "discount": 0,
+            "mostOrdered": true
+        },
+        {
+            "id": "dal-003",
+            "name": {
+                "hi": "चना दाल",
+                "en": "Chana Dal (Bengal Gram)"
+            },
+            "price": 90,
+            "unit": {
+                "hi": "1 किलो",
+                "en": "1 kg"
+            },
+            "image": "https://images.pexels.com/photos/16599820/pexels-photo-16599820.jpeg",
+            "discount": 10,
+            "mostOrdered": false
+        },
+        {
+            "id": "dal-004",
+            "name": {
+                "hi": "मूंग दाल (धुली)",
+                "en": "Split Moong Dal"
+            },
+            "price": 120,
+            "unit": {
+                "hi": "1 किलो",
+                "en": "1 kg"
+            },
+            "image": "https://images.unsplash.com/photo-1605433247592-c08b8c7c3e2c?w=300",
+            "discount": 0,
+            "mostOrdered": true
+        },
+        {
+            "id": "dal-005",
+            "name": {
+                "hi": "उड़द दाल (धुली)",
+                "en": "Split Urad Dal"
+            },
+            "price": 140,
+            "unit": {
+                "hi": "1 किलो",
+                "en": "1 kg"
+            },
+            "image": "https://images.unsplash.com/photo-1626200419199-391ae4be7a41?w=300",
+            "discount": 0,
+            "mostOrdered": false
+        },
+        {
+            "id": "dal-006",
+            "name": {
+                "hi": "राजमा",
+                "en": "Kidney Beans (Rajma)"
+            },
+            "price": 150,
+            "unit": {
+                "hi": "1 किलो",
+                "en": "1 kg"
+            },
+            "image": "https://images.unsplash.com/photo-1551269901-5c5e14c25c4e?w=300",
+            "discount": 8,
+            "mostOrdered": false
+        }
+    ]
+}

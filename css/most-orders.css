@@ -1,0 +1,484 @@
+/* ============================================
+   MOST-ORDERS.CSS - Section 7 (FIXED V2)
+   Synced with New Product Card Layout
+   Medium Cards + Scroll Title Effect
+   ============================================ */
+
+.most-orders-section {
+    margin-bottom: var(--spacing-md);
+    padding: 0 4px;
+}
+
+/* ============================================
+   SECTION TITLE - With Scroll Size Effect
+   ============================================ */
+.most-orders-section .section-title {
+    color: #0f614e;
+    font-weight: 700;
+    display: inline-block;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    font-size: 16px;
+    margin-left: 4px;
+    transition: font-size 0.3s ease, color 0.3s ease, letter-spacing 0.3s ease;
+}
+
+/* Title shrinks when section is scrolled */
+.most-orders-section.scrolled .section-title {
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    opacity: 0.85;
+}
+
+/* Blur behind title */
+.most-orders-section .section-title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -14px;
+    right: -14px;
+    bottom: 0;
+    background: rgba(245, 245, 220, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: -1;
+    border-radius: 10px;
+}
+
+body.dark-mode .most-orders-section .section-title::before {
+    background: rgba(26, 26, 46, 0.85);
+}
+
+body.dark-mode .most-orders-section .section-title {
+    color: #F4A460;
+    text-shadow: 0 0 10px rgba(244, 164, 96, 0.3);
+}
+
+/* ============================================
+   HORIZONTAL SCROLL
+   ============================================ */
+.most-orders-section .horizontal-scroll {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding: 8px 8px 10px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-snap-type: x proximity;
+    min-height: 200px;
+}
+
+.most-orders-section .horizontal-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* ============================================
+   MEDIUM CARDS - Most Orders
+   ============================================ */
+.most-orders-section .product-card {
+    width: var(--card-width);
+    flex-shrink: 0;
+    border-radius: var(--radius-sm);
+    border: 2px solid rgba(205, 133, 63, 0.15);
+    scroll-snap-align: start;
+    transition: all 0.25s ease;
+}
+
+.most-orders-section .product-card:hover {
+    border-color: rgba(205, 133, 63, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+.most-orders-section .product-card-image {
+    aspect-ratio: 1 / 1;
+    background: #f8f8f8;
+}
+
+.most-orders-section .product-card-image img {
+    object-fit: cover;
+}
+
+/* Info */
+.most-orders-section .product-card-info {
+    padding: 9px 10px;
+    gap: 4px;
+}
+
+/* Name - single row scrollable */
+.most-orders-section .product-name {
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: visible;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    line-height: 1.3;
+    padding: 1px 0;
+}
+
+.most-orders-section .product-name::-webkit-scrollbar {
+    display: none;
+}
+
+/* Price overlay */
+.most-orders-section .price-overlay {
+    font-size: 15px;
+    padding: 3px 9px;
+    bottom: 6px;
+    right: 6px;
+    font-weight: 700;
+}
+
+/* Discount row - %OFF left + Unit right */
+.most-orders-section .product-discount {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    min-height: 18px;
+}
+
+.most-orders-section .discount-text {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    color: #FFFFFF;
+    background: linear-gradient(135deg, #2E7D32, #43A047);
+    box-shadow: 0 2px 4px rgba(46, 125, 50, 0.2);
+    white-space: nowrap;
+}
+
+.most-orders-section .product-unit {
+    font-size: 10px;
+    padding: 2px 6px;
+    background: /* ============================================
+   RECENTLY-VIEWED.CSS - Section 6 (FIXED V2)
+   Synced with New Product Card Layout
+   ============================================ */
+
+.recently-viewed-section {
+    margin-bottom: var(--spacing-md);
+    padding: 0 4px;
+}
+
+/* ============================================
+   SECTION TITLE - With Scroll Size Effect
+   ============================================ */
+.recently-viewed-section .section-title {
+    color: #8B7355;
+    font-weight: 700;
+    display: inline-block;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    font-size: 15px;
+    margin-left: 4px;
+    transition: font-size 0.3s ease, color 0.3s ease, letter-spacing 0.3s ease;
+}
+
+/* Title shrinks when section is scrolled */
+.recently-viewed-section.scrolled .section-title {
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    opacity: 0.8;
+}
+
+/* Blur behind title */
+.recently-viewed-section .section-title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -14px;
+    right: -14px;
+    bottom: 0;
+    background: rgba(245, 245, 220, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: -1;
+    border-radius: 10px;
+}
+
+body.dark-mode .recently-viewed-section .section-title::before {
+    background: rgba(26, 26, 46, 0.85);
+}
+
+body.dark-mode .recently-viewed-section .section-title {
+    color: #DEB887;
+}
+
+/* ============================================
+   HORIZONTAL SCROLL
+   ============================================ */
+.recently-viewed-section .horizontal-scroll {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding: 8px 8px 10px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-snap-type: x proximity;
+    min-height: 170px;
+}
+
+.recently-viewed-section .horizontal-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* ============================================
+   CHHOTE CARDS - Recently Viewed
+   ============================================ */
+.recently-viewed-section .product-card {
+    width: 140px;
+    flex-shrink: 0;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    scroll-snap-align: start;
+    animation: slideUp 0.3s ease;
+    transition: all 0.25s ease;
+}
+
+.recently-viewed-section .product-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.recently-viewed-section .product-card-image {
+    aspect-ratio: 1 / 1;
+    background: #f8f8f8;
+}
+
+.recently-viewed-section .product-card-image img {
+    object-fit: cover;
+}
+
+/* Info padding */
+.recently-viewed-section .product-card-info {
+    padding: 6px 8px;
+    gap: 3px;
+}
+
+/* Name - single row scrollable */
+.recently-viewed-section .product-name {
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: visible;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    line-height: 1.3;
+    padding: 1px 0;
+}
+
+.recently-viewed-section .product-name::-webkit-scrollbar {
+    display: none;
+}
+
+/* Price overlay */
+.recently-viewed-section .price-overlay {
+    font-size: 12px;
+    padding: 2px 7px;
+    bottom: 4px;
+    right: 4px;
+    background: rgba(0,0,0,0.55);
+    font-weight: 700;
+}
+
+/* Discount row - %OFF left + Unit right */
+.recently-viewed-section .product-discount {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+    min-height: 16px;
+}
+
+.recently-viewed-section .discount-text {
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 8px;
+    color: #FFFFFF;
+    background: linear-gradient(135deg, #2E7D32, #43A047);
+    box-shadow: 0 1px 3px rgba(46, 125, 50, 0.2);
+    white-space: nowrap;
+}
+
+.recently-viewed-section .product-unit {
+    font-size: 9px;
+    padding: 2px 5px;
+    background: rgba(0,0,0,0.04);
+    border-radius: 8px;
+    font-weight: 500;
+    white-space: nowrap;
+    margin-left: auto;
+}
+
+/* Buttons */
+.recently-viewed-section .btn-add-cart,
+.recently-viewed-section .btn-buy-now {
+    padding: 5px 3px;
+    font-size: 9px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.recently-viewed-section .product-buttons {
+    gap: 4px;
+}
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+body.dark-mode .recently-viewed-section .product-card {
+    background: var(--bg-card);
+}
+
+body.dark-mode .recently-viewed-section .product-card-image {
+    background: #2a2a2a;
+}
+
+body.dark-mode .recently-viewed-section .product-unit {
+    background: rgba(255,255,255,0.06);
+    color: #aaa;
+}
+
+body.dark-mode .recently-viewed-section .discount-text {
+    background: linear-gradient(135deg, #1B5E20, #2E7D32);
+}
+
+/* ============================================
+   SCROLL TITLE EFFECT - JS Add/Remove Class
+   ============================================ */
+.recently-viewed-section .horizontal-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* ============================================
+   MOBILE
+   ============================================ */
+@media (max-width: 400px) {
+    .recently-viewed-section .product-card {
+        width: 120px;
+    }
+    .recently-viewed-section .product-name {
+        font-size: 10px;
+    }
+    .recently-viewed-section .discount-text {
+        font-size: 8px;
+        padding: 1px 5px;
+    }
+    .recently-viewed-section .product-unit {
+        font-size: 8px;
+    }
+    .recently-viewed-section .btn-add-cart,
+    .recently-viewed-section .btn-buy-now {
+        font-size: 8px;
+        padding: 4px 2px;
+    }
+}
+
+@media (max-width: 340px) {
+    .recently-viewed-section .product-card {
+        width: 100px;
+    }
+    .recently-viewed-section .product-name {
+        font-size: 9px;
+    }
+    .recently-viewed-section .price-overlay {
+        font-size: 10px;
+        padding: 2px 5px;
+    }
+    .recently-viewed-section .product-card-info {
+        padding: 4px 6px;
+    }
+}(0,0,0,0.04);
+    border-radius: 8px;
+    font-weight: 500;
+    white-space: nowrap;
+    margin-left: auto;
+}
+
+/* Buttons */
+.most-orders-section .btn-add-cart,
+.most-orders-section .btn-buy-now {
+    padding: 8px 5px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.most-orders-section .product-buttons {
+    gap: 5px;
+}
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+body.dark-mode .most-orders-section .product-card {
+    border-color: rgba(244, 164, 96, 0.15);
+    background: var(--bg-card);
+}
+
+body.dark-mode .most-orders-section .product-card:hover {
+    border-color: rgba(244, 164, 96, 0.5);
+}
+
+body.dark-mode .most-orders-section .product-card-image {
+    background: #2a2a2a;
+}
+
+body.dark-mode .most-orders-section .product-unit {
+    background: rgba(255,255,255,0.06);
+    color: #bbb;
+}
+
+body.dark-mode .most-orders-section .discount-text {
+    background: linear-gradient(135deg, #1B5E20, #2E7D32);
+}
+
+/* ============================================
+   MOBILE
+   ============================================ */
+@media (max-width: 400px) {
+    .most-orders-section .product-card {
+        width: 145px;
+    }
+    .most-orders-section .product-name {
+        font-size: 12px;
+    }
+    .most-orders-section .discount-text {
+        font-size: 10px;
+        padding: 2px 6px;
+    }
+    .most-orders-section .product-unit {
+        font-size: 9px;
+    }
+    .most-orders-section .btn-add-cart,
+    .most-orders-section .btn-buy-now {
+        font-size: 11px;
+        padding: 7px 3px;
+    }
+}
+
+@media (max-width: 360px) {
+    .most-orders-section .product-card {
+        width: 130px;
+    }
+    .most-orders-section .product-name {
+        font-size: 11px;
+    }
+    .most-orders-section .price-overlay {
+        font-size: 13px;
+    }
+    .most-orders-section .product-card-info {
+        padding: 7px 8px;
+    }
+}

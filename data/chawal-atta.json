@@ -1,0 +1,65 @@
+{
+    "category": "chawal-atta",
+    "products": [
+        {
+            "id": "chawal-001",
+            "name": {
+                "hi": "बासमती चावल (प्रीमियम)",
+                "en": "Premium Basmati Rice"
+            },
+            "price": 200,
+            "unit": {
+                "hi": "5 किलो",
+                "en": "5 kg"
+            },
+            "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=300",
+            "discount": 5,
+            "mostOrdered": true
+        },
+        {
+            "id": "chawal-002",
+            "name": {
+                "hi": "गेहूं का आटा",
+                "en": "Wheat Flour (Atta)"
+            },
+            "price": 55,
+            "unit": {
+                "hi": "5 किलो",
+                "en": "5 kg"
+            },
+            "image": "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=300",
+            "discount": 0,
+            "mostOrdered": true
+        },
+        {
+            "id": "chawal-003",
+            "name": {
+                "hi": "सोनामसूरी चावल",
+                "en": "Sona Masoori Rice"
+            },
+            "price": 120,
+            "unit": {
+                "hi": "5 किलो",
+                "en": "5 kg"
+            },
+            "image": "https://images.unsplash.com/photo-1516684732162-798a0062be99?w=300",
+            "discount": 0,
+            "mostOrdered": false
+        },
+        {
+            "id": "chawal-004",
+            "name": {
+                "hi": "बेसन",
+                "en": "Gram Flour (Besan)"
+            },
+            "price": 70,
+            "unit": {
+                "hi": "1 किलो",
+                "en": "1 kg"
+            },
+            "image": "https://images.unsplash.com/photo-1603569283847-aa295f0cd016?w=300",
+            "discount": 0,
+            "mostOrdered": false
+        }
+    ]
+}
