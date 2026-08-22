@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2E7D32">
+    <title>Quick Dukan - Login</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="login-page-wrapper">
+        
+        <!-- Top Decoration -->
+        <div class="login-top-decoration">
+            <div class="decoration-circle circle-1"></div>
+            <div class="decoration-circle circle-2"></div>
+            <div class="decoration-circle circle-3"></div>
+        </div>
+        
+        <!-- 🆕 Close Button -->
+        <button class="login-close-btn" onclick="closeLoginPopupFromIframe()">✕</button>
+        
+        <!-- Main Card -->
+        <div class="login-card">
+            
+            <!-- Logo Section -->
+            <div class="login-logo-section">
+                <div class="logo-wrapper">
+                    <span class="login-logo">🛒</span>
+                </div>
+                <h1 class="login-brand">Quick <span>Dukan</span></h1>
+                <p class="login-tagline">आपकी विश्वसनीय किराना दुकान</p>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="auth-tabs" id="authTabs">
+                <button class="auth-tab active" data-tab="login" onclick="switchAuthTab('login')">
+                    <span class="tab-icon">🔐</span> Login
+                </button>
+                <button class="auth-tab" data-tab="register" onclick="switchAuthTab('register')">
+                    <span class="tab-icon">📝</span> Register
+                </button>
+            </div>
+            
+            <!-- ============================================ -->
+            <!-- LOGIN SECTION -->
+            <!-- ============================================ -->
+            <div id="loginSection" class="auth-section">
+                
+                <!-- OTP Display -->
+                <div class="otp-display hidden" id="loginOtpDisplay">
+                    <div class="otp-header">
+                        <span class="otp-label">🔐 आपका OTP</span>
+                        <span class="otp-timer" id="loginOtpTimer">⏱️ 00:40</span>
+                    </div>
+                    <div class="otp-value" id="loginOtpValue">------</div>
+                    <span class="otp-attempts" id="loginOtpAttempts">Attempts: 0/5</span>
+                </div>
+                
+                <!-- Lock Message -->
+                <div class="lock-message hidden" id="loginLockMessage">
+                    <span class="lock-icon">🔒</span>
+                    <span class="lock-text">बहुत ज्यादा गलत OTP! 10 मिनट बाद try करें।</span>
+                    <span class="lock-timer" id="loginLockTimer"></span>
+                </div>
+                
+                <!-- Phone/Email -->
+                <div class="auth-input-group">
+                    <span class="auth-input-icon">📱</span>
+                    <input type="text" id="loginPhoneEmail" class="auth-input" placeholder="मोबाइल नंबर या Email" autocomplete="off">
+                </div>
+                <div class="validation-msg hidden" id="loginPhoneEmailError"></div>
+                
+                <!-- Password -->
+                <div class="auth-input-group">
+                    <span class="auth-input-icon">🔒</span>
+                    <input type="password" id="loginPassword" class="auth-input" placeholder="Password" autocomplete="off">
+                </div>
+                
+                <!-- OTP Input -->
+                <div class="auth-input-group hidden" id="loginOtpSection">
+                    <span class="auth-input-icon">🔑</span>
+                    <input type="text" id="loginOtp" class="auth-input" placeholder="6 digit OTP" maxlength="6" inputmode="numeric">
+                </div>
+                
+                <!-- Buttons -->
+                <div class="auth-buttons">
+                    <button class="auth-btn btn-otp" onclick="generateLoginOtp()">
+                        <span>🔑</span> OTP Generate
+                    </button>
+                    <button class="auth-btn btn-login" onclick="loginUser()">
+                        <span>✅</span> Login
+                    </button>
+                </div>
+                
+                <!-- Forget Password -->
+                <button class="forget-btn hidden" id="forgetPasswordBtn" onclick="showForgetPassword()">
+                    🔄 Password भूल गए?
+                </button>
+                
+                <!-- Status -->
+                <div class="auth-status" id="loginStatus"></div>
+            </div>
+            
+            <!-- ============================================ -->
+            <!-- REGISTER SECTION -->
+            <!-- ============================================ -->
+            <div id="registerSection" class="auth-section hidden">
+                
+                <!-- OTP Display -->
+                <div class="otp-display hidden" id="registerOtpDisplay">
+                    <div class="otp-header">
+                        <span class="otp-label">🔐 आपका OTP</span>
+                        <span class="otp-timer" id="registerOtpTimer">⏱️ 00:40</span>
+                    </div>
+                    <div class="otp-value" id="registerOtpValue">------</div>
+                    <span class="otp-attempts" id="registerOtpAttempts">Attempts: 0/5</span>
+                </div>
+                
+                <!-- Lock Message -->
+                <div class="lock-message hidden" id="registerLockMessage">
+                    <span class="lock-icon">🔒</span>
+                    <span class="lock-text">10 मिनट बाद try करें।</span>
+                    <span class="lock-timer" id="registerLockTimer"></span>
+                </div>
+                
+                <!-- Name -->
+                <div class="auth-input-group">
+                    <span class="auth-input-icon">👤</span>
+                    <input type="text" id="registerName" class="auth-input" placeholder="पूरा नाम" autocomplete="off">
+                </div>
+                
+                <!-- Phone -->
+                <div class="auth-input-group">
+                    <span class="auth-input-icon">📱</span>
+                    <input type="tel" id="registerPhone" class="auth-input" placeholder="मोबाइल नंबर" maxlength="10" inputmode="numeric">
+                </div>
+                <div class="validation-msg hidden" id="registerPhoneError"></div>
+                
+                <!-- Email -->
+                <div class="auth-input-group">
+                    <span class="auth-input-icon">📧</span>
+                    <input type="email" id="registerEmail" class="auth-input" placeholder="Email@gmail.com (वैकल्पिक)" autocomplete="off">
+                </div>
+                <div class="validation-msg hidden" id="registerEmailError"></div>
+                
+                <!-- Password + RePassword -->
+                <div class="auth-input-row">
+                    <div class="auth-input-group half">
+                        <span class="auth-input-icon">🔒</span>
+                        <input type="password" id="registerPassword" class="auth-input" placeholder="Password">
+                    </div>
+                    <div class="auth-input-group half">
+                        <span class="auth-input-icon">🔒</span>
+                        <input type="password" id="registerRePassword" class="auth-input" placeholder="Re-Password">
+                    </div>
+                </div>
+                
+                <!-- OTP Input -->
+                <div class="auth-input-group hidden" id="registerOtpSection">
+                    <span class="auth-input-icon">🔑</span>
+                    <input type="text" id="registerOtp" class="auth-input" placeholder="6 digit OTP" maxlength="6" inputmode="numeric">
+                </div>
+                
+                <!-- Buttons -->
+                <div class="auth-buttons">
+                    <button class="auth-btn btn-otp" onclick="generateRegisterOtp()">
+                        <span>📱</span> Get OTP
+                    </button>
+                    <button class="auth-btn btn-register" onclick="registerUser()">
+                        <span>📝</span> Register
+                    </button>
+                </div>
+                
+                <!-- Status -->
+                <div class="auth-status" id="registerStatus"></div>
+            </div>
+        </div>
+        
+        <!-- ============================================ -->
+        <!-- FORGET PASSWORD MODAL -->
+        <!-- ============================================ -->
+        <div class="forget-modal hidden" id="forgetModal">
+            <div class="forget-modal-content">
+                <div class="forget-modal-header">
+                    <h3>🔄 Password Reset</h3>
+                    <button class="close-btn" onclick="closeForgetModal()">✕</button>
+                </div>
+                
+                <div class="otp-display hidden" id="forgetOtpDisplay">
+                    <div class="otp-header">
+                        <span class="otp-label">🔐 आपका OTP</span>
+                        <span class="otp-timer" id="forgetOtpTimer">⏱️ 00:40</span>
+                    </div>
+                    <div class="otp-value" id="forgetOtpValue">------</div>
+                </div>
+                
+                <input type="tel" id="forgetPhone" class="auth-input" placeholder="📱 मोबाइल नंबर" maxlength="10">
+                <button class="auth-btn btn-otp" onclick="generateForgetOtp()" style="width:100%;margin-bottom:8px;">🔑 OTP Generate</button>
+                <input type="text" id="forgetOtp" class="auth-input" placeholder="6 digit OTP" maxlength="6" style="margin-bottom:8px;">
+                <input type="password" id="forgetNewPassword" class="auth-input" placeholder="🔒 नया Password">
+                <button class="auth-btn btn-login" onclick="resetPassword()" style="width:100%;margin-top:8px;">✅ Reset Password</button>
+            </div>
+        </div>
+        
+        <!-- ============================================ -->
+        <!-- PROFILE SECTION -->
+        <!-- ============================================ -->
+        <div id="profileSection" class="profile-section hidden">
+            <button class="home-btn" onclick="goHome()">🏠 Home</button>
+            
+            <div class="profile-card">
+                <div class="profile-avatar">👤</div>
+                <h2 class="profile-name" id="profileName">User Name</h2>
+                <p class="profile-member-since" id="profileMemberSince">Member since: --</p>
+                
+                <div class="blocked-banner hidden" id="profileBlockedBanner">
+                    <span class="blocked-icon">🚫</span>
+                    <span class="blocked-text">Account Blocked</span>
+                    <span class="blocked-reason" id="profileBlockReason"></span>
+                </div>
+            </div>
+            
+            <div class="profile-details">
+                <div class="profile-detail-row">
+                    <span class="detail-label">👤 Name</span>
+                    <span class="detail-value" id="profileDetailName">--</span>
+                </div>
+                <div class="profile-detail-row">
+                    <span class="detail-label">📱 Phone</span>
+                    <span class="detail-value" id="profileDetailPhone">--</span>
+                </div>
+                <div class="profile-detail-row">
+                    <span class="detail-label">📧 Email</span>
+                    <span class="detail-value" id="profileDetailEmail">--</span>
+                </div>
+                <div class="profile-detail-row">
+                    <span class="detail-label">🏠 Address</span>
+                    <span class="detail-value" id="profileDetailAddress">--</span>
+                </div>
+            </div>
+            
+            <div class="profile-settings">
+                <button class="setting-btn" onclick="showEditProfile()">✏️ Edit Profile</button>
+                <button class="setting-btn" onclick="showForgetPassword()">🔒 Change Password</button>
+                <button class="setting-btn" onclick="showNotifications()">🔔 Notifications</button>
+                <button class="setting-btn logout-btn" onclick="logoutUser()">🚪 Logout</button>
+            </div>
+            
+            <button class="view-orders-btn" onclick="viewMyOrders()">📋 My Orders</button>
+        </div>
+        
+    </div>
+    
+    <script src="js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2E7D32">
+    <title>Quick Dukan - My Orders</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Orders Page CSS -->
+    <link rel="stylesheet" href="css/orders-page.css">
+</head>
+<body>
+    <!-- Header -->
+    <div class="orders-header">
+        <button class="back-btn" onclick="goBack()">⬅</button>
+        <div class="header-center">
+            <span class="header-logo">🛒</span>
+            <span class="header-title">My Orders</span>
+        </div>
+        <button class="home-btn" onclick="goHome()">🏠</button>
+    </div>
+    
+    <!-- User Info Bar -->
+    <div class="user-info-bar hidden" id="userInfoBar">
+        <span class="user-avatar">👤</span>
+        <div class="user-details">
+            <span class="user-name" id="userName">User</span>
+            <span class="user-phone" id="userPhone"></span>
+        </div>
+    </div>
+    
+    <!-- Orders Container -->
+    <div class="orders-container" id="ordersContainer">
+        <div class="loading-state">
+            <div class="loading-spinner"></div>
+            <p>🔄 Orders load हो रहे हैं...</p>
+        </div>
+    </div>
+    
+    <!-- No Orders State -->
+    <div class="no-orders-state hidden" id="noOrdersState">
+        <div class="no-orders-icon">📭</div>
+        <h3>कोई Orders नहीं मिले</h3>
+        <p>अभी तक आपने कोई order नहीं किया है</p>
+        <button class="shop-now-btn" onclick="goHome()">🛒 अभी खरीदारी करें</button>
+    </div>
+    
+    <!-- Error State -->
+    <div class="error-state hidden" id="errorState">
+        <div class="error-icon">❌</div>
+        <h3>कुछ गलत हो गया</h3>
+        <p>Orders load नहीं हो सके। कृपया दोबारा try करें।</p>
+        <button class="retry-btn" onclick="retryLoad()">🔄 Retry</button>
+    </div>
+    
+    <script src="js/orders-page.js"></script>
+</body>
+</html>

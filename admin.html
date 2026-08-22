@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Dukan - Admin Panel</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <span class="header-logo">🛒</span>
+                <div class="header-title">
+                    <h1>Quick Dukan Admin</h1>
+                    <p>Real-time Order Management</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-sound" id="soundToggle" onclick="toggleSound()">
+                    🔊 Sound ON
+                </button>
+                <button class="btn btn-refresh" onclick="refreshAll()">
+                    🔄 Refresh
+                </button>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-icon">📦</div>
+                <div class="stat-value" id="totalOrders">0</div>
+                <div class="stat-label">Total Orders</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⏳</div>
+                <div class="stat-value" id="pendingOrders" style="color:#E65100;">0</div>
+                <div class="stat-label">Pending</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+                <div class="stat-value" id="confirmedOrders" style="color:#2E7D32;">0</div>
+                <div class="stat-label">Confirmed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+                <div class="stat-value" id="totalRevenue">₹0</div>
+                <div class="stat-label">Total Revenue</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🛵</div>
+                <div class="stat-value" id="totalDeliveryBoys" style="color:#FF9800;">0</div>
+                <div class="stat-label">Delivery Boys</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📋</div>
+                <div class="stat-value" id="pendingRequests" style="color:#9C27B0;">0</div>
+                <div class="stat-label">New Requests</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💳</div>
+                <div class="stat-value" id="pendingPayments" style="color:#FF9800;">0</div>
+                <div class="stat-label">Pending Payments</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⭐</div>
+                <div class="stat-value" id="averageRating" style="color:#FFD700;">0.0</div>
+                <div class="stat-label">Avg Rating</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🚫</div>
+                <div class="stat-value" id="blockedUsers" style="color:#f44336;">0</div>
+                <div class="stat-label">Blocked Users</div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="admin-tabs">
+            <button class="admin-tab active" data-tab="orders" onclick="switchTab('orders')">
+                📋 Orders <span class="tab-badge" id="ordersTabCount">0</span>
+            </button>
+            <button class="admin-tab" data-tab="payments" onclick="switchTab('payments')">
+                💳 Payments <span class="tab-badge" id="paymentsTabCount">0</span>
+            </button>
+            <button class="admin-tab" data-tab="deliveryBoys" onclick="switchTab('deliveryBoys')">
+                🛵 Delivery Boys <span class="tab-badge" id="deliveryBoysTabCount">0</span>
+            </button>
+            <button class="admin-tab" data-tab="ratings" onclick="switchTab('ratings')">
+                ⭐ Ratings <span class="tab-badge" id="ratingsTabCount">0</span>
+            </button>
+            <button class="admin-tab" data-tab="users" onclick="switchTab('users')">
+                👤 Users <span class="tab-badge" id="usersTabCount">0</span>
+            </button>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- ORDERS TAB -->
+        <!-- ============================================ -->
+        <div id="ordersTab" class="tab-content active">
+            <div class="orders-container">
+                <div class="orders-header">
+                    <h2>
+                        📋 Orders
+                        <span class="orders-count" id="ordersCount">0</span>
+                    </h2>
+                    <span style="font-size:12px;color:#ccc;">Auto-refresh: 5 sec</span>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Date</th>
+                                <th>Customer</th>
+                                <th>Phone</th>
+                                <th>Address</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Delivery Boy</th>
+                                <th>Rating</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersBody">
+                            <tr>
+                                <td colspan="10" style="text-align:center;padding:30px;color:#999;">
+                                    🔄 Loading...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 💳 PAYMENTS TAB -->
+        <!-- ============================================ -->
+        <div id="paymentsTab" class="tab-content">
+            <div class="orders-container">
+                <div class="orders-header">
+                    <h2>
+                        💳 Payments
+                        <span class="orders-count" id="paymentsCount">0</span>
+                    </h2>
+                    <span style="font-size:12px;color:#ccc;">Payment management</span>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="payment-search-section">
+                    <div class="payment-search-container">
+                        <input type="text" id="paymentSearchInput" class="payment-search-input" placeholder="🔍 Order ID, Phone, Amount, Name खोजें..." onkeyup="searchPayments()">
+                        <button class="payment-search-clear" onclick="clearPaymentSearch()">✕</button>
+                    </div>
+                </div>
+                
+                <!-- Payment Filters -->
+                <div class="payment-filters">
+                    <button class="payment-filter-btn active" data-filter="all" onclick="filterPayments('all')">📋 All</button>
+                    <button class="payment-filter-btn" data-filter="Pending" onclick="filterPayments('Pending')">⏳ Pending</button>
+                    <button class="payment-filter-btn" data-filter="Verified" onclick="filterPayments('Verified')">✅ Verified</button>
+                    <button class="payment-filter-btn" data-filter="Cancelled" onclick="filterPayments('Cancelled')">❌ Cancelled</button>
+                </div>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Payment ID</th>
+                                <th>Order ID</th>
+                                <th>User</th>
+                                <th>Phone</th>
+                                <th>Items</th>
+                                <th>Product ₹</th>
+                                <th>Charge ₹</th>
+                                <th>Total ₹</th>
+                                <th>Method</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="paymentsBody">
+                            <tr>
+                                <td colspan="12" style="text-align:center;padding:30px;color:#999;">
+                                    🔄 Loading...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- DELIVERY BOYS TAB -->
+        <!-- ============================================ -->
+        <div id="deliveryBoysTab" class="tab-content">
+            <!-- Login Requests -->
+            <div class="orders-container" style="margin-bottom:20px;">
+                <div class="orders-header">
+                    <h2>
+                        🛵 Login Requests
+                        <span class="orders-count" id="deliveryBoysCount">0</span>
+                    </h2>
+                    <span style="font-size:12px;color:#ccc;">Pending approval</span>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Phone</th>
+                                <th>OTP</th>
+                                <th>Request Time</th>
+                                <th>Status</th>
+                                <th>Name</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="deliveryBoysBody">
+                            <tr>
+                                <td colspan="6" style="text-align:center;padding:30px;color:#999;">
+                                    🔄 Loading...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Active Delivery Boys Stats -->
+            <div class="orders-container">
+                <div class="orders-header">
+                    <h2>
+                        📊 Delivery Boys Performance
+                        <span class="orders-count" id="activeDeliveryBoysCount">0</span>
+                    </h2>
+                    <span style="font-size:12px;color:#ccc;">Live stats</span>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Phone</th>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Login Time</th>
+                                <th>Logout Time</th>
+                                <th>Online</th>
+                                <th>Deliveries</th>
+                                <th>Earnings</th>
+                                <th>Login Code</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="deliveryBoysStatsBody">
+                            <tr>
+                                <td colspan="10" style="text-align:center;padding:30px;color:#999;">
+                                    🔄 Loading...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- RATINGS TAB -->
+        <!-- ============================================ -->
+        <div id="ratingsTab" class="tab-content">
+            <div class="orders-container">
+                <div class="orders-header">
+                    <h2>
+                        ⭐ Order Ratings
+                        <span class="orders-count" id="ratingsCount">0</span>
+                    </h2>
+                    <span style="font-size:12px;color:#ccc;">Customer feedback</span>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Rating</th>
+                                <th>Comment</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ratingsBody">
+                            <tr>
+                                <td colspan="4" style="text-align:center;padding:30px;color:#999;">
+                                    🔄 Loading...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- USERS TAB -->
+        <!-- ============================================ -->
+        <div id="usersTab" class="tab-content">
+            <div class="orders-container">
+                <div class="orders-header">
+                    <h2>
+                        👤 Blocked Users
+                        <span class="orders-count" id="usersCount">0</span>
+                    </h2>
+                    <span style="font-size:12px;color:#ccc;">User management</span>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Phone</th>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Blocked Time</th>
+                                <th>Reason</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersBody">
+                            <tr>
+                                <td colspan="6" style="text-align:center;padding:30px;color:#999;">
+                                    🔄 Loading...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Popup -->
+    <div class="notification-popup" id="notificationPopup">
+        <div class="notification-header">
+            <span class="notification-icon">🔔</span>
+            <span class="notification-title">नया ऑर्डर आया है!</span>
+        </div>
+        <div class="notification-body" id="notificationBody">
+            Loading...
+        </div>
+        <div class="notification-actions">
+            <button class="notification-btn confirm" onclick="notifConfirm()">✅ Confirm</button>
+            <button class="notification-btn view" onclick="notifView()">👁️ View</button>
+            <button class="notification-btn cancel" onclick="notifCancel()">❌ Cancel</button>
+        </div>
+    </div>
+
+    <!-- Delivery Boy Request Notification -->
+    <div class="notification-popup" id="deliveryBoyNotification" style="border-left-color:#9C27B0;">
+        <div class="notification-header">
+            <span class="notification-icon">🛵</span>
+            <span class="notification-title">नई Delivery Boy Request!</span>
+        </div>
+        <div class="notification-body" id="deliveryBoyNotificationBody">
+            Loading...
+        </div>
+        <div class="notification-actions">
+            <button class="notification-btn confirm" onclick="viewDeliveryBoys()">👁️ View</button>
+        </div>
+    </div>
+
+    <!-- Assign Delivery Boy Modal -->
+    <div class="assign-modal hidden" id="assignModal">
+        <div class="assign-overlay"></div>
+        <div class="assign-content">
+            <div class="assign-header">
+                <h3>🛵 Delivery Boy Assign करें</h3>
+                <button class="close-btn" onclick="closeAssignModal()">✕</button>
+            </div>
+            <div class="assign-body">
+                <p class="assign-order-id">Order: <strong id="assignOrderId"></strong></p>
+                <div class="assign-form">
+                    <label class="assign-label">Delivery Boy चुनें:</label>
+                    <select id="deliveryBoySelect" class="assign-select">
+                        <option value="">-- चुनें --</option>
+                    </select>
+                </div>
+                <div class="assign-actions">
+                    <button class="assign-btn confirm" onclick="assignDeliveryBoy()">✅ Assign</button>
+                    <button class="assign-btn cancel" onclick="closeAssignModal()">❌ Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Block User Modal -->
+    <div class="assign-modal hidden" id="blockUserModal">
+        <div class="assign-overlay"></div>
+        <div class="assign-content">
+            <div class="assign-header">
+                <h3>🚫 User Block करें</h3>
+                <button class="close-btn" onclick="closeBlockUserModal()">✕</button>
+            </div>
+            <div class="assign-body">
+                <p class="assign-order-id">Phone: <strong id="blockUserPhone"></strong></p>
+                <div class="assign-form">
+                    <label class="assign-label">Block Reason:</label>
+                    <input type="text" id="blockReasonInput" class="assign-select" placeholder="Reason लिखें..." style="padding:12px;border:2px solid #ddd;border-radius:12px;font-size:14px;font-family:inherit;">
+                </div>
+                <div class="assign-actions">
+                    <button class="assign-btn confirm" onclick="confirmBlockUser()" style="background:#f44336;">🚫 Block User</button>
+                    <button class="assign-btn cancel" onclick="closeBlockUserModal()">❌ Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>
