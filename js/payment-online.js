@@ -7,12 +7,12 @@
 class OnlinePaymentManager {
     constructor() {
         // UPI Details
-        this.upiId = '98979027@ybl';
+        this.upiId = '9719495844-2@ybl';
         this.payeeName = 'Quick Dukan';
         this.merchantCode = 'QKDKAN';
         
         // API URL (Google Apps Script)
-        this.API_URL = 'https://script.google.com/macros/s/AKfycbxiTbffb6_uPM2s5k9zTJ9WUEiexzepmKhM6UF2R4sUHKeFBhR8j9h24OiFnSxjyO6L/exec';
+        this.API_URL = 'https://script.google.com/macros/s/AKfycbzl2LvWqlmlt9tQFdZ-yPIhALBxhL1TRYNz6X9pGThOgEzQM-uaXKozw6ly-3oGr7o/exec';
         
         // Payment Settings (Google Sheets से)
         this.paymentSettings = {
