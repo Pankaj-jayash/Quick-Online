@@ -754,7 +754,7 @@ class CheckoutManager {
 
         // USER BLOCK CHECK
         try {
-            const apiUrl = 'https://script.google.com/macros/s/AKfycbxiTbffb6_uPM2s5k9zTJ9WUEiexzepmKhM6UF2R4sUHKeFBhR8j9h24OiFnSxjyO6L/exec';
+            const apiUrl = 'https://script.google.com/macros/s/AKfycbzl2LvWqlmlt9tQFdZ-yPIhALBxhL1TRYNz6X9pGThOgEzQM-uaXKozw6ly-3oGr7o/exec';
             const blockResponse = await fetch(`${apiUrl}?action=checkUserBlockedForOrder&phone=${phone}`);
             const blockData = await blockResponse.json();
 
@@ -903,7 +903,7 @@ class CheckoutManager {
             // Order items format karo
             const itemsText = this.formatItemsForSheet(orderData.items);
             
-            const API_URL = 'https://script.google.com/macros/s/AKfycbxiTbffb6_uPM2s5k9zTJ9WUEiexzepmKhM6UF2R4sUHKeFBhR8j9h24OiFnSxjyO6L/exec';
+            const API_URL = 'https://script.google.com/macros/s/AKfycbzl2LvWqlmlt9tQFdZ-yPIhALBxhL1TRYNz6X9pGThOgEzQM-uaXKozw6ly-3oGr7o/exec';
             
             // Order data prepare karo
             const orderParams = new URLSearchParams({
