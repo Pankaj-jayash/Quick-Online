@@ -854,59 +854,59 @@ body.dark-mode .checkout-footer {
     .checkout-modal {
         padding: 8px;
     }
-    
+
     .checkout-content {
         max-height: 95vh;
         max-height: 95dvh;
         border-radius: 18px;
     }
-    
+
     .checkout-header {
         padding: 10px 14px 10px;
     }
-    
+
     .checkout-header-icon {
         font-size: 22px;
     }
-    
+
     .checkout-header-text h2 {
         font-size: 15px;
     }
-    
+
     .checkout-form {
         padding: 10px 14px 6px;
     }
-    
+
     .form-input {
         padding: 10px 12px;
         font-size: 13px;
     }
-    
+
     .phone-prefix {
         padding: 10px 6px 10px 12px;
         font-size: 13px;
     }
-    
+
     .phone-input {
         padding: 10px 12px;
     }
-    
+
     .time-radio-label {
         padding: 5px 10px;
         font-size: 10px;
     }
-    
+
     .time-manual-input {
         width: 100px;
         padding: 5px 10px;
         font-size: 10px;
     }
-    
+
     .confirm-order-btn {
         padding: 13px 18px;
         font-size: 14px;
     }
-    
+
     .checkout-footer {
         padding: 8px 12px;
     }
@@ -917,15 +917,15 @@ body.dark-mode .checkout-footer {
         max-height: 98vh;
         max-height: 98dvh;
     }
-    
+
     .checkout-header {
         padding: 8px 14px 8px;
     }
-    
+
     .form-group {
         margin-bottom: 6px;
     }
-    
+
     .form-input {
         padding: 8px 10px;
     }
@@ -1110,19 +1110,19 @@ body.dark-mode .order-method-btn.direct-method.selected .method-btn-text {
     .order-method-buttons {
         gap: 6px;
     }
-    
+
     .order-method-btn {
         padding: 10px 8px;
     }
-    
+
     .order-method-btn .method-btn-icon {
         font-size: 20px;
     }
-    
+
     .order-method-btn .method-btn-text {
         font-size: 10px;
     }
-    
+
     .order-method-btn .method-btn-subtext {
         font-size: 8px;
     }
@@ -1282,15 +1282,15 @@ body.dark-mode .payment-method-btn.selected .pm-check {
     .payment-method-section {
         padding: 10px;
     }
-    
+
     .payment-method-btn {
         padding: 10px 12px;
     }
-    
+
     .payment-method-btn .pm-icon {
         font-size: 18px;
     }
-    
+
     .payment-method-btn .pm-text {
         font-size: 12px;
     }
