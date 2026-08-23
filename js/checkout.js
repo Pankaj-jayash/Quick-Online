@@ -2,6 +2,7 @@
 // CHECKOUT.JS - Premium Checkout Logic (Final)
 // Quick Dukan - Uses LocationManager | Multilingual | Location Fix
 // With User Block Check + Payment Method
+// Payment Pehle → Order Baad (Fixed Flow)
 // ============================================
 
 class CheckoutManager {
@@ -31,7 +32,7 @@ class CheckoutManager {
         // 🆕 ORDER METHOD BUTTONS
         this.whatsappMethodBtn = document.getElementById('whatsappMethodBtn');
         this.directMethodBtn = document.getElementById('directMethodBtn');
-        this.selectedOrderMethod = 'direct'; // 🆕 Default: direct
+        this.selectedOrderMethod = 'whatsapp'; // ✅ DEFAULT: WhatsApp
 
         // 🆕 PAYMENT METHOD
         this.paymentMethodSection = document.getElementById('paymentMethodSection');
@@ -46,7 +47,7 @@ class CheckoutManager {
         this.cartItemCount = 0;
         this.currentLang = 'hi';
         this.storageKey = 'quick-dukan-user-info';
-        
+
         // 🆕 ORDER TRACKING
         this.currentOrderId = null;
         this.orderTrackingInterval = null;
@@ -201,7 +202,9 @@ class CheckoutManager {
                     phoneRequired: '⚠️ सही मोबाइल नंबर डालें',
                     cityRequired: '⚠️ गाँव/शहर लिखें',
                     gpsRequired: '⚠️ कृपया GPS चालू करें और लोकेशन लें',
-                    loginRequired: '🔐 कृपया पहले Login करें!'
+                    loginRequired: '🔐 कृपया पहले Login करें!',
+                    paymentFailed: '❌ पेमेंट फेल - ऑर्डर नहीं हुआ',
+                    orderFailed: '⚠️ ऑर्डर फेल हो गया, दोबारा try करें'
                 },
                 en: {
                     orderSent: '✅ Order sent on WhatsApp!',
@@ -210,7 +213,9 @@ class CheckoutManager {
                     phoneRequired: '⚠️ Enter valid mobile number',
                     cityRequired: '⚠️ Enter village/city',
                     gpsRequired: '⚠️ Please turn ON GPS and get location',
-                    loginRequired: '🔐 Please Login first!'
+                    loginRequired: '🔐 Please Login first!',
+                    paymentFailed: '❌ Payment failed - Order not placed',
+                    orderFailed: '⚠️ Order failed, please try again'
                 }
             }
         };
@@ -263,30 +268,28 @@ class CheckoutManager {
     // ============================================
     selectOrderMethod(method) {
         this.selectedOrderMethod = method;
-        
+
         if (this.whatsappMethodBtn && this.directMethodBtn) {
             this.whatsappMethodBtn.classList.remove('selected');
             this.directMethodBtn.classList.remove('selected');
-            
+
             if (method === 'whatsapp') {
                 this.whatsappMethodBtn.classList.add('selected');
-                // WhatsApp में payment section hide
                 if (this.paymentMethodSection) {
                     this.paymentMethodSection.classList.add('hidden');
                 }
             } else {
                 this.directMethodBtn.classList.add('selected');
-                // Direct में payment section show
                 if (this.paymentMethodSection) {
                     this.paymentMethodSection.classList.remove('hidden');
                 }
             }
         }
-        
+
         if (this.confirmOrderBtn?.classList.contains('state-ready')) {
             this.updateConfirmButtonText();
         }
-        
+
         console.log('📋 Order method selected:', method);
     }
 
@@ -295,21 +298,19 @@ class CheckoutManager {
     // ============================================
     selectPaymentMethod(btn) {
         const method = btn.getAttribute('data-payment');
-        
-        // Card check
+
         if (method === 'Card') {
             this.showToast(this.currentLang === 'hi' ? '⚠️ Card सुविधा जल्द आएगी' : '⚠️ Card feature coming soon');
             return;
         }
-        
+
         this.selectedPaymentMethod = method;
-        
-        // UI update
+
         document.querySelectorAll('.payment-method-btn').forEach(b => {
             b.classList.remove('selected');
         });
         btn.classList.add('selected');
-        
+
         console.log('💳 Payment method selected:', method);
     }
 
@@ -318,14 +319,14 @@ class CheckoutManager {
     // ============================================
     updateConfirmButtonText() {
         if (!this.confirmOrderBtn) return;
-        
+
         const btnText = this.confirmOrderBtn.querySelector('span:last-child');
         if (!btnText) return;
-        
-        if (this.selectedOrderMethod === 'direct') {
-            btnText.textContent = this.currentLang === 'hi' ? '🛒 ऑर्डर कन्फर्म करें →' : '🛒 Confirm Order →';
-        } else {
+
+        if (this.selectedOrderMethod === 'whatsapp') {
             btnText.textContent = this.currentLang === 'hi' ? '💬 WhatsApp पर भेजें →' : '💬 Send on WhatsApp →';
+        } else {
+            btnText.textContent = this.currentLang === 'hi' ? '🛒 ऑर्डर कन्फर्म करें →' : '🛒 Confirm Order →';
         }
     }
 
@@ -345,7 +346,7 @@ class CheckoutManager {
     // ============================================
     createOrderStatusPopup() {
         if (document.getElementById('orderStatusPopup')) return;
-        
+
         const popupHTML = `
             <div id="orderStatusPopup" class="order-status-popup hidden">
                 <div class="order-status-overlay"></div>
@@ -360,24 +361,24 @@ class CheckoutManager {
                 </div>
             </div>
         `;
-        
+
         document.body.insertAdjacentHTML('beforeend', popupHTML);
-        
+
         document.getElementById('orderStatusCloseBtn')?.addEventListener('click', () => {
             this.hideOrderStatusPopup();
         });
-        
+
         this.orderStatusPopup = document.getElementById('orderStatusPopup');
     }
 
     showOrderStatusPopup(status) {
         if (!this.orderStatusPopup) this.createOrderStatusPopup();
-        
+
         const icon = document.getElementById('orderStatusIcon');
         const title = document.getElementById('orderStatusTitle');
         const message = document.getElementById('orderStatusMessage');
         const loader = document.querySelector('.order-status-loader');
-        
+
         switch (status) {
             case 'Pending':
                 if (icon) icon.textContent = '⏳';
@@ -385,21 +386,21 @@ class CheckoutManager {
                 if (message) message.textContent = 'हमारी टीम जल्द ही आपके ऑर्डर को कन्फर्म करेगी';
                 if (loader) loader.style.display = 'flex';
                 break;
-                
+
             case 'Confirmed':
                 if (icon) icon.textContent = '✅';
                 if (title) title.textContent = this.getMsg('orderStatus', 'confirmed');
                 if (message) message.textContent = 'आपका ऑर्डर कन्फर्म हो गया है! जल्द ही डिलीवर किया जाएगा';
                 if (loader) loader.style.display = 'none';
                 break;
-                
+
             case 'Cancelled':
                 if (icon) icon.textContent = '❌';
                 if (title) title.textContent = this.getMsg('orderStatus', 'cancelled');
                 if (message) message.textContent = 'माफ़ कीजिए, आपका ऑर्डर कैंसिल कर दिया गया है';
                 if (loader) loader.style.display = 'none';
                 break;
-                
+
             case 'Delivered':
                 if (icon) icon.textContent = '🚚';
                 if (title) title.textContent = this.getMsg('orderStatus', 'delivered');
@@ -407,10 +408,10 @@ class CheckoutManager {
                 if (loader) loader.style.display = 'none';
                 break;
         }
-        
+
         this.orderStatusPopup?.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
-        
+
         if (status === 'Delivered' || status === 'Cancelled') {
             setTimeout(() => {
                 this.hideOrderStatusPopup();
@@ -427,25 +428,27 @@ class CheckoutManager {
     startOrderTracking(orderId) {
         this.currentOrderId = orderId;
         this.checkOrderStatusNow();
-        
+
         this.orderTrackingInterval = setInterval(() => {
             this.checkOrderStatusNow();
         }, 5000);
-        
+
         console.log('🔄 Order tracking started for:', orderId);
     }
 
     async checkOrderStatusNow() {
         if (!this.currentOrderId) return;
-        
+
         try {
-            const status = await window.googleSheetsOrders?.checkOrderStatus(this.currentOrderId);
-            
-            if (status && status.success) {
-                console.log('📊 Order Status:', status.status);
-                this.showOrderStatusPopup(status.status);
-                
-                if (status.status === 'Delivered' || status.status === 'Cancelled') {
+            const API_URL = 'https://script.google.com/macros/s/AKfycbzl2LvWqlmlt9tQFdZ-yPIhALBxhL1TRYNz6X9pGThOgEzQM-uaXKozw6ly-3oGr7o/exec';
+            const response = await fetch(`${API_URL}?action=getOrderStatus&orderId=${this.currentOrderId}`);
+            const data = await response.json();
+
+            if (data && data.success) {
+                console.log('📊 Order Status:', data.status);
+                this.showOrderStatusPopup(data.status);
+
+                if (data.status === 'Delivered' || data.status === 'Cancelled') {
                     this.stopOrderTracking();
                 }
             }
@@ -476,8 +479,8 @@ class CheckoutManager {
         this.updateAllLabels();
         this.fillSavedData();
         this.resetTimeSelection();
-        
-        // 🆕 Direct Order auto-select
+
+        // ✅ Direct Order auto-select (kyunki payment method chahiye)
         this.selectOrderMethod('direct');
         this.selectedPaymentMethod = '';
 
@@ -501,7 +504,7 @@ class CheckoutManager {
         if (this.location) {
             this.location.stop();
         }
-        
+
         this.stopOrderTracking();
         this.clearForm();
 
@@ -522,8 +525,7 @@ class CheckoutManager {
         document.querySelectorAll('.form-input').forEach(el => {
             el.classList.remove('error', 'valid');
         });
-        
-        // 🆕 Payment method reset
+
         this.selectedPaymentMethod = '';
         document.querySelectorAll('.payment-method-btn').forEach(b => b.classList.remove('selected'));
     }
@@ -597,7 +599,6 @@ class CheckoutManager {
         if (whatsappBtnSubtext) whatsappBtnSubtext.textContent = this.getMsg('form', 'whatsappSubtext');
         if (directBtnSubtext) directBtnSubtext.textContent = this.getMsg('form', 'directSubtext');
 
-        // Payment method labels
         const paymentTitle = document.querySelector('.payment-method-title');
         if (paymentTitle) paymentTitle.textContent = this.getMsg('paymentMethod', 'title');
 
@@ -647,12 +648,12 @@ class CheckoutManager {
             case 'ready':
                 this.confirmOrderBtn.classList.add('state-ready');
                 this.confirmOrderBtn.disabled = false;
-                if (this.selectedOrderMethod === 'direct') {
-                    if (btnText) btnText.textContent = this.getMsg('button', 'readyDirect');
-                    if (whatsappIcon) whatsappIcon.style.display = 'none';
-                } else {
+                if (this.selectedOrderMethod === 'whatsapp') {
                     if (btnText) btnText.textContent = this.getMsg('button', 'readyWhatsapp');
                     if (whatsappIcon) whatsappIcon.style.display = 'inline';
+                } else {
+                    if (btnText) btnText.textContent = this.getMsg('button', 'readyDirect');
+                    if (whatsappIcon) whatsappIcon.style.display = 'none';
                 }
                 break;
 
@@ -734,16 +735,13 @@ class CheckoutManager {
         }
         this.villageCity?.classList.remove('error');
 
-        // 🆕 PAYMENT METHOD CHECK (Direct Order में)
+        // ✅ SIRF Direct Order ke liye payment/login check
         if (this.selectedOrderMethod === 'direct') {
             if (!this.selectedPaymentMethod) {
                 this.showToast(this.getMsg('paymentMethod', 'required'));
                 return;
             }
-        }
-
-        // 🆕 USER LOGIN CHECK (Direct Order में)
-        if (this.selectedOrderMethod === 'direct') {
+            
             const userPhone = localStorage.getItem('userPhone');
             if (!userPhone) {
                 this.showToast(this.getMsg('toast', 'loginRequired'));
@@ -754,12 +752,12 @@ class CheckoutManager {
             }
         }
 
-        // 🆕 USER BLOCK CHECK
+        // USER BLOCK CHECK
         try {
-            const apiUrl = window.googleSheetsOrders?.API_URL || 'https://script.google.com/macros/s/AKfycbxiTbffb6_uPM2s5k9zTJ9WUEiexzepmKhM6UF2R4sUHKeFBhR8j9h24OiFnSxjyO6L/exec';
+            const apiUrl = 'https://script.google.com/macros/s/AKfycbxiTbffb6_uPM2s5k9zTJ9WUEiexzepmKhM6UF2R4sUHKeFBhR8j9h24OiFnSxjyO6L/exec';
             const blockResponse = await fetch(`${apiUrl}?action=checkUserBlockedForOrder&phone=${phone}`);
             const blockData = await blockResponse.json();
-            
+
             if (blockData.success && blockData.blocked) {
                 alert('🚫 आपको admin ने block कर दिया है। आप order नहीं कर सकते।\n\nकारण: ' + (blockData.reason || 'नहीं बताया गया'));
                 this.close();
@@ -821,15 +819,16 @@ class CheckoutManager {
 
         console.log('📦 Final Order Data:', JSON.stringify(orderData, null, 2));
 
-        if (this.selectedOrderMethod === 'direct') {
-            this.submitDirectOrder(orderData);
-        } else {
+        // ✅ WhatsApp ya Direct order
+        if (this.selectedOrderMethod === 'whatsapp') {
             this.submitWhatsAppOrder(orderData);
+        } else {
+            this.submitDirectOrder(orderData);
         }
     }
 
     // ============================================
-    // SUBMIT WHATSAPP ORDER
+    // ✅ SUBMIT WHATSAPP ORDER (Proper Format)
     // ============================================
     submitWhatsAppOrder(orderData) {
         if (window.whatsappManager?.sendOrder) {
@@ -845,52 +844,196 @@ class CheckoutManager {
     }
 
     // ============================================
-    // SUBMIT DIRECT ORDER (Payment Integration)
+    // ✅ SUBMIT DIRECT ORDER - Payment Pehle, Order Baad
     // ============================================
     async submitDirectOrder(orderData) {
-        if (window.googleSheetsOrders) {
-            try {
-                const result = await window.googleSheetsOrders.saveOrder(orderData);
-                
-                if (result && result.orderId) {
-                    console.log('✅ Direct order Google Sheet में save हो गया, Order ID:', result.orderId);
-                    orderData.orderId = result.orderId;
-                    
-                    // 🆕 Payment Popup खोलें (UPI के लिए)
-                    if (this.selectedPaymentMethod === 'UPI') {
-                        if (window.onlinePaymentManager) {
-                            window.onlinePaymentManager.show(orderData);
-                        }
-                    }
-                    
-                    // COD के लिए सीधा order
-                    if (this.selectedPaymentMethod === 'COD') {
-                        if (window.onlinePaymentManager) {
-                            window.onlinePaymentManager.savePaymentToSheet('COD', 0, this.cartTotal);
-                        }
-                    }
-                    
-                    // Order tracking शुरू करें
-                    if (window.orderStatusPopup) {
-                        console.log('🔄 Starting real-time order tracking...');
-                        window.orderStatusPopup.startTracking(result.orderId);
-                    } else {
-                        this.startOrderTracking(result.orderId);
-                    }
-                } else {
-                    console.log('⚠️ Direct order Google Sheet में save नहीं हुआ');
-                }
-            } catch (error) {
-                console.log('⚠️ Google Sheets error:', error.message);
-            }
-        } else {
-            console.log('⚠️ Google Sheets Orders system not loaded');
-        }
+        console.log('📦 Direct Order Flow Started - Payment Pehle');
         
-        this.saveToOrderHistory(orderData);
-        this.triggerConfetti();
-       
-        this.finalizeOrder('direct');
+        // ✅ UPI Payment - Pehle Payment Popup
+        if (this.selectedPaymentMethod === 'UPI') {
+            if (window.onlinePaymentManager) {
+                console.log('💳 Opening Payment Popup...');
+                
+                window.onlinePaymentManager.show(orderData, {
+                    onPaymentSuccess: async (paymentData) => {
+                        console.log('✅ Payment successful, ab order save hoga:', paymentData);
+                        await this.saveDirectOrderToSheets(orderData, paymentData);
+                    },
+                    onPaymentFailure: (error) => {
+                        console.log('❌ Payment failed:', error);
+                        this.setButtonState('ready');
+                        this.showToast(this.getMsg('toast', 'paymentFailed'));
+                    },
+                    onCODSelected: async (paymentData) => {
+                        console.log('🏍️ COD selected, order save hoga');
+                        await this.saveDirectOrderToSheets(orderData, paymentData);
+                    }
+                });
+            } else {
+                console.log('⚠️ Online Payment Manager not loaded');
+                this.setButtonState('ready');
+                this.showToast('⚠️ Payment system not available');
+            }
+            return;
+        }
+
+        // ✅ COD Payment - Direct order save
+        if (this.selectedPaymentMethod === 'COD') {
+            console.log('🏍️ COD selected, direct order save');
+            await this.saveDirectOrderToSheets(orderData, {
+                method: 'COD',
+                amount: this.cartTotal,
+                charge: 0,
+                total: this.cartTotal,
+                transactionId: 'COD-' + Date.now(),
+                status: 'Pending',
+            });
+            return;
+        }
+    }
+
+    // ============================================
+    // ✅ SAVE ORDER TO GOOGLE SHEETS (Payment ke baad)
+    // ============================================
+    async saveDirectOrderToSheets(orderData, paymentData) {
+        console.log('📦 Saving order to Google Sheets...');
+        console.log('Payment Data:', paymentData);
+        
+        try {
+            // Order items format karo
+            const itemsText = this.formatItemsForSheet(orderData.items);
+            
+            const API_URL = 'https://script.google.com/macros/s/AKfycbxiTbffb6_uPM2s5k9zTJ9WUEiexzepmKhM6UF2R4sUHKeFBhR8j9h24OiFnSxjyO6L/exec';
+            
+            // Order data prepare karo
+            const orderParams = new URLSearchParams({
+                customerName: orderData.customer.name,
+                phone: orderData.customer.phone.replace(/\D/g, ''),
+                villageCity: orderData.customer.villageCity,
+                landmark: orderData.customer.landmark || '',
+                pincode: orderData.customer.pincode || '',
+                deliveryTime: orderData.customer.deliveryTime,
+                orderDetails: itemsText,
+                totalAmount: orderData.totals.total,
+                itemCount: orderData.totals.itemCount,
+                latitude: orderData.location.lat,
+                longitude: orderData.location.lng,
+                locationUrl: orderData.location.url || '',
+                orderMethod: 'direct',
+                paymentMethod: paymentData.method || this.selectedPaymentMethod,
+                paymentStatus: paymentData.status || 'Pending',
+                paymentId: paymentData.transactionId || '',
+            });
+            
+            console.log('📤 Sending order to Google Sheets...');
+            
+            const response = await fetch(`${API_URL}?action=saveOrder`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: orderParams.toString(),
+            });
+            
+            const result = await response.json();
+            
+            console.log('📥 Response:', result);
+            
+            if (result.success && result.orderId) {
+                console.log('✅ Order saved successfully! Order ID:', result.orderId);
+                
+                orderData.orderId = result.orderId;
+                
+                // ✅ Payment record bhi save karo (agar UPI hai)
+                if (paymentData.method === 'UPI') {
+                    await this.savePaymentRecord(result.orderId, orderData, paymentData);
+                }
+                
+                // Order history save karo
+                this.saveToOrderHistory(orderData);
+                
+                // Confetti
+                this.triggerConfetti();
+                
+                // Success toast
+                this.showToast(this.getMsg('toast', 'orderSentDirect'));
+                
+                // Order tracking shuru karo
+                if (window.orderStatusPopup) {
+                    window.orderStatusPopup.startTracking(result.orderId);
+                } else {
+                    this.startOrderTracking(result.orderId);
+                }
+                
+                // Checkout close karo
+                this.finalizeOrder('direct');
+                
+            } else {
+                console.log('⚠️ Order save failed:', result.message);
+                this.setButtonState('ready');
+                this.showToast(this.getMsg('toast', 'orderFailed'));
+            }
+            
+        } catch (error) {
+            console.error('❌ Google Sheets Error:', error);
+            this.setButtonState('ready');
+            this.showToast(this.getMsg('toast', 'orderFailed'));
+        }
+    }
+
+    // ============================================
+    // ✅ SAVE PAYMENT RECORD
+    // ============================================
+    async savePaymentRecord(orderId, orderData, paymentData) {
+        try {
+            const API_URL = 'https://script.google.com/macros/s/AKfycbzl2LvWqlmlt9tQFdZ-yPIhALBxhL1TRYNz6X9pGThOgEzQM-uaXKozw6ly-3oGr7o/exec';
+            
+            const itemsText = this.formatItemsForSheet(orderData.items);
+            
+            const paymentParams = new URLSearchParams({
+                orderId: orderId,
+                phone: orderData.customer.phone.replace(/\D/g, ''),
+                name: orderData.customer.name,
+                items: itemsText,
+                productAmount: paymentData.amount,
+                chargeAmount: paymentData.charge || 0,
+                totalAmount: paymentData.total || paymentData.amount,
+                method: paymentData.method,
+            });
+            
+            const response = await fetch(`${API_URL}?action=savePayment`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: paymentParams.toString(),
+            });
+            
+            const result = await response.json();
+            console.log('💳 Payment record saved:', result);
+            
+        } catch (error) {
+            console.log('⚠️ Payment record save error:', error);
+        }
+    }
+
+    // ============================================
+    // ✅ FORMAT ITEMS FOR SHEET
+    // ============================================
+    formatItemsForSheet(items) {
+        if (!items || items.length === 0) return '';
+        
+        return items.map(item => {
+            const name = typeof item.name === 'object' 
+                ? (item.name.hi || item.name.en || '') 
+                : (item.name || '');
+            const unit = typeof item.unit === 'object' 
+                ? (item.unit.hi || item.unit.en || '') 
+                : (item.unit || '');
+            const qty = item.quantity || 1;
+            const price = item.price || 0;
+            return `${name} (${unit}) ×${qty} = ₹${price * qty}`;
+        }).join('\n');
     }
 
     // ============================================
@@ -914,6 +1057,7 @@ class CheckoutManager {
                 location: orderData.location,
                 orderMethod: orderData.orderMethod,
                 paymentMethod: orderData.paymentMethod,
+                orderId: orderData.orderId || null,
             });
         }
     }
