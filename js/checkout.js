@@ -31,7 +31,7 @@ class CheckoutManager {
         // 🆕 ORDER METHOD BUTTONS
         this.whatsappMethodBtn = document.getElementById('whatsappMethodBtn');
         this.directMethodBtn = document.getElementById('directMethodBtn');
-        this.selectedOrderMethod = 'direct'; // 🆕 Default: direct
+        this.selectedOrderMethod = 'whatsapp'; // ✅ DEFAULT: WhatsApp
 
         // 🆕 PAYMENT METHOD
         this.paymentMethodSection = document.getElementById('paymentMethodSection');
@@ -322,10 +322,10 @@ class CheckoutManager {
         const btnText = this.confirmOrderBtn.querySelector('span:last-child');
         if (!btnText) return;
 
-        if (this.selectedOrderMethod === 'direct') {
-            btnText.textContent = this.currentLang === 'hi' ? '🛒 ऑर्डर कन्फर्म करें →' : '🛒 Confirm Order →';
-        } else {
+        if (this.selectedOrderMethod === 'whatsapp') {
             btnText.textContent = this.currentLang === 'hi' ? '💬 WhatsApp पर भेजें →' : '💬 Send on WhatsApp →';
+        } else {
+            btnText.textContent = this.currentLang === 'hi' ? '🛒 ऑर्डर कन्फर्म करें →' : '🛒 Confirm Order →';
         }
     }
 
@@ -477,8 +477,8 @@ class CheckoutManager {
         this.fillSavedData();
         this.resetTimeSelection();
 
-        // 🆕 Direct Order auto-select
-        this.selectOrderMethod('direct');
+        // ✅ WhatsApp Order auto-select
+        this.selectOrderMethod('whatsapp');
         this.selectedPaymentMethod = '';
 
         this.checkoutModal.classList.remove('hidden');
@@ -647,12 +647,12 @@ class CheckoutManager {
             case 'ready':
                 this.confirmOrderBtn.classList.add('state-ready');
                 this.confirmOrderBtn.disabled = false;
-                if (this.selectedOrderMethod === 'direct') {
-                    if (btnText) btnText.textContent = this.getMsg('button', 'readyDirect');
-                    if (whatsappIcon) whatsappIcon.style.display = 'none';
-                } else {
+                if (this.selectedOrderMethod === 'whatsapp') {
                     if (btnText) btnText.textContent = this.getMsg('button', 'readyWhatsapp');
                     if (whatsappIcon) whatsappIcon.style.display = 'inline';
+                } else {
+                    if (btnText) btnText.textContent = this.getMsg('button', 'readyDirect');
+                    if (whatsappIcon) whatsappIcon.style.display = 'none';
                 }
                 break;
 
@@ -734,16 +734,15 @@ class CheckoutManager {
         }
         this.villageCity?.classList.remove('error');
 
-        // 🆕 PAYMENT METHOD CHECK (Direct Order में)
+        // ✅ SIRF Direct Order ke liye payment/login check
         if (this.selectedOrderMethod === 'direct') {
+            // Payment method check
             if (!this.selectedPaymentMethod) {
                 this.showToast(this.getMsg('paymentMethod', 'required'));
                 return;
             }
-        }
-
-        // 🆕 USER LOGIN CHECK (Direct Order में)
-        if (this.selectedOrderMethod === 'direct') {
+            
+            // User login check
             const userPhone = localStorage.getItem('userPhone');
             if (!userPhone) {
                 this.showToast(this.getMsg('toast', 'loginRequired'));
@@ -754,7 +753,7 @@ class CheckoutManager {
             }
         }
 
-        // 🆕 USER BLOCK CHECK
+        // 🆕 USER BLOCK CHECK (sabke liye)
         try {
             const apiUrl = window.googleSheetsOrders?.API_URL || 'https://script.google.com/macros/s/AKfycbzl2LvWqlmlt9tQFdZ-yPIhALBxhL1TRYNz6X9pGThOgEzQM-uaXKozw6ly-3oGr7o/exec';
             const blockResponse = await fetch(`${apiUrl}?action=checkUserBlockedForOrder&phone=${phone}`);
@@ -821,17 +820,19 @@ class CheckoutManager {
 
         console.log('📦 Final Order Data:', JSON.stringify(orderData, null, 2));
 
-        if (this.selectedOrderMethod === 'direct') {
-            this.submitDirectOrder(orderData);
-        } else {
+        // ✅ WhatsApp ya Direct order
+        if (this.selectedOrderMethod === 'whatsapp') {
             this.submitWhatsAppOrder(orderData);
+        } else {
+            this.submitDirectOrder(orderData);
         }
     }
 
     // ============================================
-    // SUBMIT WHATSAPP ORDER
+    // ✅ SUBMIT WHATSAPP ORDER (Proper Format)
     // ============================================
     submitWhatsAppOrder(orderData) {
+        // ✅ Always use WhatsAppManager for proper formatting
         if (window.whatsappManager?.sendOrder) {
             window.whatsappManager.sendOrder(orderData);
         } else {
@@ -856,21 +857,18 @@ class CheckoutManager {
                     console.log('✅ Direct order Google Sheet में save हो गया, Order ID:', result.orderId);
                     orderData.orderId = result.orderId;
 
-                    // 🆕 Payment Popup खोलें (UPI के लिए)
                     if (this.selectedPaymentMethod === 'UPI') {
                         if (window.onlinePaymentManager) {
                             window.onlinePaymentManager.show(orderData);
                         }
                     }
 
-                    // COD के लिए सीधा order
                     if (this.selectedPaymentMethod === 'COD') {
                         if (window.onlinePaymentManager) {
                             window.onlinePaymentManager.savePaymentToSheet('COD', 0, this.cartTotal);
                         }
                     }
 
-                    // Order tracking शुरू करें
                     if (window.orderStatusPopup) {
                         console.log('🔄 Starting real-time order tracking...');
                         window.orderStatusPopup.startTracking(result.orderId);
