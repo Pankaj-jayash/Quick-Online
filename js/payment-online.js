@@ -2,7 +2,6 @@
 // PAYMENT-ONLINE.JS - Complete Online Payment
 // Google Sheets + Google Apps Script Connected
 // UPI + Card (Disabled) + COD + Service Charge
-// With Callback Support for Order Saving
 // ============================================
 
 class OnlinePaymentManager {
@@ -29,17 +28,6 @@ class OnlinePaymentManager {
         this.currentTotal = 0;
         this.currentUser = { phone: '', name: '' };
         this.currentLang = 'hi';
-        
-        // 🆕 CALLBACKS
-        this.callbacks = {
-            onPaymentSuccess: null,
-            onPaymentFailure: null,
-            onCODSelected: null,
-        };
-        
-        // 🆕 PAYMENT STATUS
-        this.paymentCompleted = false;
-        this.paymentMethod = '';
         
         this.init();
     }
@@ -94,23 +82,16 @@ class OnlinePaymentManager {
     }
     
     // ============================================
-    // ✅ SHOW PAYMENT POPUP (With Callbacks)
+    // SHOW PAYMENT POPUP
     // ============================================
-    async show(orderData, callbacks = {}) {
-        // 🆕 Callbacks store karo
-        this.callbacks = {
-            onPaymentSuccess: callbacks.onPaymentSuccess || null,
-            onPaymentFailure: callbacks.onPaymentFailure || null,
-            onCODSelected: callbacks.onCODSelected || null,
-        };
-        
-        console.log('📦 Callbacks set:', this.callbacks);
-        
+    async show(orderData) {
         // Login check
         if (!this.isUserLoggedIn()) {
             alert('🔐 कृपया पहले Login करें!');
-            if (typeof openLoginPopup === 'function') {
-                openLoginPopup();
+            if (window.parent !== window) {
+                window.parent.openLoginPopup();
+            } else {
+                window.location.href = 'login.html';
             }
             return;
         }
@@ -149,10 +130,9 @@ class OnlinePaymentManager {
                         <span class="payment-header-icon">💳</span>
                         <div>
                             <h3>${hi ? 'ऑनलाइन भुगतान' : 'Online Payment'}</h3>
-                            <p class="payment-order-id">${hi ? 'ऑर्डर करने के लिए पेमेंट करें' : 'Pay to place order'}</p>
+                            <p class="payment-order-id">Order: ${orderData.orderId || 'N/A'}</p>
                         </div>
                     </div>
-                    <button class="payment-close-btn" id="paymentCloseBtn" type="button">✕</button>
                 </div>
                 
                 <!-- Amount Section -->
@@ -190,7 +170,7 @@ class OnlinePaymentManager {
                     </div>
                     <p class="qr-amount">₹${this.currentTotal.toFixed(2)}</p>
                     <p class="qr-upi">UPI: ${this.upiId}</p>
-                    <button class="copy-upi-btn" id="btnCopyUPI" type="button">📋 ${hi ? 'UPI ID कॉपी करें' : 'Copy UPI ID'}</button>
+                    <button class="copy-upi-btn" id="btnCopyUPI">📋 ${hi ? 'UPI ID कॉपी करें' : 'Copy UPI ID'}</button>
                 </div>
                 
                 <!-- Divider -->
@@ -200,20 +180,20 @@ class OnlinePaymentManager {
                 <div class="payment-apps-section">
                     <p class="apps-title">${hi ? '📱 UPI ऐप चुनें' : '📱 Choose UPI App'}</p>
                     <div class="upi-apps-grid">
-                        <button class="upi-app-btn" data-app="gpay" type="button">
+                        <button class="upi-app-btn" data-app="gpay">
                             <span class="app-icon-g">G</span><span>GPay</span>
                         </button>
-                        <button class="upi-app-btn" data-app="phonepe" type="button">
+                        <button class="upi-app-btn" data-app="phonepe">
                             <span class="app-icon-p">P</span><span>PhonePe</span>
                         </button>
-                        <button class="upi-app-btn" data-app="paytm" type="button">
+                        <button class="upi-app-btn" data-app="paytm">
                             <span class="app-icon-pt">₹</span><span>Paytm</span>
                         </button>
-                        <button class="upi-app-btn" data-app="bhim" type="button">
+                        <button class="upi-app-btn" data-app="bhim">
                             <span class="app-icon-b">B</span><span>BHIM</span>
                         </button>
                     </div>
-                    <button class="upi-any-btn" id="btnAnyUPI" type="button">📱 ${hi ? 'कोई भी UPI ऐप' : 'Any UPI App'}</button>
+                    <button class="upi-any-btn" id="btnAnyUPI">📱 ${hi ? 'कोई भी UPI ऐप' : 'Any UPI App'}</button>
                 </div>
                 
                 <!-- Divider -->
@@ -221,7 +201,7 @@ class OnlinePaymentManager {
                 
                 <!-- Card (Disabled Message) -->
                 <div class="payment-card-section">
-                    <button class="card-btn-disabled" id="btnCard" type="button">
+                    <button class="card-btn-disabled" id="btnCard">
                         <span class="card-icon">💳</span>
                         <div>
                             <strong>${hi ? 'कार्ड से भुगतान' : 'Card Payment'}</strong>
@@ -235,7 +215,7 @@ class OnlinePaymentManager {
                 
                 <!-- COD -->
                 <div class="payment-cod-section">
-                    <button class="cod-btn" id="btnCOD" type="button" style="cursor:pointer;">
+                    <button class="cod-btn" id="btnCOD">
                         <span class="cod-icon">🏍️</span>
                         <div>
                             <strong>${hi ? 'कैश ऑन डिलीवरी' : 'Cash on Delivery'}</strong>
@@ -246,8 +226,8 @@ class OnlinePaymentManager {
                 
                 <!-- Payment Done Button -->
                 <div class="payment-done-section">
-                    <button class="payment-done-btn" id="btnPaymentDone" type="button">
-                        ✅ ${hi ? 'मैंने Payment कर दिया - ऑर्डर कन्फर्म करें' : 'I have paid - Confirm Order'}
+                    <button class="payment-done-btn" id="btnPaymentDone">
+                        ✅ ${hi ? 'मैंने Payment कर दिया' : 'I have made the payment'}
                     </button>
                 </div>
             </div>
@@ -256,7 +236,6 @@ class OnlinePaymentManager {
         document.body.appendChild(container);
         requestAnimationFrame(() => container.classList.add('show'));
         
-        // ✅ Events bind karo
         this.bindEvents(container);
     }
     
@@ -311,40 +290,22 @@ class OnlinePaymentManager {
     }
     
     // ============================================
-    // ✅ BIND EVENTS - COD Button Fix
+    // BIND EVENTS
     // ============================================
     bindEvents(container) {
         const hi = this.currentLang === 'hi';
         const amount = this.currentTotal;
-        const note = 'Quick Dukan Payment - Order Amount';
+        const note = 'Order: ' + (this.currentOrder.orderId || 'N/A') + ' - यह न बदलें! Payment verify इसी से होगा';
         const upiUrl = this.buildUPIUrl(amount, note);
-        
-        // Close button
-        const closeBtn = container.querySelector('#paymentCloseBtn');
-        if (closeBtn) {
-            closeBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log('❌ Close button clicked');
-                this.handlePaymentCancel(container);
-            });
-        }
-        
-        // Overlay click - band na ho
-        const overlay = container.querySelector('.payment-online-overlay');
-        if (overlay) {
-            overlay.addEventListener('click', () => {
-                this.showToast(hi ? '⚠️ कृपया पहले पेमेंट पूरा करें' : '⚠️ Please complete payment first');
-            });
-        }
         
         // QR Click
         const qrImage = container.querySelector('#qrImage');
+        const qrSection = container.querySelector('#qrSection');
+        
         if (qrImage) {
             qrImage.addEventListener('click', () => this.openUPIUrl(upiUrl, amount));
         }
         
-        const qrSection = container.querySelector('#qrSection');
         if (qrSection) {
             qrSection.addEventListener('click', (e) => {
                 if (e.target.closest('button')) return;
@@ -353,14 +314,11 @@ class OnlinePaymentManager {
         }
         
         // Copy UPI
-        const copyBtn = container.querySelector('#btnCopyUPI');
-        if (copyBtn) {
-            copyBtn.addEventListener('click', () => {
-                navigator.clipboard.writeText(this.upiId).then(() => {
-                    this.showToast(hi ? '✅ UPI ID कॉपी!' : '✅ UPI ID Copied!');
-                });
+        container.querySelector('#btnCopyUPI').addEventListener('click', () => {
+            navigator.clipboard.writeText(this.upiId).then(() => {
+                this.showToast(hi ? '✅ UPI ID कॉपी!' : '✅ UPI ID Copied!');
             });
-        }
+        });
         
         // UPI Apps
         container.querySelectorAll('.upi-app-btn').forEach(btn => {
@@ -370,45 +328,24 @@ class OnlinePaymentManager {
         });
         
         // Any UPI
-        const anyUpiBtn = container.querySelector('#btnAnyUPI');
-        if (anyUpiBtn) {
-            anyUpiBtn.addEventListener('click', () => {
-                this.openUPIUrl(upiUrl, amount);
-            });
-        }
+        container.querySelector('#btnAnyUPI').addEventListener('click', () => {
+            this.openUPIUrl(upiUrl, amount);
+        });
         
         // Card (Disabled)
-        const cardBtn = container.querySelector('#btnCard');
-        if (cardBtn) {
-            cardBtn.addEventListener('click', () => {
-                this.showToast(hi ? '⚠️ कार्ड सुविधा जल्द आएगी' : '⚠️ Card feature coming soon');
-            });
-        }
+        container.querySelector('#btnCard').addEventListener('click', () => {
+            this.showToast(hi ? '⚠️ कार्ड सुविधा जल्द आएगी' : '⚠️ Card feature coming soon');
+        });
         
-        // ✅ COD BUTTON - FIXED
-        const codBtn = container.querySelector('#btnCOD');
-        if (codBtn) {
-            console.log('✅ COD button found, binding event...');
-            codBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log('🏍️ COD button clicked from popup!');
-                this.handleCOD(container);
-            });
-        } else {
-            console.log('❌ COD button NOT found!');
-        }
+        // COD
+        container.querySelector('#btnCOD').addEventListener('click', () => {
+            this.handleCOD(container);
+        });
         
         // Payment Done
-        const paymentDoneBtn = container.querySelector('#btnPaymentDone');
-        if (paymentDoneBtn) {
-            paymentDoneBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log('✅ Payment Done clicked!');
-                this.handlePaymentDone(container);
-            });
-        }
+        container.querySelector('#btnPaymentDone').addEventListener('click', () => {
+            this.handlePaymentDone(container);
+        });
     }
     
     // ============================================
@@ -439,7 +376,7 @@ class OnlinePaymentManager {
     // OPEN SPECIFIC UPI APP
     // ============================================
     openSpecificUPIApp(app, amount) {
-        const note = 'Quick Dukan Payment - Order Amount';
+        const note = 'Order: ' + (this.currentOrder.orderId || 'N/A') + ' - यह न बदलें!';
         const upiUrl = this.buildUPIUrl(amount, note);
         
         const apps = {
@@ -462,96 +399,31 @@ class OnlinePaymentManager {
     }
     
     // ============================================
-    // ✅ HANDLE COD - FIXED
+    // HANDLE COD
     // ============================================
     async handleCOD(container) {
         const hi = this.currentLang === 'hi';
         
-        console.log('🏍️ handleCOD called!');
-        console.log('Callbacks:', this.callbacks);
-        console.log('Current Order:', this.currentOrder);
-        
-        // ✅ COD payment data
-        const paymentData = {
-            method: 'COD',
-            amount: this.currentAmount,
-            charge: 0,
-            total: this.currentAmount,
-            transactionId: 'COD-' + Date.now(),
-            status: 'Pending',
-        };
-        
-        // ✅ Payment sheet mein COD entry
+        // Payment save करें (COD)
         await this.savePaymentToSheet('COD', 0, this.currentAmount);
         
-        // ✅ Callback check karo
-        if (this.callbacks.onCODSelected) {
-            console.log('✅ onCODSelected callback mila, order save hoga');
-            await this.callbacks.onCODSelected(paymentData);
-        } else if (this.callbacks.onPaymentSuccess) {
-            console.log('✅ onPaymentSuccess fallback callback mila');
-            await this.callbacks.onPaymentSuccess(paymentData);
-        } else {
-            console.log('❌ KOI CALLBACK NAHI MILA - Order save NAHI hoga!');
-        }
-        
-        this.showToast(hi ? '✅ ऑर्डर कन्फर्म! सामान आने पर भुगतान करें।' : '✅ Order confirmed! Pay on delivery.');
+        this.showToast(hi ? '✅ COD! ₹' + this.currentAmount + ' सामान आने पर दें।' : '✅ COD! Pay ₹' + this.currentAmount + ' on delivery.');
         
         setTimeout(() => this.hide(container), 1500);
     }
     
     // ============================================
-    // ✅ HANDLE PAYMENT DONE (UPI)
+    // HANDLE PAYMENT DONE (UPI)
     // ============================================
     async handlePaymentDone(container) {
         const hi = this.currentLang === 'hi';
         
-        console.log('✅ Payment Done clicked - Order save hoga');
-        console.log('Callbacks:', this.callbacks);
+        // Payment save करें (UPI)
+        await this.savePaymentToSheet('UPI', this.currentCharge, this.currentTotal);
         
-        // Payment save karo
-        const paymentId = await this.savePaymentToSheet('UPI', this.currentCharge, this.currentTotal);
-        
-        const paymentData = {
-            method: 'UPI',
-            amount: this.currentAmount,
-            charge: this.currentCharge,
-            total: this.currentTotal,
-            transactionId: paymentId || 'UPI-' + Date.now(),
-            status: 'Paid',
-        };
-        
-        // Callback check karo
-        if (this.callbacks.onPaymentSuccess) {
-            console.log('✅ onPaymentSuccess callback mila');
-            await this.callbacks.onPaymentSuccess(paymentData);
-        } else {
-            console.log('❌ onPaymentSuccess callback NAHI mila!');
-        }
-        
-        this.showToast(hi ? '✅ ऑर्डर कन्फर्म हो गया!' : '✅ Order confirmed!');
+        this.showToast(hi ? '✅ Payment जानकारी भेज दी गई! Admin verify करेगा।' : '✅ Payment info sent! Admin will verify.');
         
         setTimeout(() => this.hide(container), 1500);
-    }
-    
-    // ============================================
-    // ✅ HANDLE PAYMENT CANCEL
-    // ============================================
-    handlePaymentCancel(container) {
-        const hi = this.currentLang === 'hi';
-        
-        console.log('❌ Payment cancelled by user');
-        
-        if (this.callbacks.onPaymentFailure) {
-            this.callbacks.onPaymentFailure({
-                message: 'Payment cancelled',
-                method: 'UPI',
-            });
-        }
-        
-        this.showToast(hi ? '❌ पेमेंट कैंसिल - ऑर्डर नहीं हुआ' : '❌ Payment cancelled - Order not placed');
-        
-        this.hide(container);
     }
     
     // ============================================
@@ -560,11 +432,11 @@ class OnlinePaymentManager {
     async savePaymentToSheet(method, chargeAmount, totalAmount) {
         try {
             const orderData = this.currentOrder;
-            const itemsText = this.formatItems(orderData?.items || []);
+            const itemsText = this.formatItems(orderData.items || []);
             
             const response = await fetch(
                 `${this.API_URL}?action=savePayment` +
-                `&orderId=${encodeURIComponent(orderData?.orderId || '')}` +
+                `&orderId=${encodeURIComponent(orderData.orderId || '')}` +
                 `&phone=${encodeURIComponent(this.currentUser.phone)}` +
                 `&name=${encodeURIComponent(this.currentUser.name)}` +
                 `&items=${encodeURIComponent(itemsText)}` +
